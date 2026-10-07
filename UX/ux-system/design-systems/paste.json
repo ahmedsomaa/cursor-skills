@@ -1,0 +1,18 @@
+{
+  "id": "paste",
+  "name": "Paste",
+  "source": "https://paste.twilio.design/",
+  "maker": "Twilio",
+  "fit": "Messaging, account, and support products built from a theme of tokens.",
+  "principles": "Compose with primitives and tokens. A theme package and a theme provider supply every value. Accessibility belongs to the component.",
+  "color": "Background, text, border, and data-visualization tokens, plus error, warning, success, and neutral.",
+  "typography": "A sans family with heading, text, and display styles.",
+  "spacing": "A space scale consumed by stack and box primitives.",
+  "shape": "Radii for controls and cards. Shadows are tokens.",
+  "elevation": "Shadow tokens for card and overlay.",
+  "layout": "Page composition from stack, grid, and column primitives.",
+  "icons": "A product icon set plus illustrative icons.",
+  "components": "Button, input, modal, alert, table, and tabs. Patterns combine those components. Each one reads tokens only.",
+  "themes": "Unconfirmed.",
+  "adapt": "Keep the rule that components only use tokens from the theme. Retheme color and type for this product."
+}

@@ -1,0 +1,95 @@
+{
+  "schema": "schema.json",
+  "systems": [
+    {
+      "id": "material-3",
+      "name": "Material 3",
+      "fit": "Cross-platform apps that generate color, type, and elevation from one source color.",
+      "file": "material-3.json"
+    },
+    {
+      "id": "carbon",
+      "name": "Carbon",
+      "fit": "Dense product UI for tools and data.",
+      "file": "carbon.json"
+    },
+    {
+      "id": "atlassian",
+      "name": "Atlassian Design System",
+      "fit": "Collaboration and work-management products.",
+      "file": "atlassian.json"
+    },
+    {
+      "id": "fluent-2",
+      "name": "Fluent 2",
+      "fit": "Productivity apps that share a neutral, shared, and brand palette.",
+      "file": "fluent-2.json"
+    },
+    {
+      "id": "spectrum",
+      "name": "Spectrum",
+      "fit": "Creative tools with separate mobile and desktop scales.",
+      "file": "spectrum.json"
+    },
+    {
+      "id": "lightning",
+      "name": "Lightning Design System",
+      "fit": "Record-heavy CRM and admin apps.",
+      "file": "lightning.json"
+    },
+    {
+      "id": "paste",
+      "name": "Paste",
+      "fit": "Messaging, account, and support products built from a theme of tokens.",
+      "file": "paste.json"
+    },
+    {
+      "id": "govuk",
+      "name": "GOV.UK Design System",
+      "fit": "Public services that need a small, tested, accessible set.",
+      "file": "govuk.json"
+    },
+    {
+      "id": "polaris",
+      "name": "Polaris",
+      "fit": "Commerce admin, checkout, and point of sale.",
+      "file": "polaris.json"
+    },
+    {
+      "id": "primer",
+      "name": "Primer",
+      "fit": "Developer tools and content-heavy product UI.",
+      "file": "primer.json"
+    },
+    {
+      "id": "ant-design",
+      "name": "Ant Design",
+      "fit": "Enterprise forms and dashboards driven by one seed color.",
+      "file": "ant-design.json"
+    },
+    {
+      "id": "cloudscape",
+      "name": "Cloudscape",
+      "fit": "Dense admin consoles, dashboards, and wizards.",
+      "file": "cloudscape.json"
+    },
+    {
+      "id": "forma-36",
+      "name": "Forma 36",
+      "fit": "Content and editorial tools.",
+      "file": "forma-36.json"
+    },
+    {
+      "id": "gestalt",
+      "name": "Gestalt",
+      "fit": "Creation and content products in Pinterest's design language.",
+      "file": "gestalt.json"
+    },
+    {
+      "id": "uber-base",
+      "name": "Base",
+      "fit": "One foundation shared across many Uber products.",
+      "file": "uber-base.json"
+    }
+  ]
+}

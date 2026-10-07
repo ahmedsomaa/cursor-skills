@@ -1,0 +1,18 @@
+{
+  "id": "polaris",
+  "name": "Polaris",
+  "source": "https://polaris.shopify.com/",
+  "maker": "Shopify",
+  "fit": "Commerce admin, checkout, and point of sale.",
+  "principles": "One UI framework, built on web components, shared by Shopify admin, checkout, customer accounts, and Point of Sale. Each surface exposes its own subset of components.",
+  "color": "Unconfirmed.",
+  "typography": "Unconfirmed.",
+  "spacing": "Unconfirmed.",
+  "shape": "Unconfirmed.",
+  "elevation": "Unconfirmed.",
+  "layout": "Unconfirmed.",
+  "icons": "Unconfirmed.",
+  "components": "Web components for admin, checkout, customer accounts, and Point of Sale. A surface does not get the full set.",
+  "themes": "Unconfirmed.",
+  "adapt": "Keep the idea of one commerce framework with a smaller set per surface. Open the source before using a color, type size, space, or shadow. Replace Shopify's brand."
+}

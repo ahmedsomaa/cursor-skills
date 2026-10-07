@@ -1,0 +1,18 @@
+{
+  "id": "atlassian",
+  "name": "Atlassian Design System",
+  "source": "https://atlassian.design/",
+  "maker": "Atlassian",
+  "fit": "Collaboration and work-management products.",
+  "principles": "Bold, optimistic, and practical. Tokens are named so a picker can choose a role instead of a raw value.",
+  "color": "Tokens for background, text, border, and icon, including inverse roles for bold surfaces. Alpha and transparent colors are part of the set.",
+  "typography": "A product sans with a short heading and body scale.",
+  "spacing": "A space scale used by stack and inline layouts.",
+  "shape": "A radius scale. Many surfaces use a medium radius.",
+  "elevation": "A small set of elevation tokens, including one below the surface (sunken). Each elevation color token is paired with a shadow token. Light mode builds depth with shadow. Dark mode uses shadow and color together.",
+  "layout": "Page layouts with navigation, banners, and a main column.",
+  "icons": "A dual icon set for 16px UI and larger spot illustrations.",
+  "components": "Button, lozenge, flag, modal, dynamic table, and inline edit.",
+  "themes": "Light and dark token sets. The same elevation roles resolve differently in each.",
+  "adapt": "Keep the named elevation pairs and the token roles. Replace the Atlassian palette and illustration style."
+}

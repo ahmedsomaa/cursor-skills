@@ -1,0 +1,29 @@
+{
+  "schema": "schema.json",
+  "templates": [
+    {
+      "id": "sidebar",
+      "name": "Sidebar",
+      "fit": "A written system, read section by section.",
+      "file": "sidebar.json"
+    },
+    {
+      "id": "cards",
+      "name": "Cards",
+      "fit": "A card index when the work is mostly screens.",
+      "file": "cards.json"
+    },
+    {
+      "id": "grid",
+      "name": "Grid",
+      "fit": "A dense gallery of screen tiles.",
+      "file": "grid.json"
+    },
+    {
+      "id": "topbar",
+      "name": "Top bar",
+      "fit": "A horizontal bar and a stacked page.",
+      "file": "topbar.json"
+    }
+  ]
+}
