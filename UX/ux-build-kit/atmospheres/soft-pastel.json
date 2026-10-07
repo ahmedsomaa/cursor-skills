@@ -1,0 +1,15 @@
+{
+  "id": "soft-pastel",
+  "name": "Soft pastel",
+  "fit": "Airy pastels, generous radius, gentle gradients; consumer onboarding.",
+  "feel": "Friendly, light, approachable.",
+  "surfaces": "Large radii, soft fills, gentle gradient washes.",
+  "type": "Rounded geometric sans.",
+  "color": "Pastel backgrounds; soft brand accents.",
+  "depth": "Light shadows; airy separation.",
+  "motion": "Soft ease, welcoming.",
+  "bestFor": "Consumer SaaS, education, health-adjacent onboarding.",
+  "avoid": "High-density finance/ops as the only mode.",
+  "adapt": "Keep softness; replace pastels with brand-safe tints.",
+  "systems": "polaris, paste, material-3"
+}

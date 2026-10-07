@@ -1,0 +1,10 @@
+{
+  "id": "ibm-plex-sans-mono",
+  "name": "IBM Plex Sans + IBM Plex Mono",
+  "fit": "Productive, slightly formal docs and dense galleries.",
+  "heading": "IBM Plex Sans",
+  "body": "IBM Plex Sans",
+  "mono": "IBM Plex Mono",
+  "templates": "sidebar, grid",
+  "adapt": "Good when the system itself feels enterprise."
+}

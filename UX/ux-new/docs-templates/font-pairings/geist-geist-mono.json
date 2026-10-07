@@ -1,0 +1,10 @@
+{
+  "id": "geist-geist-mono",
+  "name": "Geist + Geist Mono",
+  "fit": "Sharp product-docs feel for cards and grids. If Geist is unavailable on Google Fonts, use Inter + JetBrains Mono.",
+  "heading": "Geist",
+  "body": "Geist",
+  "mono": "Geist Mono",
+  "templates": "cards, grid",
+  "adapt": "Fall back to Inter and JetBrains Mono when Geist cannot load from Google Fonts."
+}

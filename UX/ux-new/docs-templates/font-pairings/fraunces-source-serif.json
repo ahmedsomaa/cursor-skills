@@ -1,0 +1,10 @@
+{
+  "id": "fraunces-source-serif",
+  "name": "Fraunces + Source Serif 4",
+  "fit": "Editorial top-bar documentation.",
+  "heading": "Fraunces",
+  "body": "Source Serif 4",
+  "mono": "JetBrains Mono",
+  "templates": "topbar",
+  "adapt": "Serif body for reading; mono for code."
+}

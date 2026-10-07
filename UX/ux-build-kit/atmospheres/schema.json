@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "atmosphere.schema.json",
+  "title": "Atmosphere",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "name",
+    "fit",
+    "feel",
+    "surfaces",
+    "type",
+    "color",
+    "depth",
+    "motion",
+    "bestFor",
+    "avoid",
+    "adapt",
+    "systems"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "fit": {
+      "type": "string",
+      "minLength": 1
+    },
+    "feel": {
+      "type": "string",
+      "minLength": 1
+    },
+    "surfaces": {
+      "type": "string",
+      "minLength": 1
+    },
+    "type": {
+      "type": "string",
+      "minLength": 1
+    },
+    "color": {
+      "type": "string",
+      "minLength": 1
+    },
+    "depth": {
+      "type": "string",
+      "minLength": 1
+    },
+    "motion": {
+      "type": "string",
+      "minLength": 1
+    },
+    "bestFor": {
+      "type": "string",
+      "minLength": 1
+    },
+    "avoid": {
+      "type": "string",
+      "minLength": 1
+    },
+    "adapt": {
+      "type": "string",
+      "minLength": 1
+    },
+    "systems": {
+      "type": "string",
+      "minLength": 1
+    }
+  }
+}

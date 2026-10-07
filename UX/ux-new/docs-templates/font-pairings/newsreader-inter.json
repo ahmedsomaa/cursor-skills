@@ -1,0 +1,10 @@
+{
+  "id": "newsreader-inter",
+  "name": "Newsreader + Inter",
+  "fit": "Editorial titles with neutral UI body.",
+  "heading": "Newsreader",
+  "body": "Inter",
+  "mono": "JetBrains Mono",
+  "templates": "sidebar, topbar",
+  "adapt": "Reserve Newsreader for titles."
+}

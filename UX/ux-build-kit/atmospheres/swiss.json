@@ -1,0 +1,15 @@
+{
+  "id": "swiss",
+  "name": "Swiss / International",
+  "fit": "Grid-led, typographic clarity, strong hierarchy, little ornament.",
+  "feel": "Objective, structured, editorial-engineering hybrid.",
+  "surfaces": "Strict grid, generous margins or modular columns, hairline rules.",
+  "type": "Grotesk sans dominance; asymmetric or modular type scale.",
+  "color": "Limited palette; black/white/gray plus one signal color.",
+  "depth": "Flat. Hierarchy from type and space, not shadow.",
+  "motion": "Minimal or none.",
+  "bestFor": "Docs-heavy products, design tools, brand-forward B2B.",
+  "avoid": "Soft blobs, skeuomorphism, playful clay shapes.",
+  "adapt": "Keep grid and type clarity; change the signal color and family.",
+  "systems": "govuk, primer, atlassian"
+}

@@ -1,0 +1,95 @@
+{
+  "schema": "schema.json",
+  "atmospheres": [
+    {
+      "id": "calm-density",
+      "name": "Calm density",
+      "fit": "Info-rich tools with quiet chrome (Linear / Stripe / Vercel class).",
+      "file": "calm-density.json"
+    },
+    {
+      "id": "swiss",
+      "name": "Swiss / International",
+      "fit": "Grid-led, typographic clarity, strong hierarchy, little ornament.",
+      "file": "swiss.json"
+    },
+    {
+      "id": "minimalism",
+      "name": "Strategic minimalism",
+      "fit": "One clear action per view; ruthless reduction without burying data.",
+      "file": "minimalism.json"
+    },
+    {
+      "id": "liquid-glass",
+      "name": "Liquid glass",
+      "fit": "Refractive, reactive translucency (Apple-native feel; use sparingly on web).",
+      "file": "liquid-glass.json"
+    },
+    {
+      "id": "glassmorphism",
+      "name": "Glassmorphism",
+      "fit": "Frosted blur panels over rich bg; chrome/modals, not dense tables.",
+      "file": "glassmorphism.json"
+    },
+    {
+      "id": "soft-ui",
+      "name": "Soft UI (neumorphism)",
+      "fit": "Extruded soft shadows; consumer/low-density only\u2014watch contrast.",
+      "file": "soft-ui.json"
+    },
+    {
+      "id": "claymorphism",
+      "name": "Claymorphism",
+      "fit": "Soft, saturated, floating clay shapes; friendly consumer SaaS.",
+      "file": "claymorphism.json"
+    },
+    {
+      "id": "neo-brutalism",
+      "name": "Neo-brutalism",
+      "fit": "Hard borders, high contrast, raw/bold marketing-adjacent product.",
+      "file": "neo-brutalism.json"
+    },
+    {
+      "id": "flat",
+      "name": "Flat",
+      "fit": "No fake depth; solid fills, simple borders; classic efficient UI.",
+      "file": "flat.json"
+    },
+    {
+      "id": "material-tonal",
+      "name": "Material tonal",
+      "fit": "Tonal surfaces and seed-color harmony (Material You climate).",
+      "file": "material-tonal.json"
+    },
+    {
+      "id": "editorial",
+      "name": "Editorial",
+      "fit": "Magazine type, display serif moments, strong typographic rhythm.",
+      "file": "editorial.json"
+    },
+    {
+      "id": "dark-tooling",
+      "name": "Dark tooling",
+      "fit": "Dark-first, monospace accents, high-contrast developer/ops tools.",
+      "file": "dark-tooling.json"
+    },
+    {
+      "id": "bento",
+      "name": "Bento modular",
+      "fit": "Asymmetric modular cards; feature hubs and light dashboards.",
+      "file": "bento.json"
+    },
+    {
+      "id": "soft-pastel",
+      "name": "Soft pastel",
+      "fit": "Airy pastels, generous radius, gentle gradients; consumer onboarding.",
+      "file": "soft-pastel.json"
+    },
+    {
+      "id": "spatial-depth",
+      "name": "Spatial depth",
+      "fit": "Subtle layered shadows/3D accents for hierarchy without skeuomorphism.",
+      "file": "spatial-depth.json"
+    }
+  ]
+}

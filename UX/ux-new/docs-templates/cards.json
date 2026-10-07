@@ -1,0 +1,14 @@
+{
+  "id": "cards",
+  "name": "Cards",
+  "source": "A card index for design docs.",
+  "fit": "A card index when the work is mostly screens.",
+  "layout": "The index is a grid of cards. A section page repeats the pattern for its parts.",
+  "typography": "A card title, a one-line description, and a small meta caption. The page title is one step larger than the card title.",
+  "fonts": "Outfit for the page title and card titles. Source Sans 3 for descriptions and captions. IBM Plex Mono for code, token names, and file paths.",
+  "icons": "Lucide. layout-grid marks the index, file-text a brief card, component a system card, layers a feature card.",
+  "nav": "One card for the brief, one per design-system section, and one per feature. The open card is marked.",
+  "frames": "Each case is a card. Light and dark are two states of that card.",
+  "chrome": "Neutral light and dark for the docs chrome, separate from the product themes inside the frames.",
+  "adapt": "Keep the card grid and the three type sizes. Keep the chrome neutral so it does not compete with the product. Pair with a font-pairings pick; recommend the pairing that lists this template."
+}

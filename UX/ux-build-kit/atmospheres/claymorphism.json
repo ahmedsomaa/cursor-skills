@@ -1,0 +1,15 @@
+{
+  "id": "claymorphism",
+  "name": "Claymorphism",
+  "fit": "Soft, saturated, floating clay shapes; friendly consumer SaaS.",
+  "feel": "Playful, approachable, dimensional but friendly.",
+  "surfaces": "Fat rounded shapes, inner soft light, floating cards.",
+  "type": "Rounded geometric sans.",
+  "color": "Saturated pastels and clay fills.",
+  "depth": "Soft 3D clay extrusion.",
+  "motion": "Bouncy, short.",
+  "bestFor": "Consumer onboarding, education, playful brand apps.",
+  "avoid": "Enterprise ops consoles, dense tables.",
+  "adapt": "Tone saturation to brand; keep corner fatness.",
+  "systems": "material-3, polaris, paste"
+}

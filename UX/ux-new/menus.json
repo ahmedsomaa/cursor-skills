@@ -1,0 +1,135 @@
+{
+  "steps": [
+    {
+      "id": "kit",
+      "label": "Design system",
+      "skill": "ux-build-kit",
+      "substeps": [
+        {
+          "id": "principles",
+          "label": "Principles",
+          "file": "principles.html",
+          "guide": "../ux-build-kit/sections/foundations/principles/GUIDE.md"
+        },
+        {
+          "id": "color",
+          "label": "Color",
+          "file": "color.html",
+          "guide": "../ux-build-kit/sections/foundations/color/GUIDE.md"
+        },
+        {
+          "id": "typography",
+          "label": "Typography",
+          "file": "typography.html",
+          "guide": "../ux-build-kit/sections/foundations/typography/GUIDE.md"
+        },
+        {
+          "id": "spacing",
+          "label": "Spacing",
+          "file": "spacing.html",
+          "guide": "../ux-build-kit/sections/foundations/spacing/GUIDE.md"
+        },
+        {
+          "id": "layout",
+          "label": "Layout",
+          "file": "layout.html",
+          "guide": "../ux-build-kit/sections/foundations/layout/GUIDE.md"
+        },
+        {
+          "id": "shape",
+          "label": "Shape",
+          "file": "shape.html",
+          "guide": "../ux-build-kit/sections/foundations/shape/GUIDE.md"
+        },
+        {
+          "id": "elevation",
+          "label": "Elevation",
+          "file": "elevation.html",
+          "guide": "../ux-build-kit/sections/foundations/elevation/GUIDE.md"
+        },
+        {
+          "id": "icons",
+          "label": "Icons",
+          "file": "icons.html",
+          "guide": "../ux-build-kit/sections/foundations/iconography/GUIDE.md"
+        },
+        {
+          "id": "motion",
+          "label": "Motion",
+          "file": "motion.html",
+          "guide": "../ux-build-kit/sections/foundations/motion/GUIDE.md"
+        },
+        {
+          "id": "logo",
+          "label": "Logo",
+          "file": "logo.html",
+          "guide": "../ux-build-kit/sections/foundations/logo/GUIDE.md",
+          "process": "../ux-build-kit/sections/foundations/logo/PROCESS.md"
+        },
+        {
+          "id": "themes",
+          "label": "Themes",
+          "file": "themes.html",
+          "guide": "../ux-build-kit/sections/foundations/themes/GUIDE.md"
+        },
+        {
+          "id": "components",
+          "label": "Components",
+          "file": "components.html",
+          "guide": "../ux-build-kit/sections/components/GUIDE.md"
+        },
+        {
+          "id": "patterns",
+          "label": "Patterns",
+          "file": "patterns.html",
+          "guide": "../ux-build-kit/sections/patterns/GUIDE.md"
+        },
+        {
+          "id": "content",
+          "label": "Content",
+          "file": "content.html",
+          "guide": "../ux-build-kit/sections/content/GUIDE.md"
+        },
+        {
+          "id": "accessibility",
+          "label": "Accessibility",
+          "file": "accessibility.html",
+          "guide": "../ux-build-kit/sections/accessibility/GUIDE.md"
+        },
+        {
+          "id": "governance",
+          "label": "Governance",
+          "file": "governance.html",
+          "guide": "../ux-build-kit/sections/governance/GUIDE.md"
+        },
+        {
+          "id": "chrome",
+          "label": "Docs chrome (nav, type, themes shell)",
+          "rules": "chrome.md"
+        }
+      ]
+    },
+    {
+      "id": "ui",
+      "label": "Screens",
+      "skill": "ux-design-ui",
+      "substeps": [
+        {
+          "id": "storyboard",
+          "label": "Storyboard",
+          "ask": "feature"
+        },
+        {
+          "id": "screen",
+          "label": "High-fidelity screen",
+          "ask": ["feature", "screen"]
+        },
+        {
+          "id": "states",
+          "label": "Critical states for a screen",
+          "ask": ["feature", "screen"]
+        }
+      ]
+    }
+  ]
+}

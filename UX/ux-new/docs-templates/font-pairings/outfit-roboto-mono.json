@@ -1,0 +1,10 @@
+{
+  "id": "outfit-roboto-mono",
+  "name": "Outfit + Roboto Mono",
+  "fit": "Card and top-bar indexes with a geometric title face.",
+  "heading": "Outfit",
+  "body": "Outfit",
+  "mono": "Roboto Mono",
+  "templates": "cards, topbar",
+  "adapt": "Matches the existing cards template default voice."
+}

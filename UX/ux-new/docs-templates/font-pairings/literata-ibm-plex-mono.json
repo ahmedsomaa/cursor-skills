@@ -1,0 +1,10 @@
+{
+  "id": "literata-ibm-plex-mono",
+  "name": "Literata + IBM Plex Mono",
+  "fit": "Long-read sidebar documentation.",
+  "heading": "Literata",
+  "body": "Literata",
+  "mono": "IBM Plex Mono",
+  "templates": "sidebar",
+  "adapt": "Best when the brief is mostly written system."
+}

@@ -1,0 +1,15 @@
+{
+  "id": "bento",
+  "name": "Bento modular",
+  "fit": "Asymmetric modular cards; feature hubs and light dashboards.",
+  "feel": "Composed modules, playful structure, scannable tiles.",
+  "surfaces": "Varied card spans in one grid; clear module edges.",
+  "type": "Clear card titles; short supporting copy.",
+  "color": "Neutral base with accents per module sparingly.",
+  "depth": "Light card elevation or flat bordered tiles.",
+  "motion": "Module enter/exit only.",
+  "bestFor": "Feature hubs, home dashboards, AI launchpads\u2014not dense tables.",
+  "avoid": "Forcing bento onto uniform data grids.",
+  "adapt": "Keep modular spans; restyle cards to brand.",
+  "systems": "polaris, material-3, spectrum"
+}

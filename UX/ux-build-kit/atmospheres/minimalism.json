@@ -1,0 +1,15 @@
+{
+  "id": "minimalism",
+  "name": "Strategic minimalism",
+  "fit": "One clear action per view; ruthless reduction without burying data.",
+  "feel": "Focused, calm, intentional empty space that earns its keep.",
+  "surfaces": "Sparse chrome; progressive disclosure; large quiet fields.",
+  "type": "Few sizes; one primary action voice.",
+  "color": "Near-monochrome with a single CTA color.",
+  "depth": "Almost none.",
+  "motion": "Sparse; emphasize state change only.",
+  "bestFor": "Onboarding, focused workflows, consumer utilities.",
+  "avoid": "Aesthetic emptiness that hides required data.",
+  "adapt": "Keep singular CTAs and progressive disclosure.",
+  "systems": "primer, polaris, paste"
+}

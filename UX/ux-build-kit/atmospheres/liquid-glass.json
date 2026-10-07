@@ -1,0 +1,15 @@
+{
+  "id": "liquid-glass",
+  "name": "Liquid glass",
+  "fit": "Refractive, reactive translucency (Apple-native feel; use sparingly on web).",
+  "feel": "Fluid, premium, light bending through chrome.",
+  "surfaces": "Translucent refractive panels on rich backdrops; solid content under glass chrome.",
+  "type": "Clean system sans; high legibility on frosted bars.",
+  "color": "Soft tints through glass; strong contrast on reading surfaces.",
+  "depth": "Layered refraction and specular highlights.",
+  "motion": "Reactive, continuous, physics-light.",
+  "bestFor": "Marketing shells, native-feeling mobile, hero chrome\u2014not dense grids.",
+  "avoid": "Frosted data tables, low-contrast body text on blur.",
+  "adapt": "Reserve glass for chrome/overlays; keep product work areas solid.",
+  "systems": "fluent-2, material-3, spectrum"
+}
