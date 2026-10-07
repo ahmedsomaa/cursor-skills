@@ -16,7 +16,7 @@ Not [ux-discover](../ux-discover/SKILL.md) (that writes a forward create brief).
 
 The folder is always named `design`. If this session has not chosen where it lives, ask where in the current project to put it. Do not assume the repo root. If a `design` directory already exists, confirm that one. All outputs go under `<design>/audit/`.
 
-If `audit/docs.json` is missing, follow the Docs template step in [ux-audit](../ux-audit/SKILL.md) (ask style: same catalog options as ux-new plus custom, then font pairing). Write `audit/docs.json` and `audit/docs.css`.
+If `audit/docs.json` is missing, follow the Docs template step in [ux-audit](../ux-audit/SKILL.md) (ask layout from [layouts/](../ux-audit/layouts/), then font pairing from [typography.html](../ux-audit/typography.html), then Style — plus custom). Write `audit/docs.json` and `audit/docs.css`.
 
 ## Explore
 

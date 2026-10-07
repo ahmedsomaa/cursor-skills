@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sidebar Layout — audit docs template</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+      font-size: 13px;
+      color: #111;
+      background: #f4f4f4;
+      line-height: 1.4;
+    }
+    .page { max-width: 920px; margin: 0 auto; padding: 1.75rem 1.25rem 3.5rem; }
+    h1 {
+      font-size: 1.5rem; font-weight: 700; letter-spacing: -0.02em;
+      margin: 0 0 0.25rem; border: 2px dashed #111; display: inline-block;
+      padding: 0.35rem 0.6rem; background: #fff;
+    }
+    .agent-note {
+      margin: 0.75rem 0 1.5rem; font-size: 11px; color: #555;
+      border: 1px dashed #999; padding: 0.5rem 0.65rem; background: #fff;
+    }
+    h2 {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.06em;
+      text-transform: uppercase; margin: 1.75rem 0 0.65rem;
+      padding-bottom: 0.35rem; border-bottom: 2px solid #111;
+    }
+    h3 {
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 0.04em;
+      text-transform: uppercase; color: #555; margin: 1.35rem 0 0.4rem;
+    }
+    a { color: #111; }
+    code { font-family: ui-monospace, monospace; font-size: 0.85em; }
+
+    .details-wire { border: 2px solid #111; background: #fff; }
+    .details-wire .row {
+      display: grid; grid-template-columns: 9rem 1fr; border-bottom: 1px dashed #999;
+    }
+    .details-wire .row:last-child { border-bottom: none; }
+    .details-wire .k, .details-wire .v { padding: 0.55rem 0.7rem; font-size: 12px; }
+    .details-wire .k {
+      font-weight: 700; border-right: 1px dashed #999; background: #fafafa;
+    }
+    .details-wire .v ul { margin: 0.25rem 0 0; padding-left: 1.1rem; }
+    .details-wire .v li { margin: 0.15rem 0; }
+
+    .wf-sep {
+      margin: 2.25rem 0 1.25rem; border: 2px solid #111; background: #fff;
+      padding: 0.55rem 0.75rem; display: flex; align-items: baseline;
+      justify-content: space-between; gap: 0.75rem;
+    }
+    .wf-sep .wf-sep-label {
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+    }
+    .wf-sep .wf-sep-note { font-size: 10px; color: #666; text-align: right; }
+
+    .wire-block { margin-bottom: 1.75rem; }
+    .wire-block .desc { font-size: 11px; color: #555; margin: 0 0 0.45rem; }
+
+    .theme {
+      width: 26px; height: 26px; border: 2px solid #111; border-radius: 999px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; background: #fff; flex-shrink: 0;
+    }
+    .page-title {
+      border: 2px dashed #111; padding: 8px 10px; font-weight: 700; font-size: 14px;
+      background: #fff; width: fit-content;
+    }
+    .page-sub {
+      font-size: 10px; color: #666; border: 1px dashed #ccc; padding: 3px 6px; width: fit-content;
+    }
+    .brief-sheet { display: flex; flex-direction: column; gap: 8px; font-size: 10px; color: #444; }
+    .brief-meta {
+      border: 2px solid #111; background: #fff; padding: 8px 10px;
+      display: flex; flex-direction: column; gap: 4px;
+    }
+    .brief-meta-top { display: flex; justify-content: space-between; gap: 8px; }
+    .brief-product {
+      font-weight: 700; font-size: 13px; color: #111; border: 1px dashed #999;
+      padding: 2px 6px; display: inline-block;
+    }
+    .brief-platform {
+      border: 1.5px solid #111; padding: 2px 7px; font-size: 9px; font-weight: 700;
+      letter-spacing: 0.04em; text-transform: uppercase; background: #eee; white-space: nowrap;
+    }
+    .brief-purpose { border: 1px dashed #bbb; padding: 4px 6px; color: #666; font-size: 10px; }
+    .brief-block { border: 1.5px solid #111; background: #fff; }
+    .brief-block .bh {
+      font-size: 9px; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase;
+      padding: 4px 8px; border-bottom: 1px dashed #999; background: #fafafa; color: #111;
+    }
+    .brief-block .bb { padding: 6px 8px; min-height: 28px; }
+    .brief-block .bb.prose {
+      min-height: 44px;
+      background: repeating-linear-gradient(0deg, transparent, transparent 6px, #eee 6px, #eee 7px);
+      color: #777;
+    }
+    .brief-list { margin: 0; padding-left: 1.1rem; color: #666; }
+    .brief-table { width: 100%; border-collapse: collapse; font-size: 10px; }
+    .brief-table th, .brief-table td {
+      border-bottom: 1px dashed #999; padding: 4px 8px; text-align: left; color: #555;
+    }
+    .brief-table th {
+      font-weight: 700; background: #fafafa; color: #111; font-size: 9px;
+      letter-spacing: 0.04em; text-transform: uppercase;
+    }
+    .term-table { width: 100%; border-collapse: collapse; font-size: 9px; }
+    .term-table th, .term-table td { border-bottom: 1px dashed #999; padding: 3px 6px; text-align: left; }
+    .term-table th {
+      background: #fafafa; font-weight: 700; font-size: 8px; letter-spacing: 0.04em;
+      text-transform: uppercase; color: #111;
+    }
+    .fs { display: flex; flex-direction: column; gap: 7px; font-size: 10px; color: #555; }
+    .fs-block { border: 1.5px solid #111; background: #fff; }
+    .fs-block .bh {
+      font-size: 9px; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase;
+      padding: 3px 8px; border-bottom: 1px dashed #999; background: #fafafa; color: #111;
+    }
+    .fs-block .bb { padding: 6px 8px; }
+    .fs-block .bb.prose {
+      min-height: 36px;
+      background: repeating-linear-gradient(0deg, transparent, transparent 6px, #eee 6px, #eee 7px);
+      color: #777;
+    }
+    .fs-split { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+    .fs-card {
+      border: 1px dashed #999; padding: 6px; background: #fafafa; min-height: 36px; font-size: 9px;
+    }
+    .fs-card strong { display: block; color: #111; font-size: 10px; margin-bottom: 2px; }
+    .film-row { display: flex; align-items: flex-start; gap: 4px; }
+    .film-step { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px; }
+    .film-num {
+      font-size: 8px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #111;
+    }
+    .film-panel {
+      border: 2px solid #111; background: #e8e8e8; aspect-ratio: 16/9;
+      display: flex; align-items: center; justify-content: center; font-size: 8px; color: #666;
+    }
+    .film-panel .mini {
+      border: 1px solid #999; background: #fff; width: 42%; height: 72%;
+      display: flex; align-items: center; justify-content: center; font-size: 7px; color: #888;
+    }
+    .film-cap {
+      border: 1px dashed #999; padding: 3px 4px; font-size: 8px; color: #555; background: #fff; min-height: 32px;
+    }
+    .film-cap .sn { font-weight: 700; color: #111; display: block; }
+    .film-arrow { align-self: center; font-size: 14px; font-weight: 700; color: #111; margin-top: 18px; }
+    .state-tabs { display: flex; flex-wrap: wrap; gap: 3px; }
+    .state-tabs .tab {
+      border: 1.5px solid #111; padding: 2px 7px; font-size: 8px; background: #fff; color: #111;
+    }
+    .state-tabs .tab.on { background: #111; color: #fff; font-weight: 700; }
+    .hi-fi {
+      border: 2px solid #111; background: #ddd; min-height: 110px;
+      display: flex; align-items: center; justify-content: center; font-size: 9px; color: #555;
+    }
+    .hi-fi .device {
+      border: 1.5px solid #111; background: #fff; width: 55%; max-width: 140px;
+      aspect-ratio: 9/16; display: flex; flex-direction: column; padding: 4px; gap: 3px; font-size: 7px; color: #888;
+    }
+    .hi-fi .device .bar { height: 8px; background: #eee; border: 1px dashed #bbb; }
+    .hi-fi .device .body {
+      flex: 1;
+      background: repeating-linear-gradient(0deg, transparent, transparent 4px, #f0f0f0 4px, #f0f0f0 5px);
+      border: 1px dashed #ccc;
+    }
+    .ba-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+    .ba { border: 1px dashed #999; padding: 6px; font-size: 9px; min-height: 40px; }
+    .ba.good { border-color: #111; background: #fafafa; }
+    .ba.bad { border-color: #c00; background: #fff5f5; color: #900; }
+    .card-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;
+    }
+    .card-grid.two { grid-template-columns: repeat(2, 1fr); }
+    .g-card {
+      border: 1.5px solid #111; background: #fff; display: flex; flex-direction: column;
+      min-height: 96px; text-decoration: none; color: #111;
+    }
+    .g-card.current { outline: 2px solid #111; outline-offset: -1px; background: #fafafa; }
+    .g-card .preview {
+      flex: 1; min-height: 56px; border-bottom: 1px dashed #999; background: #e8e8e8;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 9px; color: #777;
+    }
+    .g-card .preview .mini {
+      width: 48%; height: 68%; border: 1px solid #999; background: #fff;
+      display: flex; align-items: center; justify-content: center; font-size: 8px; color: #888;
+    }
+    .g-card .meta { padding: 6px 8px; }
+    .g-card .meta .ct { font-weight: 700; font-size: 11px; }
+    .g-card .meta .cm { font-size: 9px; color: #666; margin-top: 2px; }
+
+    .wire {
+      border: 2px solid #111; background: #fff;
+      display: grid; grid-template-columns: 210px 1fr; min-height: 340px;
+    }
+    .side {
+      border-right: 2px solid #111; background: #fafafa;
+      display: flex; flex-direction: column;
+    }
+    .side-header {
+      display: flex; justify-content: space-between; align-items: flex-start;
+      gap: 8px; padding: 10px; border-bottom: 1px dashed #999;
+    }
+    .brand .name {
+      border: 1px dashed #999; padding: 3px 6px; font-weight: 700; font-size: 11px;
+      display: inline-block;
+    }
+    .brand .docs {
+      margin-top: 4px; border: 1px dashed #bbb; padding: 2px 6px;
+      font-size: 10px; color: #666; display: inline-block;
+    }
+    .sep { height: 2px; background: #111; }
+    .nav {
+      padding: 8px 6px 12px; display: flex; flex-direction: column; gap: 12px; overflow: auto;
+    }
+    .group { display: flex; flex-direction: column; gap: 3px; }
+    .label {
+      font-size: 9px; font-weight: 700; letter-spacing: 0.08em;
+      text-transform: uppercase; color: #555; padding: 2px 6px 3px;
+    }
+    .btn {
+      border: 1.5px solid #111; background: #fff; padding: 4px 7px;
+      font-size: 11px; text-align: left;
+    }
+    .btn.current {
+      outline: 2px solid #111; outline-offset: -1px; font-weight: 700; background: #eee;
+    }
+    .nest-label {
+      font-size: 10px; font-weight: 600; color: #666; padding: 5px 6px 2px;
+    }
+    .sub {
+      margin-left: 6px; padding-left: 7px; border-left: 1px dashed #999;
+      display: flex; flex-direction: column; gap: 3px;
+    }
+    .sub .btn { font-size: 10px; border-style: dashed; }
+    .main {
+      padding: 12px 14px; display: flex; flex-direction: column; gap: 8px; min-width: 0;
+    }
+    @media (max-width: 700px) {
+      .details-wire .row { grid-template-columns: 1fr; }
+      .details-wire .k { border-right: none; border-bottom: 1px dashed #999; }
+      .wire { grid-template-columns: 1fr; }
+      .side { border-right: none; border-bottom: 2px solid #111; }
+      .fs-split, .ba-pair, .card-grid, .card-grid.two { grid-template-columns: 1fr; }
+      .film-row { flex-direction: column; }
+      .film-arrow { margin-top: 0; transform: rotate(90deg); }
+    }
+</style>
+</head>
+<body>
+  <article class="page">
+    <h1>Sidebar Layout</h1>
+    <p class="agent-note">
+      Agent guide for the Sidebar audit docs chrome. The <strong>Details</strong> block is not copied into
+      <code>design/audit/</code> — implement from the wireframes. Examples:
+      <a href="https://mintlify.com/" rel="noopener noreferrer">Mintlify</a>,
+      <a href="https://fumadocs.dev/" rel="noopener noreferrer">Fumadocs</a>.
+    </p>
+
+    <h2 id="details">1. Details</h2>
+    <div class="details-wire">
+      <div class="row"><div class="k">Name</div><div class="v">Sidebar Layout</div></div>
+      <div class="row"><div class="k">Fit</div><div class="v">Written audit reports — Understand, Evaluate, Prioritize with long reading columns.</div></div>
+      <div class="row"><div class="k">Examples</div><div class="v">
+        <a href="https://mintlify.com/" rel="noopener noreferrer">Mintlify</a> ·
+        <a href="https://fumadocs.dev/" rel="noopener noreferrer">Fumadocs</a>
+        — sidebar + reading column docs chrome
+      </div></div>
+      <div class="row"><div class="k">Style</div><div class="v">
+        Docs chrome corners (<code>audit/docs.json</code> <code>style</code>). Wireframes:
+        <a href="style.html">style.html</a> — <code>square</code> · <code>squircle</code> · <code>pill</code>.
+      </div></div>
+      <div class="row"><div class="k">Fonts</div><div class="v">
+        This agent-guide HTML uses <strong>Inter</strong>. Audit docs pick from
+        <a href="../typography.html">typography.html</a> (pairings that list <code>sidebar</code>).
+      </div></div>
+      <div class="row"><div class="k">Icons</div><div class="v">Use Lucide Icons</div></div>
+      <div class="row"><div class="k">Description</div><div class="v">
+        Left sidebar + reading column. Header: product name and “Audit handbook” (left), theme toggle (right).
+        Five uppercase groups — UNDERSTAND, WALKTHROUGH, EVALUATE, PRIORITIZE, REDESIGN.
+        Walkthrough nests <strong>flow</strong> buttons. Redesign nests <strong>opportunity</strong> ids
+        (each package: before → problem → after index + screen pages).
+      </div></div>
+      <div class="row"><div class="k">Wireframes</div><div class="v">
+        <a href="#sep-understand">Understand</a> ·
+        <a href="#sep-walkthrough">Walkthrough</a> ·
+        <a href="#sep-evaluate">Evaluate</a> ·
+        <a href="#sep-prioritize">Prioritize</a> ·
+        <a href="#sep-redesign">Redesign</a>
+      </div></div>
+    </div>
+
+    <h2 id="wireframes">2. Wireframes</h2>
+
+    <div class="wf-sep" id="sep-understand">
+      <span class="wf-sep-label">Understand</span>
+      <span class="wf-sep-note">Overview · product sheet</span>
+    </div>
+    <div class="wire-block" id="wf-understand">
+      <h3>Understand · Overview</h3>
+      <p class="desc"><code>understand.html</code> — product, users, goals, key flows, vocabulary. No evaluation.</p>
+      
+      <div class="wire">
+        <aside class="side">
+          <div class="side-header">
+            <div class="brand">
+              <div class="name">[ Product name ]</div>
+              <div class="docs">Audit handbook</div>
+            </div>
+            <div class="theme">◐</div>
+          </div>
+          <div class="sep"></div>
+          <nav class="nav">
+            <div class="group">
+              <div class="label">Understand</div>
+              <div class="btn current">Overview</div>
+            </div>
+            <div class="group">
+              <div class="label">Walkthrough</div>
+              <div class="nest-label">Flows</div>
+              <div class="sub"><div class="btn">Onboarding</div><div class="btn">Checkout</div></div>
+            </div>
+            <div class="group">
+              <div class="label">Evaluate</div>
+              <div class="btn">Findings</div>
+            </div>
+            <div class="group">
+              <div class="label">Prioritize</div>
+              <div class="btn">Backlog</div>
+            </div>
+            <div class="group">
+              <div class="label">Redesign</div>
+              <div class="nest-label">Opportunities</div>
+              <div class="sub"><div class="btn">payment-errors</div><div class="btn">empty-states</div></div>
+            </div>
+          </nav></aside>
+        <div class="main">
+            <div class="page-title">Understand · Overview</div>
+            <div class="brief-sheet">
+              <div class="brief-meta">
+                <div class="brief-meta-top">
+                  <span class="brief-product">[ Product name ]</span>
+                  <span class="brief-platform">Web · App</span>
+                </div>
+                <div class="brief-purpose">What the product does — one or two lines</div>
+              </div>
+              <div class="brief-block"><div class="bh">Users / roles</div><div class="bb prose">Who uses it</div></div>
+              <div class="brief-block"><div class="bh">Goals</div><div class="bb"><ul class="brief-list"><li>User goal</li><li>Business goal</li></ul></div></div>
+              <div class="brief-block"><div class="bh">Key flows</div><div class="bb"><table class="brief-table"><thead><tr><th>Flow</th><th>Why it matters</th></tr></thead><tbody><tr><td>Onboarding</td><td>…</td></tr><tr><td>Checkout</td><td>…</td></tr></tbody></table></div></div>
+              <div class="brief-block"><div class="bh">Vocabulary</div><div class="bb"><table class="term-table"><thead><tr><th>Term</th><th>Meaning</th></tr></thead><tbody><tr><td>Workspace</td><td>…</td></tr></tbody></table></div></div>
+            </div></div>
+      </div>
+    </div>
+
+    <div class="wf-sep" id="sep-walkthrough">
+      <span class="wf-sep-label">Walkthrough</span>
+      <span class="wf-sep-note">Nested flows · current screens</span>
+    </div>
+    <div class="wire-block" id="wf-walkthrough">
+      <h3>Walkthrough · flow</h3>
+      <p class="desc"><code>walkthrough/&lt;flow-id&gt;.html</code> — ordered screens and states for one flow.</p>
+      
+      <div class="wire">
+        <aside class="side">
+          <div class="side-header">
+            <div class="brand">
+              <div class="name">[ Product name ]</div>
+              <div class="docs">Audit handbook</div>
+            </div>
+            <div class="theme">◐</div>
+          </div>
+          <div class="sep"></div>
+          <nav class="nav">
+            <div class="group">
+              <div class="label">Understand</div>
+              <div class="btn">Overview</div>
+            </div>
+            <div class="group">
+              <div class="label">Walkthrough</div>
+              <div class="nest-label">Flows</div>
+              <div class="sub"><div class="btn">Onboarding</div><div class="btn current">Checkout</div></div>
+            </div>
+            <div class="group">
+              <div class="label">Evaluate</div>
+              <div class="btn">Findings</div>
+            </div>
+            <div class="group">
+              <div class="label">Prioritize</div>
+              <div class="btn">Backlog</div>
+            </div>
+            <div class="group">
+              <div class="label">Redesign</div>
+              <div class="nest-label">Opportunities</div>
+              <div class="sub"><div class="btn">payment-errors</div><div class="btn">empty-states</div></div>
+            </div>
+          </nav></aside>
+        <div class="main">
+            <div class="page-title">Walkthrough · Checkout</div>
+            <div class="page-sub">Current experience — no evaluation</div>
+            <div class="film-row">
+              <div class="film-step"><div class="film-num">1</div><div class="film-panel"><div class="mini">Cart</div></div><div class="film-cap"><span class="sn">Cart</span>Purpose · primary action · next</div></div>
+              <span class="film-arrow">→</span>
+              <div class="film-step"><div class="film-num">2</div><div class="film-panel"><div class="mini">Pay</div></div><div class="film-cap"><span class="sn">Payment</span>Entry · hierarchy · states</div></div>
+              <span class="film-arrow">→</span>
+              <div class="film-step"><div class="film-num">3</div><div class="film-panel"><div class="mini">Done</div></div><div class="film-cap"><span class="sn">Confirm</span>Success · empty/error notes</div></div>
+            </div>
+            <div class="state-tabs"><span class="tab on">Default</span><span class="tab">Empty</span><span class="tab">Error</span><span class="tab">Loading</span></div></div>
+      </div>
+    </div>
+
+    <div class="wf-sep" id="sep-evaluate">
+      <span class="wf-sep-label">Evaluate</span>
+      <span class="wf-sep-note">Findings · opportunity backlog</span>
+    </div>
+    <div class="wire-block" id="wf-evaluate">
+      <h3>Evaluate · Findings</h3>
+      <p class="desc"><code>evaluate.html</code> — structured findings plus flat opportunity backlog.</p>
+      
+      <div class="wire">
+        <aside class="side">
+          <div class="side-header">
+            <div class="brand">
+              <div class="name">[ Product name ]</div>
+              <div class="docs">Audit handbook</div>
+            </div>
+            <div class="theme">◐</div>
+          </div>
+          <div class="sep"></div>
+          <nav class="nav">
+            <div class="group">
+              <div class="label">Understand</div>
+              <div class="btn">Overview</div>
+            </div>
+            <div class="group">
+              <div class="label">Walkthrough</div>
+              <div class="nest-label">Flows</div>
+              <div class="sub"><div class="btn">Onboarding</div><div class="btn">Checkout</div></div>
+            </div>
+            <div class="group">
+              <div class="label">Evaluate</div>
+              <div class="btn current">Findings</div>
+            </div>
+            <div class="group">
+              <div class="label">Prioritize</div>
+              <div class="btn">Backlog</div>
+            </div>
+            <div class="group">
+              <div class="label">Redesign</div>
+              <div class="nest-label">Opportunities</div>
+              <div class="sub"><div class="btn">payment-errors</div><div class="btn">empty-states</div></div>
+            </div>
+          </nav></aside>
+        <div class="main">
+            <div class="page-title">Evaluate · Findings</div>
+            <div class="fs">
+              <div class="fs-block"><div class="bh">By flow / dimension</div><div class="bb">
+                <div class="fs-split">
+                  <div class="fs-card"><strong>Checkout · Friction</strong>Where · what · why · severity</div>
+                  <div class="fs-card"><strong>Nav · Consistency</strong>Where · what · why · severity</div>
+                </div>
+              </div></div>
+              <div class="fs-block"><div class="bh">Opportunity backlog</div><div class="bb">
+                <table class="brief-table"><thead><tr><th>#</th><th>Opportunity</th><th>Type</th><th>Sev</th></tr></thead>
+                <tbody><tr><td>1</td><td>Clarify payment errors</td><td>Usability</td><td>High</td></tr>
+                <tr><td>2</td><td>Reduce empty-state dead ends</td><td>Opportunity</td><td>Med</td></tr></tbody></table>
+              </div></div>
+            </div></div>
+      </div>
+    </div>
+
+    <div class="wf-sep" id="sep-prioritize">
+      <span class="wf-sep-label">Prioritize</span>
+      <span class="wf-sep-note">Focused backlog</span>
+    </div>
+    <div class="wire-block" id="wf-prioritize">
+      <h3>Prioritize · Backlog</h3>
+      <p class="desc"><code>prioritize.html</code> — ranked opportunities ready for redesign.</p>
+      
+      <div class="wire">
+        <aside class="side">
+          <div class="side-header">
+            <div class="brand">
+              <div class="name">[ Product name ]</div>
+              <div class="docs">Audit handbook</div>
+            </div>
+            <div class="theme">◐</div>
+          </div>
+          <div class="sep"></div>
+          <nav class="nav">
+            <div class="group">
+              <div class="label">Understand</div>
+              <div class="btn">Overview</div>
+            </div>
+            <div class="group">
+              <div class="label">Walkthrough</div>
+              <div class="nest-label">Flows</div>
+              <div class="sub"><div class="btn">Onboarding</div><div class="btn">Checkout</div></div>
+            </div>
+            <div class="group">
+              <div class="label">Evaluate</div>
+              <div class="btn">Findings</div>
+            </div>
+            <div class="group">
+              <div class="label">Prioritize</div>
+              <div class="btn current">Backlog</div>
+            </div>
+            <div class="group">
+              <div class="label">Redesign</div>
+              <div class="nest-label">Opportunities</div>
+              <div class="sub"><div class="btn">payment-errors</div><div class="btn">empty-states</div></div>
+            </div>
+          </nav></aside>
+        <div class="main">
+            <div class="page-title">Prioritize · Backlog</div>
+            <div class="fs">
+              <div class="fs-block"><div class="bh">Selected opportunities</div><div class="bb">
+                <div class="fs-card" style="margin-bottom:6px"><strong>P1 · Clarify payment errors</strong>
+                  Problem · Evidence · Desired outcome · Scope · Success criteria</div>
+                <div class="fs-card"><strong>P2 · Empty-state recovery</strong>
+                  Problem · Evidence · Desired outcome · Scope · Success criteria</div>
+              </div></div>
+            </div></div>
+      </div>
+    </div>
+
+    <div class="wf-sep" id="sep-redesign">
+      <span class="wf-sep-label">Redesign</span>
+      <span class="wf-sep-note">Opportunity package · before / problem / after</span>
+    </div>
+    <div class="wire-block" id="wf-redesign">
+      <h3>Redesign · opportunity index</h3>
+      <p class="desc"><code>redesign/&lt;opportunity-id&gt;/index.html</code> — before → problem → after + links to hi-fi screens.</p>
+      
+      <div class="wire">
+        <aside class="side">
+          <div class="side-header">
+            <div class="brand">
+              <div class="name">[ Product name ]</div>
+              <div class="docs">Audit handbook</div>
+            </div>
+            <div class="theme">◐</div>
+          </div>
+          <div class="sep"></div>
+          <nav class="nav">
+            <div class="group">
+              <div class="label">Understand</div>
+              <div class="btn">Overview</div>
+            </div>
+            <div class="group">
+              <div class="label">Walkthrough</div>
+              <div class="nest-label">Flows</div>
+              <div class="sub"><div class="btn">Onboarding</div><div class="btn">Checkout</div></div>
+            </div>
+            <div class="group">
+              <div class="label">Evaluate</div>
+              <div class="btn">Findings</div>
+            </div>
+            <div class="group">
+              <div class="label">Prioritize</div>
+              <div class="btn">Backlog</div>
+            </div>
+            <div class="group">
+              <div class="label">Redesign</div>
+              <div class="nest-label">Opportunities</div>
+              <div class="sub"><div class="btn current">payment-errors</div><div class="btn">empty-states</div></div>
+            </div>
+          </nav></aside>
+        <div class="main">
+            <div class="page-title">Redesign · payment-errors</div>
+            <div class="ba-pair">
+              <div class="ba bad"><strong>Before</strong><br/>Current frame / behavior</div>
+              <div class="ba good"><strong>After</strong><br/>Improved frame / behavior</div>
+            </div>
+            <div class="fs-block"><div class="bh">Problem</div><div class="bb prose">Named problem from prioritize</div></div>
+            <div class="card-grid two" style="margin-top:8px">
+              <div class="g-card"><div class="preview"><div class="mini">Screen A</div></div><div class="meta"><div class="ct">Payment</div><div class="cm">hi-fi</div></div></div>
+              <div class="g-card"><div class="preview"><div class="mini">Screen B</div></div><div class="meta"><div class="ct">Confirm</div><div class="cm">hi-fi</div></div></div>
+            </div></div>
+      </div>
+    </div>
+    <div class="wire-block" id="wf-redesign-screen">
+      <h3>Redesign · screen</h3>
+      <p class="desc"><code>redesign/&lt;opportunity-id&gt;/&lt;screen&gt;.html</code> — hi-fi with states.</p>
+      
+      <div class="wire">
+        <aside class="side">
+          <div class="side-header">
+            <div class="brand">
+              <div class="name">[ Product name ]</div>
+              <div class="docs">Audit handbook</div>
+            </div>
+            <div class="theme">◐</div>
+          </div>
+          <div class="sep"></div>
+          <nav class="nav">
+            <div class="group">
+              <div class="label">Understand</div>
+              <div class="btn">Overview</div>
+            </div>
+            <div class="group">
+              <div class="label">Walkthrough</div>
+              <div class="nest-label">Flows</div>
+              <div class="sub"><div class="btn">Onboarding</div><div class="btn">Checkout</div></div>
+            </div>
+            <div class="group">
+              <div class="label">Evaluate</div>
+              <div class="btn">Findings</div>
+            </div>
+            <div class="group">
+              <div class="label">Prioritize</div>
+              <div class="btn">Backlog</div>
+            </div>
+            <div class="group">
+              <div class="label">Redesign</div>
+              <div class="nest-label">Opportunities</div>
+              <div class="sub"><div class="btn current">payment-errors</div><div class="btn">empty-states</div></div>
+            </div>
+          </nav></aside>
+        <div class="main">
+            <div class="page-title">Payment · redesigned</div>
+            <div class="state-tabs"><span class="tab on">Default</span><span class="tab">Error</span><span class="tab">Success</span></div>
+            <div class="hi-fi"><div class="device"><div class="bar"></div><div class="body"></div></div></div></div>
+      </div>
+    </div>
+  </article>
+</body>
+</html>

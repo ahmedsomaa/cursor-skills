@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Tone catalog — UX build kit</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Press+Start+2P&family=VT323&family=Orbitron:wght@500;700&family=Nunito:wght@500;700&family=Space+Grotesk:wght@400;500;700&family=Quicksand:wght@500;700&family=Rajdhani:wght@500;700&family=Oxanium:wght@500;700&family=Josefin+Sans:wght@400;600&family=Fredoka:wght@500;700&display=swap" rel="stylesheet"/>
+
+<style>
+
+:root { color-scheme: light; --ink:#0a0a0a; --muted:#525252; --line:#e5e5e5; --paper:#fff; --wash:#fafafa; --blue:#1d4ed8; }
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  background: var(--wash);
+  color: var(--ink);
+  line-height: 1.5;
+}
+.page { max-width: 960px; margin: 0 auto; padding: 28px 20px 80px; }
+a { color: var(--blue); text-decoration: none; }
+a:hover { text-decoration: underline; }
+code {
+  font-family: ui-monospace, Menlo, monospace; font-size: 0.85em;
+  background: #eee; padding: 1px 5px; border-radius: 0;
+}
+
+.back {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 36px; height: 36px; border-radius: 0; border: 1px solid #111;
+  background: var(--paper); color: var(--ink); margin-bottom: 20px;
+}
+.back:hover { border-color: #a3a3a3; text-decoration: none; background: #fff; }
+.back svg { display: block; }
+
+.hero-title {
+  font-size: clamp(1.75rem, 3vw, 2.25rem);
+  font-weight: 650; letter-spacing: -0.035em; line-height: 1.15;
+  margin: 0 0 4px;
+}
+.hero-sub {
+  font-size: 0.95rem; font-weight: 500; color: var(--muted);
+  letter-spacing: 0.04em; text-transform: uppercase; margin: 0 0 14px;
+}
+.fit { font-size: 1.05rem; color: #262626; margin: 0 0 10px; max-width: 40rem; }
+.meta-row {
+  display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 20px;
+  font-size: 0.8rem; color: var(--muted);
+}
+.meta-row code { background: #eee; }
+
+.toc {
+  display: flex; align-items: stretch;
+  gap: 0; margin: 0 0 36px; padding: 0;
+  border: 1px solid #111; background: #fff;
+  overflow-x: auto; -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+}
+.toc a {
+  flex: 1 1 0; min-width: 5.5rem;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 2px; padding: 12px 10px;
+  font-size: 0.8rem; font-weight: 550; letter-spacing: -0.01em;
+  color: #525252; text-decoration: none; text-align: center;
+  border-right: 1px solid #e5e5e5; white-space: nowrap;
+  transition: background .12s ease, color .12s ease;
+}
+.toc a:last-child { border-right: 0; }
+.toc a .n {
+  font-size: 0.65rem; font-weight: 700; letter-spacing: 0.08em;
+  color: #a3a3a3; line-height: 1;
+}
+.toc a:hover { background: #f5f5f5; color: #111; text-decoration: none; }
+.toc a:hover .n { color: #737373; }
+.toc a:focus-visible { outline: 2px solid #111; outline-offset: -2px; z-index: 1; }
+
+.section {
+  padding: 8px 0 36px;
+  border-bottom: 1px solid var(--line);
+  scroll-margin-top: 24px;
+}
+.section:last-of-type { border-bottom: 0; }
+.section h2 {
+  font-size: 1.25rem; font-weight: 650; letter-spacing: -0.025em;
+  margin: 0 0 8px; border: 0; padding: 0;
+  display: flex; align-items: baseline; gap: 10px;
+}
+.section h2 .n {
+  font-size: 0.75rem; font-weight: 700; letter-spacing: 0.06em;
+  color: #a3a3a3; font-variant-numeric: tabular-nums;
+}
+.section .lead { font-size: 0.9rem; color: var(--muted); margin: 0 0 16px; max-width: 40rem; }
+
+.two-col {
+  display: grid; grid-template-columns: 1.2fr 1fr; gap: 20px 28px;
+}
+@media (max-width: 720px) { .two-col { grid-template-columns: 1fr; } }
+
+ul.bullets { margin: 0; padding-left: 1.15rem; }
+ul.bullets li { margin: 5px 0; font-size: 0.92rem; }
+h3.block-title {
+  font-size: 0.72rem; font-weight: 650; letter-spacing: 0.07em;
+  text-transform: uppercase; color: var(--muted); margin: 0 0 8px;
+}
+
+.pick {
+  display: inline-flex; align-items: baseline; gap: 8px; flex-wrap: wrap;
+  background: var(--paper); border: 1px solid #111;
+  border-radius: 0; padding: 10px 14px; font-size: 0.9rem;
+}
+.pick strong { font-weight: 650; }
+.pick .cue { color: var(--muted); font-size: 0.85rem; }
+
+.resource-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.resource-list li {
+  background: var(--paper); border: 1px solid #111;
+  border-radius: 0; padding: 10px 12px; font-size: 0.88rem;
+}
+.resource-list .role {
+  display: block; font-size: 0.68rem; font-weight: 650;
+  letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin-bottom: 2px;
+}
+.resource-list a { font-weight: 600; color: var(--ink); }
+.resource-list a:hover { color: var(--blue); }
+.resource-list .note { color: var(--muted); font-size: 0.8rem; }
+
+.examples { font-size: 0.9rem; line-height: 1.75; margin: 0; }
+.examples a { margin-right: 2px; }
+
+.do-dont {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 4px;
+}
+.do-dont > div {
+  background: var(--paper); border: 1px solid #111;
+  border-radius: 0; padding: 14px 16px; font-size: 0.9rem;
+}
+.do-dont .label {
+  font-size: 0.68rem; font-weight: 700; letter-spacing: 0.08em;
+  text-transform: uppercase; margin-bottom: 6px;
+}
+.do-dont .do .label { color: #15803d; }
+.do-dont .dont .label { color: #b91c1c; }
+@media (max-width: 640px) { .do-dont { grid-template-columns: 1fr; } }
+
+.wf-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 4px;
+}
+@media (max-width: 720px) { .wf-grid { grid-template-columns: 1fr; } }
+.wf-card {
+  background: var(--paper); border: 1px solid #111;
+  border-radius: 0; overflow: hidden; display: flex; flex-direction: column;
+}
+.wf-card .wf-head {
+  padding: 10px 12px 8px; border-bottom: 1px solid #111;
+  background: #fff;
+}
+.wf-card .wf-head h3 { margin: 0 0 2px; font-size: 0.92rem; font-weight: 650; }
+.wf-card .wf-head .desc { margin: 0; font-size: 0.78rem; color: var(--muted); }
+.wf-card .specimen { padding: 12px; background: #f0f0f0; flex: 1; }
+.wf-card .specimen .t { display: block; }
+
+/* Catalog index — wireframe board, never soft “cards” */
+.index-board {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 28px 20px;
+  margin-top: 28px;
+}
+.wf-link {
+  display: block; color: inherit; text-decoration: none;
+}
+.wf-link:hover { text-decoration: none; }
+.wf-link:hover .wf-frame { outline: 2px solid #111; outline-offset: 2px; }
+.wf-frame {
+  border: 1px dashed #111;
+  background: #f0f0f0;
+  padding: 10px;
+  border-radius: 0;
+}
+.wf-frame .t { display: block; pointer-events: none; }
+.wf-caption {
+  margin-top: 10px;
+  border-top: 1px solid #111;
+  padding-top: 8px;
+}
+.wf-caption .name {
+  font-size: 0.95rem; font-weight: 650; letter-spacing: -0.02em; margin: 0 0 2px;
+}
+.wf-caption .tid {
+  font-size: 11px; font-family: ui-monospace, Menlo, monospace; color: #525252; margin: 0 0 6px;
+}
+.wf-caption .fit {
+  font-size: 0.8rem; color: #404040; margin: 0 0 6px; line-height: 1.4;
+}
+.wf-caption .meta {
+  font-size: 0.72rem; color: #737373; font-family: ui-monospace, Menlo, monospace;
+}
+
+.agent-note { font-size: 0.8rem; color: var(--muted); margin: 18px 0 0; }
+
+
+.t{
+  --bg:#fff;--fg:#111;--muted:#737373;--line:#d4d4d4;--soft:#f5f5f5;
+  --accent:#111;--accent-fg:#fff;--danger:#b91c1c;--danger-fg:#fff;
+  --radius:0;--radius-sm:0;--shadow:none;--font:Inter,ui-sans-serif,system-ui,sans-serif;
+  --weight:600;--tracking:0;--stage-border:1px solid var(--line);
+  --blur:none;--saturate:100%;
+  font-family:var(--font);color:var(--fg);font-size:11px;line-height:1.4;
+  display:block;
+}
+.t .stage{
+  background:var(--bg);border:var(--stage-border);border-radius:var(--radius);
+  box-shadow:var(--shadow);overflow:hidden;min-height:168px;
+  backdrop-filter:var(--blur) saturate(var(--saturate));
+  -webkit-backdrop-filter:var(--blur) saturate(var(--saturate));
+}
+.t .stage.pad{padding:16px}.t .stage.center{display:flex;align-items:center;justify-content:center}
+.t .top{
+  display:flex;align-items:center;gap:12px;padding:8px 12px;
+  border-bottom:1px solid var(--line);background:var(--soft);
+}
+.t .brand{font-weight:var(--weight);letter-spacing:var(--tracking)}
+.t .nav{display:flex;gap:10px;flex:1;color:var(--muted)}
+.t .nav .on,.t .nav-item.on{color:var(--fg);font-weight:var(--weight)}
+.t .meta{margin-left:auto;color:var(--muted);font-size:10px}
+.t .body{display:grid;grid-template-columns:118px 1fr;min-height:120px}
+.t .side{border-right:1px solid var(--line);padding:8px;background:var(--soft)}
+.t .nav-item{padding:6px 8px;border-radius:var(--radius-sm);margin-bottom:2px;color:var(--muted)}
+.t .main{padding:12px 14px}
+.t .title-row{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:4px}
+.t h3{margin:0;font-size:14px;font-weight:var(--weight);letter-spacing:var(--tracking)}
+.t .muted{margin:0;color:var(--muted);font-size:10px}
+.t .chips{display:flex;gap:6px;margin-top:12px;flex-wrap:wrap}
+.t .chip{
+  border:1px solid var(--line);padding:3px 8px;border-radius:var(--radius-sm);
+  color:var(--muted);background:var(--bg)
+}
+.t .chip.on{background:var(--accent);color:var(--accent-fg);border-color:var(--accent)}
+.t .btn{
+  display:inline-block;background:var(--accent);color:var(--accent-fg);
+  border:1px solid var(--accent);padding:6px 12px;border-radius:var(--radius-sm);
+  font-size:11px;font-weight:var(--weight);box-shadow:var(--shadow);cursor:default
+}
+.t .btn.ghost{background:var(--bg);color:var(--fg);border-color:var(--line);box-shadow:none}
+.t .btn.danger{background:var(--danger);border-color:var(--danger);color:var(--danger-fg)}
+.t .grid{width:100%;border-collapse:collapse}
+.t .grid th,.t .grid td{padding:8px 12px;border-bottom:1px solid var(--line);text-align:left}
+.t .grid th{font-size:10px;color:var(--muted);font-weight:500;background:var(--soft)}
+.t .tag{
+  display:inline-block;padding:1px 6px;border:1px solid var(--line);
+  border-radius:var(--radius-sm);font-size:10px;background:var(--bg)
+}
+.t .tag.muted{color:var(--muted)}
+.t .panel,.t .modal{
+  background:var(--bg);border:1px solid var(--line);border-radius:var(--radius);
+  padding:14px;box-shadow:var(--shadow);max-width:280px;width:100%;
+  backdrop-filter:var(--blur) saturate(var(--saturate));
+  -webkit-backdrop-filter:var(--blur) saturate(var(--saturate));
+}
+.t label{display:block;font-size:10px;color:var(--muted);margin:10px 0 4px}
+.t input{
+  width:100%;box-sizing:border-box;border:1px solid var(--line);background:var(--bg);
+  color:var(--fg);padding:7px 8px;border-radius:var(--radius-sm);font:inherit
+}
+.t .actions{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+.t .modal p{margin:6px 0 0}
+
+.skin-swiss.t{
+  --bg:#fff;
+  --fg:#111;
+  --muted:#737373;
+  --line:#111;
+  --soft:#f5f5f5;
+  --accent:#e11;
+  --accent-fg:#fff;
+  --danger:#b91c1c;
+  --danger-fg:#fff;
+  --radius:0;
+  --radius-sm:0;
+  --shadow:none;
+  --font:Inter, ui-sans-serif, system-ui, sans-serif;
+  --weight:600;
+  --tracking:0.02em;
+  --stage-border:1px solid var(--line);
+}
+.skin-minimalism.t{
+  --bg:#fafafa;
+  --fg:#111;
+  --muted:#a3a3a3;
+  --line:#eee;
+  --soft:#fafafa;
+  --accent:#111;
+  --accent-fg:#fff;
+  --danger:#b91c1c;
+  --danger-fg:#fff;
+  --radius:16px;
+  --radius-sm:999px;
+  --shadow:none;
+  --font:Inter, ui-sans-serif, system-ui, sans-serif;
+  --weight:500;
+  --tracking:0;
+  --stage-border:1px solid #eee;
+}
+.skin-maximalism.t{
+  --bg:#fff7ed;
+  --fg:#111;
+  --muted:#737373;
+  --line:#ea580c;
+  --soft:#ffedd5;
+  --accent:#db2777;
+  --accent-fg:#fff;
+  --danger:#b91c1c;
+  --danger-fg:#fff;
+  --radius:0;
+  --radius-sm:0;
+  --shadow:4px 4px 0 #111;
+  --font:'Space Grotesk', Inter, sans-serif;
+  --weight:700;
+  --tracking:0;
+  --stage-border:1px solid var(--line);
+}
+.skin-neo-brutalism.t{
+  --bg:#fef08a;
+  --fg:#111;
+  --muted:#737373;
+  --line:#000;
+  --soft:#fde047;
+  --accent:#000;
+  --accent-fg:#fef08a;
+  --danger:#000;
+  --danger-fg:#fff;
+  --radius:0;
+  --radius-sm:0;
+  --shadow:4px 4px 0 #000;
+  --font:'Space Grotesk', Inter, sans-serif;
+  --weight:700;
+  --tracking:0.02em;
+  --stage-border:3px solid #000;
+}
+.skin-soft.t{
+  --bg:#fff;
+  --fg:#111;
+  --muted:#9d174d;
+  --line:#fbcfe8;
+  --soft:#fdf2f8;
+  --accent:#db2777;
+  --accent-fg:#fff;
+  --danger:#b91c1c;
+  --danger-fg:#fff;
+  --radius:20px;
+  --radius-sm:14px;
+  --shadow:0 8px 24px rgba(219,39,119,.12);
+  --font:Nunito, Inter, sans-serif;
+  --weight:600;
+  --tracking:0;
+  --stage-border:1px solid var(--line);
+}
+.skin-editorial.t{
+  --bg:#faf8f5;
+  --fg:#111;
+  --muted:#737373;
+  --line:#d6d3d1;
+  --soft:#f3efe8;
+  --accent:#1c1917;
+  --accent-fg:#faf8f5;
+  --danger:#b91c1c;
+  --danger-fg:#fff;
+  --radius:0;
+  --radius-sm:2px;
+  --shadow:none;
+  --font:Georgia, 'Source Serif 4', serif;
+  --weight:600;
+  --tracking:-0.01em;
+  --stage-border:1px solid var(--line);
+}
+.skin-liquid-glass.t{
+  --bg:rgba(255,255,255,0.38);
+  --fg:#111;
+  --muted:#334155;
+  --line:rgba(255,255,255,0.62);
+  --soft:rgba(255,255,255,0.28);
+  --accent:rgba(37,99,235,0.92);
+  --accent-fg:#fff;
+  --danger:rgba(225,29,72,0.9);
+  --danger-fg:#fff;
+  --radius:22px;
+  --radius-sm:14px;
+  --shadow:0 16px 48px rgba(15,23,42,0.22), inset 0 1px 0 rgba(255,255,255,0.75);
+  --font:Inter, ui-sans-serif, system-ui, sans-serif;
+  --weight:500;
+  --tracking:0;
+  --stage-border:1px solid rgba(255,255,255,0.55);
+  --blur:blur(18px);
+  --saturate:180%;
+}
+
+.skin-liquid-glass.t{
+  padding:12px;
+  border-radius:24px;
+  background:
+    radial-gradient(120% 90% at 8% 0%, rgba(125,211,252,.95) 0%, transparent 42%),
+    radial-gradient(90% 80% at 92% 12%, rgba(240,171,252,.9) 0%, transparent 40%),
+    radial-gradient(80% 70% at 70% 100%, rgba(167,139,250,.85) 0%, transparent 45%),
+    radial-gradient(70% 60% at 20% 85%, rgba(52,211,153,.55) 0%, transparent 40%),
+    linear-gradient(145deg, #1d4ed8 0%, #7c3aed 42%, #db2777 78%, #f97316 100%);
+}
+.skin-liquid-glass.t .stage{
+  background:linear-gradient(160deg, rgba(255,255,255,.52) 0%, rgba(255,255,255,.22) 100%);
+  border:1px solid rgba(255,255,255,.58);
+  box-shadow:0 18px 50px rgba(15,23,42,.28), inset 0 1px 0 rgba(255,255,255,.85), inset 0 -1px 0 rgba(255,255,255,.15);
+}
+.skin-liquid-glass.t .top,.skin-liquid-glass.t .side,.skin-liquid-glass.t .grid th{
+  background:rgba(255,255,255,.32);
+  border-color:rgba(255,255,255,.4);
+}
+.skin-liquid-glass.t .main{background:transparent}
+.skin-liquid-glass.t .chip{
+  background:rgba(255,255,255,.35);
+  border-color:rgba(255,255,255,.55);
+  color:#1e293b;
+}
+.skin-liquid-glass.t .chip.on{
+  background:rgba(37,99,235,.88);
+  border-color:rgba(255,255,255,.5);
+  color:#fff;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.35);
+}
+.skin-liquid-glass.t .btn{
+  background:linear-gradient(180deg, rgba(59,130,246,.95), rgba(37,99,235,.9));
+  border-color:rgba(255,255,255,.45);
+  box-shadow:0 6px 18px rgba(37,99,235,.35), inset 0 1px 0 rgba(255,255,255,.45);
+}
+.skin-liquid-glass.t .btn.ghost{
+  background:rgba(255,255,255,.35);
+  color:#0f172a;
+  border-color:rgba(255,255,255,.55);
+}
+.skin-liquid-glass.t .panel,.skin-liquid-glass.t .modal{
+  background:linear-gradient(165deg, rgba(255,255,255,.55), rgba(255,255,255,.28));
+  border:1px solid rgba(255,255,255,.6);
+  box-shadow:0 12px 36px rgba(15,23,42,.2), inset 0 1px 0 rgba(255,255,255,.8);
+}
+.skin-liquid-glass.t input{
+  background:rgba(255,255,255,.45);
+  border-color:rgba(255,255,255,.65);
+}
+.skin-dark-industrial.t{
+  --bg:#0a0a0a;
+  --fg:#e5e5e5;
+  --muted:#a3a3a3;
+  --line:#262626;
+  --soft:#171717;
+  --accent:#f59e0b;
+  --accent-fg:#0a0a0a;
+  --danger:#ef4444;
+  --danger-fg:#fff;
+  --radius:0;
+  --radius-sm:2px;
+  --shadow:none;
+  --font:'IBM Plex Sans', Inter, sans-serif;
+  --weight:500;
+  --tracking:0;
+  --stage-border:1px solid var(--line);
+}
+.skin-bauhaus.t{
+  --bg:#fff;
+  --fg:#111;
+  --muted:#737373;
+  --line:#111;
+  --soft:#fafafa;
+  --accent:#e11;
+  --accent-fg:#fff;
+  --danger:#b91c1c;
+  --danger-fg:#fff;
+  --radius:0;
+  --radius-sm:0;
+  --shadow:none;
+  --font:Josefin Sans, Futura, Inter, sans-serif;
+  --weight:600;
+  --tracking:0.04em;
+  --stage-border:1px solid var(--line);
+}
+.skin-calm-density.t{
+  --bg:#fff;
+  --fg:#111;
+  --muted:#8a8a8a;
+  --line:#ececec;
+  --soft:#fafafa;
+  --accent:#5e6ad2;
+  --accent-fg:#fff;
+  --danger:#b91c1c;
+  --danger-fg:#fff;
+  --radius:10px;
+  --radius-sm:6px;
+  --shadow:none;
+  --font:Inter, sans-serif;
+  --weight:500;
+  --tracking:0;
+  --stage-border:1px solid var(--line);
+}
+.skin-japandi.t{
+  --bg:#f7f4ef;
+  --fg:#111;
+  --muted:#78716c;
+  --line:#ddd5c8;
+  --soft:#efeae3;
+  --accent:#44403c;
+  --accent-fg:#f7f4ef;
+  --danger:#b91c1c;
+  --danger-fg:#fff;
+  --radius:16px;
+  --radius-sm:10px;
+  --shadow:none;
+  --font:'DM Sans', Inter, sans-serif;
+  --weight:500;
+  --tracking:0.02em;
+  --stage-border:1px solid var(--line);
+}
+.skin-terminal.t{
+  --bg:#0b0f0b;
+  --fg:#39ff14;
+  --muted:#2db812;
+  --line:#39ff14;
+  --soft:#0f160f;
+  --accent:#39ff14;
+  --accent-fg:#0b0f0b;
+  --danger:#ff3333;
+  --danger-fg:#0b0f0b;
+  --radius:0;
+  --radius-sm:0;
+  --shadow:none;
+  --font:'JetBrains Mono', ui-monospace, monospace;
+  --weight:500;
+  --tracking:0;
+  --stage-border:1px solid var(--line);
+}
+.skin-clay.t{
+  --bg:#e8f0ff;
+  --fg:#1e293b;
+  --muted:#64748b;
+  --line:#c7d7fe;
+  --soft:#dbe7ff;
+  --accent:#7c6af7;
+  --accent-fg:#fff;
+  --danger:#f43f5e;
+  --danger-fg:#fff;
+  --radius:28px;
+  --radius-sm:18px;
+  --shadow:8px 10px 0 rgba(124,106,247,.18), 0 18px 40px rgba(100,116,139,.12);
+  --font:Nunito, 'Varela Round', sans-serif;
+  --weight:700;
+  --tracking:0;
+  --stage-border:1px solid rgba(255,255,255,.85);
+}
+
+.skin-clay.t .stage{
+  background:linear-gradient(180deg,#f4f7ff 0%,#e4ecff 100%);
+  box-shadow:inset 0 2px 0 rgba(255,255,255,.95), 10px 12px 0 rgba(148,163,184,.18), 0 22px 44px rgba(99,102,241,.12);
+}
+.skin-clay.t .top,.skin-clay.t .side{background:#dfe8ff;box-shadow:inset 0 1px 0 rgba(255,255,255,.8)}
+.skin-clay.t .btn{
+  box-shadow:inset 0 2px 0 rgba(255,255,255,.45), 0 8px 0 rgba(88,70,220,.25);
+  border:0;
+}
+.skin-clay.t .panel,.skin-clay.t .modal{
+  background:linear-gradient(180deg,#fff,#eef2ff);
+  box-shadow:inset 0 2px 0 #fff, 8px 10px 0 rgba(148,163,184,.2);
+}
+.skin-aurora.t{
+  --bg:rgba(15,23,42,0.55);
+  --fg:#f8fafc;
+  --muted:#cbd5e1;
+  --line:rgba(167,243,208,0.35);
+  --soft:rgba(30,41,59,0.55);
+  --accent:#34d399;
+  --accent-fg:#022c22;
+  --danger:#f472b6;
+  --danger-fg:#fff;
+  --radius:20px;
+  --radius-sm:999px;
+  --shadow:0 0 40px rgba(52,211,153,.2);
+  --font:'Space Grotesk', Inter, sans-serif;
+  --weight:500;
+  --tracking:-0.01em;
+  --stage-border:1px solid rgba(255,255,255,.14);
+  --blur:blur(10px);
+  --saturate:140%;
+}
+
+.skin-aurora.t{
+  padding:10px;border-radius:22px;
+  background:
+    radial-gradient(80% 70% at 20% 20%, rgba(52,211,153,.55), transparent 50%),
+    radial-gradient(70% 60% at 80% 30%, rgba(167,139,250,.55), transparent 45%),
+    radial-gradient(60% 50% at 50% 90%, rgba(244,114,182,.4), transparent 45%),
+    linear-gradient(160deg,#020617,#0f172a 50%,#1e1b4b);
+}
+.skin-aurora.t .stage{
+  background:rgba(15,23,42,.5);
+  box-shadow:0 20px 50px rgba(2,6,23,.45), inset 0 1px 0 rgba(255,255,255,.12);
+}
+.skin-aurora.t .top,.skin-aurora.t .side{background:rgba(15,23,42,.45);border-color:rgba(255,255,255,.1)}
+.skin-aurora.t .btn{box-shadow:0 0 24px rgba(52,211,153,.45)}
+.skin-aurora.t .chip.on{background:#34d399;color:#022c22;border-color:transparent}
+.skin-aurora.t .panel,.skin-aurora.t .modal{
+  background:rgba(15,23,42,.62);
+  border:1px solid rgba(255,255,255,.14);
+  box-shadow:0 16px 40px rgba(2,6,23,.4);
+}
+.skin-cyberpunk.t{
+  --bg:#070b12;
+  --fg:#e2f6ff;
+  --muted:#7dd3fc;
+  --line:#00f0ff;
+  --soft:#0d1522;
+  --accent:#ff2bd6;
+  --accent-fg:#070b12;
+  --danger:#ffe600;
+  --danger-fg:#070b12;
+  --radius:0;
+  --radius-sm:0;
+  --shadow:0 0 0 1px #00f0ff, 0 0 18px rgba(0,240,255,.35);
+  --font:Rajdhani, Oxanium, sans-serif;
+  --weight:700;
+  --tracking:0.08em;
+  --stage-border:1px solid #00f0ff;
+}
+
+.skin-cyberpunk.t .stage{background:linear-gradient(180deg,#070b12,#101b2d 60%,#1a0b24)}
+.skin-cyberpunk.t .top{background:#0d1522;border-bottom:1px solid #ff2bd6;box-shadow:0 0 12px rgba(255,43,214,.25)}
+.skin-cyberpunk.t .side{background:#0a121c;border-right:1px solid #00f0ff}
+.skin-cyberpunk.t .btn{box-shadow:0 0 16px rgba(255,43,214,.45)}
+.skin-cyberpunk.t .chip.on{background:#00f0ff;color:#070b12;border-color:#00f0ff}
+.skin-cyberpunk.t .grid th{color:#00f0ff;background:#0d1522}
+
+</style>
+</head>
+<body>
+<div class="page">
+<h1 class="hero-title">Tone catalog</h1>
+<p class="hero-sub">SaaS wireframes</p>
+<p class="fit">Only tones that fit a SaaS product. Each tile shows that tone’s best-fit app shell — open a guide for all four specimens. Write <code>id</code> + <code>name</code> into <code>system.json</code> <code>tone</code>.</p>
+<p class="agent-note" style="margin-top:0">Dashed frames are wireframe chrome (0 radius). Interior corner language follows each tone’s radius pick.</p>
+<div class="index-board">
+<a class="wf-link" href="swiss.html"><div class="wf-frame"><div class="t skin-swiss"><div class="stage">
+  <div class="top">
+    <span class="brand">Ledger</span>
+    <nav class="nav"><span class="on">Workspace</span><span>Billing</span><span>Members</span></nav>
+    <span class="meta">Alex</span>
+  </div>
+  <div class="body">
+    <aside class="side"><div class="nav-item on">Overview</div><div class="nav-item">Invoices</div><div class="nav-item">Audit</div></aside>
+    <main class="main">
+      <div class="title-row"><h3>Workspace</h3><span class="btn">Invite</span></div>
+      <p class="muted">Plan · Growth · Renews Apr 12</p>
+      <div class="chips"><span class="chip">Usage</span><span class="chip on">Seats</span><span class="chip">Limits</span></div>
+    </main>
+  </div>
+</div></div></div><div class="wf-caption"><div class="name">Swiss</div><div class="tid">swiss</div><p class="fit">Grid-led modernist clarity — objective, typographic, little ornament.</p><div class="meta">radius:square · govuk, primer, atlassian</div></div></a>
+<a class="wf-link" href="minimalism.html"><div class="wf-frame"><div class="t skin-minimalism"><div class="stage">
+  <div class="top">
+    <span class="brand">Focus</span>
+    <nav class="nav"><span class="on">Today</span><span>Later</span></nav>
+    <span class="meta">Alex</span>
+  </div>
+  <div class="body">
+    <aside class="side"><div class="nav-item on">Inbox</div><div class="nav-item">Done</div></aside>
+    <main class="main">
+      <div class="title-row"><h3>Today</h3><span class="btn">Continue</span></div>
+      <p class="muted">One clear next step</p>
+      <div class="chips"><span class="chip on">Now</span><span class="chip">Soon</span></div>
+    </main>
+  </div>
+</div></div></div><div class="wf-caption"><div class="name">Minimalism</div><div class="tid">minimalism</div><p class="fit">Zen reduction — one clear action, intentional empty space.</p><div class="meta">radius:pill · primer, polaris, paste</div></div></a>
+<a class="wf-link" href="maximalism.html"><div class="wf-frame"><div class="t skin-maximalism"><div class="stage">
+  <div class="top">
+    <span class="brand">Studio</span>
+    <nav class="nav"><span class="on">Store</span><span>Audience</span><span>Payouts</span></nav>
+    <span class="meta">Alex</span>
+  </div>
+  <div class="body">
+    <aside class="side"><div class="nav-item on">Products</div><div class="nav-item">Posts</div><div class="nav-item">Tips</div></aside>
+    <main class="main">
+      <div class="title-row"><h3>Storefront</h3><span class="btn">Add product</span></div>
+      <p class="muted">12 products · $4.2k this week</p>
+      <div class="chips"><span class="chip on">Live</span><span class="chip">Drafts</span><span class="chip">Bundles</span></div>
+    </main>
+  </div>
+</div></div></div><div class="wf-caption"><div class="name">Maximalism</div><div class="tid">maximalism</div><p class="fit">More is more — layered color, mixed type, dense visual rhythm.</p><div class="meta">radius:square · gestalt, ant-design, material-3</div></div></a>
+<a class="wf-link" href="neo-brutalism.html"><div class="wf-frame"><div class="t skin-neo-brutalism"><div class="stage">
+  <div class="top">
+    <span class="brand">Punch</span>
+    <nav class="nav"><span class="on">Dashboard</span><span>Customers</span><span>$$</span></nav>
+    <span class="meta">Alex</span>
+  </div>
+  <div class="body">
+    <aside class="side"><div class="nav-item on">Today</div><div class="nav-item">Queue</div><div class="nav-item">Spam</div></aside>
+    <main class="main">
+      <div class="title-row"><h3>Dashboard</h3><span class="btn">Do it</span></div>
+      <p class="muted">Cash out Friday · 3 alerts</p>
+      <div class="chips"><span class="chip on">Sales</span><span class="chip">Traffic</span><span class="chip">Fees</span></div>
+    </main>
+  </div>
+</div></div></div><div class="wf-caption"><div class="name">Neo-brutalism</div><div class="tid">neo-brutalism</div><p class="fit">Raw, loud, high-contrast — thick borders and hard shadows.</p><div class="meta">radius:square · gestalt, chakra, mantine</div></div></a>
+<a class="wf-link" href="soft.html"><div class="wf-frame"><div class="t skin-soft"><div class="stage">
+  <div class="top">
+    <span class="brand">Calmly</span>
+    <nav class="nav"><span class="on">Home</span><span>Sessions</span><span>Care</span></nav>
+    <span class="meta">Alex</span>
+  </div>
+  <div class="body">
+    <aside class="side"><div class="nav-item on">Today</div><div class="nav-item">Library</div><div class="nav-item">Coach</div></aside>
+    <main class="main">
+      <div class="title-row"><h3>Home</h3><span class="btn">Start</span></div>
+      <p class="muted">Good evening · 12 min left in streak</p>
+      <div class="chips"><span class="chip on">Breathe</span><span class="chip">Sleep</span><span class="chip">Focus</span></div>
+    </main>
+  </div>
+</div></div></div><div class="wf-caption"><div class="name">Soft</div><div class="tid">soft</div><p class="fit">Friendly cushioned UI — rounded, airy, low-contrast comfort.</p><div class="meta">radius:squircle · polaris, chakra, fluent-2</div></div></a>
+<a class="wf-link" href="editorial.html"><div class="wf-frame"><div class="t skin-editorial"><div class="stage">
+  <div class="top">
+    <span class="brand">Gazette</span>
+    <nav class="nav"><span class="on">Drafts</span><span>Published</span><span>Extras</span></nav>
+    <span class="meta">Alex</span>
+  </div>
+  <div class="body">
+    <aside class="side"><div class="nav-item on">All stories</div><div class="nav-item">Features</div><div class="nav-item">Notes</div></aside>
+    <main class="main">
+      <div class="title-row"><h3>Drafts</h3><span class="btn">New story</span></div>
+      <p class="muted">3 ready · 1 needs edit</p>
+      <div class="chips"><span class="chip on">Mine</span><span class="chip">Desk</span><span class="chip">Scheduled</span></div>
+    </main>
+  </div>
+</div></div></div><div class="wf-caption"><div class="name">Editorial</div><div class="tid">editorial</div><p class="fit">Magazine discipline — type-led hierarchy and long-form calm.</p><div class="meta">radius:square · primer, govuk, carbon</div></div></a>
+<a class="wf-link" href="liquid-glass.html"><div class="wf-frame"><div class="t skin-liquid-glass"><div class="stage">
+  <div class="top">
+    <span class="brand">Orb</span>
+    <nav class="nav"><span class="on">Workspace</span><span>Files</span><span>Share</span></nav>
+    <span class="meta">Alex</span>
+  </div>
+  <div class="body">
+    <aside class="side"><div class="nav-item on">Recents</div><div class="nav-item">Starred</div><div class="nav-item">Trash</div></aside>
+    <main class="main">
+      <div class="title-row"><h3>Workspace</h3><span class="btn">New</span></div>
+      <p class="muted">Synced · 2 devices</p>
+      <div class="chips"><span class="chip on">Boards</span><span class="chip">Docs</span><span class="chip">Media</span></div>
+    </main>
+  </div>
+</div></div></div><div class="wf-caption"><div class="name">Liquid glass</div><div class="tid">liquid-glass</div><p class="fit">Translucent layered panels — light, blur, and specular depth.</p><div class="meta">radius:squircle · fluent-2, material-3, polaris</div></div></a>
+<a class="wf-link" href="dark-industrial.html"><div class="wf-frame"><div class="t skin-dark-industrial"><div class="stage">
+  <div class="top">
+    <span class="brand">Signal</span>
+    <nav class="nav"><span class="on">Ops</span><span>Services</span><span>Deploys</span></nav>
+    <span class="meta">Alex</span>
+  </div>
+  <div class="body">
+    <aside class="side"><div class="nav-item on">Incidents</div><div class="nav-item">SLOs</div><div class="nav-item">Logs</div></aside>
+    <main class="main">
+      <div class="title-row"><h3>Incidents</h3><span class="btn">Declare</span></div>
+      <p class="muted">2 open · p95 182ms</p>
+      <div class="chips"><span class="chip on">Open</span><span class="chip">Resolved</span><span class="chip">Muted</span></div>
+    </main>
+  </div>
+</div></div></div><div class="wf-caption"><div class="name">Dark industrial</div><div class="tid">dark-industrial</div><p class="fit">Ops / infra night mode — dense, technical, status-first.</p><div class="meta">radius:square · carbon, primer, atlassian</div></div></a>
+<a class="wf-link" href="bauhaus.html"><div class="wf-frame"><div class="t skin-bauhaus"><div class="stage">
+  <div class="top">
+    <span class="brand">Forma</span>
+    <nav class="nav"><span class="on">Canvas</span><span>Assets</span><span>Share</span></nav>
+    <span class="meta">Alex</span>
+  </div>
+  <div class="body">
+    <aside class="side"><div class="nav-item on">Files</div><div class="nav-item">Components</div><div class="nav-item">Tokens</div></aside>
+    <main class="main">
+      <div class="title-row"><h3>Files</h3><span class="btn">New file</span></div>
+      <p class="muted">8 files · 2 shared</p>
+      <div class="chips"><span class="chip on">Recent</span><span class="chip">Team</span><span class="chip">Archive</span></div>
+    </main>
+  </div>
+</div></div></div><div class="wf-caption"><div class="name">Bauhaus</div><div class="tid">bauhaus</div><p class="fit">Primary geometry — circle, triangle, square as the visual system.</p><div class="meta">radius:square · material-3, ant-design, gestalt</div></div></a>
+<a class="wf-link" href="calm-density.html"><div class="wf-frame"><div class="t skin-calm-density"><div class="stage">
+  <div class="top">
+    <span class="brand">Linearish</span>
+    <nav class="nav"><span class="on">Inbox</span><span>My issues</span><span>Projects</span></nav>
+    <span class="meta">Alex</span>
+  </div>
+  <div class="body">
+    <aside class="side"><div class="nav-item on">Active</div><div class="nav-item">Backlog</div><div class="nav-item">Triage</div></aside>
+    <main class="main">
+      <div class="title-row"><h3>Active</h3><span class="btn">New issue</span></div>
+      <p class="muted">14 issues · Updated 2m ago</p>
+      <div class="chips"><span class="chip on">All</span><span class="chip">Mine</span><span class="chip">Bugs</span></div>
+    </main>
+  </div>
+</div></div></div><div class="wf-caption"><div class="name">Calm density</div><div class="tid">calm-density</div><p class="fit">Lots of information, still quiet — Linear/Notion-like composure.</p><div class="meta">radius:squircle · primer, atlassian, carbon</div></div></a>
+<a class="wf-link" href="japandi.html"><div class="wf-frame"><div class="t skin-japandi"><div class="stage">
+  <div class="top">
+    <span class="brand">Ma</span>
+    <nav class="nav"><span class="on">Space</span><span>Rituals</span><span>Notes</span></nav>
+    <span class="meta">Alex</span>
+  </div>
+  <div class="body">
+    <aside class="side"><div class="nav-item on">Today</div><div class="nav-item">Week</div><div class="nav-item">Later</div></aside>
+    <main class="main">
+      <div class="title-row"><h3>Today</h3><span class="btn">Add</span></div>
+      <p class="muted">Three things · leave room</p>
+      <div class="chips"><span class="chip on">Focus</span><span class="chip">Rest</span><span class="chip">Home</span></div>
+    </main>
+  </div>
+</div></div></div><div class="wf-caption"><div class="name">Japandi</div><div class="tid">japandi</div><p class="fit">Japanese calm × Scandinavian warmth — sparse, natural, precise.</p><div class="meta">radius:squircle · polaris, primer, fluent-2</div></div></a>
+<a class="wf-link" href="terminal.html"><div class="wf-frame"><div class="t skin-terminal"><div class="stage">
+  <div class="top">
+    <span class="brand">shipctl</span>
+    <nav class="nav"><span class="on">apps</span><span>deploys</span><span>logs</span></nav>
+    <span class="meta">Alex</span>
+  </div>
+  <div class="body">
+    <aside class="side"><div class="nav-item on">prod</div><div class="nav-item">staging</div><div class="nav-item">preview</div></aside>
+    <main class="main">
+      <div class="title-row"><h3>deploys</h3><span class="btn">deploy</span></div>
+      <p class="muted">prod · healthy · v2.14.3</p>
+      <div class="chips"><span class="chip on">running</span><span class="chip">failed</span><span class="chip">queued</span></div>
+    </main>
+  </div>
+</div></div></div><div class="wf-caption"><div class="name">Terminal</div><div class="tid">terminal</div><p class="fit">CLI aesthetic — monospace, prompts, phosphor on black.</p><div class="meta">radius:square · primer, carbon, atlassian</div></div></a>
+<a class="wf-link" href="clay.html"><div class="wf-frame"><div class="t skin-clay"><div class="stage">
+  <div class="top">
+    <span class="brand">Buddy</span>
+    <nav class="nav"><span class="on">People</span><span>Pipelines</span><span>Hugs</span></nav>
+    <span class="meta">Alex</span>
+  </div>
+  <div class="body">
+    <aside class="side"><div class="nav-item on">All</div><div class="nav-item">Warm</div><div class="nav-item">Cold</div></aside>
+    <main class="main">
+      <div class="title-row"><h3>People</h3><span class="btn">Add</span></div>
+      <p class="muted">128 contacts · 6 due today</p>
+      <div class="chips"><span class="chip on">Customers</span><span class="chip">Leads</span><span class="chip">Friends</span></div>
+    </main>
+  </div>
+</div></div></div><div class="wf-caption"><div class="name">Clay</div><div class="tid">clay</div><p class="fit">Claymorphism — soft extruded shapes, candy light, playful depth.</p><div class="meta">radius:squircle · chakra, mantine, polaris</div></div></a>
+<a class="wf-link" href="aurora.html"><div class="wf-frame"><div class="t skin-aurora"><div class="stage">
+  <div class="top">
+    <span class="brand">Lumen</span>
+    <nav class="nav"><span class="on">Chat</span><span>Projects</span><span>Usage</span></nav>
+    <span class="meta">Alex</span>
+  </div>
+  <div class="body">
+    <aside class="side"><div class="nav-item on">Home</div><div class="nav-item">Agents</div><div class="nav-item">Library</div></aside>
+    <main class="main">
+      <div class="title-row"><h3>Projects</h3><span class="btn">New agent</span></div>
+      <p class="muted">4 agents · 82% monthly budget</p>
+      <div class="chips"><span class="chip on">Active</span><span class="chip">Sleeping</span><span class="chip">Shared</span></div>
+    </main>
+  </div>
+</div></div></div><div class="wf-caption"><div class="name">Aurora</div><div class="tid">aurora</div><p class="fit">Mesh-gradient night sky — luminous color fields, soft glow UI.</p><div class="meta">radius:pill · polaris, material-3, fluent-2</div></div></a>
+<a class="wf-link" href="cyberpunk.html"><div class="wf-frame"><div class="t skin-cyberpunk"><div class="stage">
+  <div class="top">
+    <span class="brand">NIGHTWATCH</span>
+    <nav class="nav"><span class="on">SOC</span><span>Assets</span><span>Playbooks</span></nav>
+    <span class="meta">Alex</span>
+  </div>
+  <div class="body">
+    <aside class="side"><div class="nav-item on">Alerts</div><div class="nav-item">Hunt</div><div class="nav-item">Intel</div></aside>
+    <main class="main">
+      <div class="title-row"><h3>Alerts</h3><span class="btn">Declare</span></div>
+      <p class="muted">7 open · 1 critical</p>
+      <div class="chips"><span class="chip on">Critical</span><span class="chip">High</span><span class="chip">Noise</span></div>
+    </main>
+  </div>
+</div></div></div><div class="wf-caption"><div class="name">Cyberpunk</div><div class="tid">cyberpunk</div><p class="fit">Neon noir — rain-soaked tech, glitch accents, high-contrast night.</p><div class="meta">radius:square · carbon, primer, atlassian</div></div></a>
+</div>
+</div>
+</body>
+</html>

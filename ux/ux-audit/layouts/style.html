@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Docs chrome — Style (border radius)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: Inter, ui-sans-serif, system-ui, sans-serif; background: #f5f5f5; color: #111; line-height: 1.45; }
+    .page { max-width: 860px; margin: 0 auto; padding: 32px 20px 64px; }
+    h1 { font-size: 1.5rem; font-weight: 600; letter-spacing: -0.02em; margin: 0 0 8px; }
+    h2 { font-size: 1.05rem; font-weight: 600; margin: 28px 0 12px; }
+    h3 { font-size: 0.95rem; font-weight: 600; margin: 0 0 6px; }
+    .agent-note { font-size: 0.875rem; color: #444; margin: 0 0 20px; }
+    .agent-note code, .details-wire code, .desc code {
+      font-family: ui-monospace, Menlo, monospace; font-size: 0.85em; background: #eee; padding: 1px 4px; border-radius: 3px;
+    }
+    a { color: #1d4ed8; }
+    .details-wire { border: 1px solid #bbb; background: #fff; margin-bottom: 8px; }
+    .details-wire .row { display: grid; grid-template-columns: 140px 1fr; border-bottom: 1px dashed #999; }
+    .details-wire .row:last-child { border-bottom: 0; }
+    .details-wire .k { padding: 8px 10px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; color: #555; border-right: 1px dashed #999; background: #fafafa; }
+    .details-wire .v { padding: 8px 10px; font-size: 13px; }
+    .desc { font-size: 0.875rem; color: #444; margin: 0 0 12px; }
+    .specimen { border: 1px dashed #999; background: #fff; padding: 16px; margin-bottom: 20px; }
+    .chrome { background: #f4f4f5; border: 1px solid #e4e4e7; padding: 14px; display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+    .nav-btn { background: #fff; border: 1px solid #d4d4d8; padding: 8px 14px; font-size: 12px; font-weight: 500; }
+    .nav-btn.current { background: #18181b; color: #fff; border-color: #18181b; }
+    .chip { background: #e4e4e7; padding: 4px 10px; font-size: 11px; }
+    .card { background: #fff; border: 1px solid #e4e4e7; padding: 12px 14px; font-size: 12px; flex: 1 1 140px; }
+    .theme { width: 32px; height: 32px; border: 1px solid #d4d4d8; background: #fff; display: grid; place-items: center; font-size: 14px; }
+    /* square */
+    .style-square .nav-btn, .style-square .chip, .style-square .card, .style-square .theme { border-radius: 0; }
+    /* squircle */
+    .style-squircle .nav-btn { border-radius: 10px; corner-shape: squircle; }
+    .style-squircle .chip { border-radius: 6px; corner-shape: squircle; }
+    .style-squircle .card { border-radius: 16px; corner-shape: squircle; }
+    .style-squircle .theme { border-radius: 10px; corner-shape: squircle; }
+    /* pill */
+    .style-pill .nav-btn { border-radius: 9999px; }
+    .style-pill .chip { border-radius: 9999px; }
+    .style-pill .card { border-radius: 9999px; }
+    .style-pill .theme { border-radius: 50%; }
+    .do-dont { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid #bbb; background: #fff; margin-top: 10px; }
+    .do-dont > div { padding: 10px 12px; font-size: 12px; }
+    .do-dont .do { border-right: 1px dashed #999; }
+    .do-dont .label { font-size: 10px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 4px; }
+    .do-dont .do .label { color: #15803d; }
+    .do-dont .dont .label { color: #b91c1c; }
+    @media (max-width: 640px) {
+      .details-wire .row { grid-template-columns: 1fr; }
+      .details-wire .k { border-right: 0; border-bottom: 1px dashed #999; }
+      .do-dont { grid-template-columns: 1fr; }
+      .do-dont .do { border-right: 0; border-bottom: 1px dashed #999; }
+    }
+  </style>
+</head>
+<body>
+  <article class="page">
+    <h1>Audit docs · Style</h1>
+    <p class="agent-note">
+      Agent guide for audit docs chrome corner style (<code>audit/docs.json</code> <code>style</code>).
+      Apply to nav buttons, chips, cards, and the theme control.
+      Ids: <code>square</code> · <code>squircle</code> · <code>pill</code>.
+    </p>
+
+    <h2 id="details">1. Details</h2>
+    <div class="details-wire">
+      <div class="row"><div class="k">Field</div><div class="v"><code>audit/docs.json</code> → <code>style</code></div></div>
+      <div class="row"><div class="k">Options</div><div class="v">
+        <a href="#wf-square">Square</a> ·
+        <a href="#wf-squircle">Squircle</a> ·
+        <a href="#wf-pill">Circle / Pill</a>
+      </div></div>
+      <div class="row"><div class="k">Scope</div><div class="v">Audit docs chrome only. Product UI shape stays with the existing product.</div></div>
+    </div>
+
+    <h2 id="wireframes">2. Wireframes</h2>
+    <p class="desc">Same chrome specimen three ways — pick one id and apply consistently.</p>
+
+    <div id="wf-square">
+      <h3>Square · <code>square</code></h3>
+      <p class="desc">Technical, rigid, structural · <code>border-radius: 0</code></p>
+      <div class="specimen">
+        <div class="chrome style-square">
+          <span class="nav-btn current">Understand</span>
+          <span class="nav-btn">Evaluate</span>
+          <span class="chip">Finding</span>
+          <div class="card">Card surface</div>
+          <span class="theme">◐</span>
+        </div>
+      </div>
+      <div class="do-dont">
+        <div class="do"><div class="label">Do</div>Zero radius on nav, chips, cards, theme control.</div>
+        <div class="dont"><div class="label">Don't</div>Mix rounded product frames inside square audit chrome inconsistently.</div>
+      </div>
+    </div>
+
+    <div id="wf-squircle" style="margin-top:28px">
+      <h3>Squircle · <code>squircle</code></h3>
+      <p class="desc">Premium, continuously smooth · base <code>border-radius: 16px</code> + <code>corner-shape: squircle</code>; nest by φ≈1.618 → ~10px / ~6px. Fallback: same radii without <code>corner-shape</code>.</p>
+      <div class="specimen">
+        <div class="chrome style-squircle">
+          <span class="nav-btn current">Understand</span>
+          <span class="nav-btn">Evaluate</span>
+          <span class="chip">Finding</span>
+          <div class="card">Card surface</div>
+          <span class="theme">◐</span>
+        </div>
+      </div>
+      <div class="do-dont">
+        <div class="do"><div class="label">Do</div>Nest radii (16 → 10 → 6). Keep fallback radii when <code>corner-shape</code> is unsupported.</div>
+        <div class="dont"><div class="label">Don't</div>Use one radius for every nested control — nesting sells the squircle system.</div>
+      </div>
+    </div>
+
+    <div id="wf-pill" style="margin-top:28px">
+      <h3>Circle / Pill · <code>pill</code></h3>
+      <p class="desc">Dynamic, actionable · <code>border-radius: 9999px</code> (pills) or <code>50%</code> (theme control).</p>
+      <div class="specimen">
+        <div class="chrome style-pill">
+          <span class="nav-btn current">Understand</span>
+          <span class="nav-btn">Evaluate</span>
+          <span class="chip">Finding</span>
+          <div class="card">Card surface</div>
+          <span class="theme">◐</span>
+        </div>
+      </div>
+      <div class="do-dont">
+        <div class="do"><div class="label">Do</div>Pills for nav/chips; circle for the theme control.</div>
+        <div class="dont"><div class="label">Don't</div>Force huge pill cards that crush multi-line content — keep cards readable.</div>
+      </div>
+    </div>
+  </article>
+</body>
+</html>

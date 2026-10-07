@@ -97,12 +97,6 @@
           "guide": "../ux-build-kit/sections/accessibility/GUIDE.md"
         },
         {
-          "id": "governance",
-          "label": "Governance",
-          "file": "governance.html",
-          "guide": "../ux-build-kit/sections/governance/GUIDE.md"
-        },
-        {
           "id": "chrome",
           "label": "Docs chrome (nav, type, themes shell)",
           "rules": "chrome.md"
@@ -122,12 +116,18 @@
         {
           "id": "screen",
           "label": "High-fidelity screen",
-          "ask": ["feature", "screen"]
+          "ask": [
+            "feature",
+            "screen"
+          ]
         },
         {
           "id": "states",
           "label": "Critical states for a screen",
-          "ask": ["feature", "screen"]
+          "ask": [
+            "feature",
+            "screen"
+          ]
         }
       ]
     }

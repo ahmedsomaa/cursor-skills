@@ -33,7 +33,7 @@ Wait for their choice. Only then ask for path, feature, screen, or other context
 2. Load the parent skill: [ux-build-kit](../ux-build-kit/SKILL.md) or [ux-design-ui](../ux-design-ui/SKILL.md).
 3. Load the substep’s `guide`, `process`, or `rules` from `menus.json`.
 4. Compare the existing files to those rules. List gaps briefly, then apply repairs.
-5. Re-run any ask-gates the original step would require when a decision is missing (atmosphere, catalog pick, mobile vs website, feature name, etc.).
+5. Re-run any ask-gates the original step would require when a decision is missing (overall tone, catalog pick, mobile vs website, feature name, etc.).
 6. Rebuild `docs.css` the way [ux-new](../ux-new/SKILL.md) builds it when docs chrome classes change.
 
 ### Kit

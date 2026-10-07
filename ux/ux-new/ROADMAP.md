@@ -18,7 +18,7 @@ Singles (create): `ux-step`, `ux-repair`
 | Later | `ux-motion` | Motion language across kit + UI |
 | Later | `ux-content` | UX writing pass across screens |
 | Later | `ux-a11y` | Deep accessibility audit pass |
-| Later | `ux-compare` | Side-by-side atmosphere or kit direction exploration |
+| Later | `ux-compare` | Side-by-side overall tone or kit direction exploration |
 | Later | `ux-migrate` | Restyle an existing app surface to match the kit |
 | Later | `ux-email` | Email templates in the same visual language |
 | Later | `ux-native` | Mobile-native frame conventions using the kit |

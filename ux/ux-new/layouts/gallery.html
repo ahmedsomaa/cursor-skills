@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Gallery Layout — docs template</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+      font-size: 13px;
+      color: #111;
+      background: #f4f4f4;
+      line-height: 1.4;
+    }
+    .page { max-width: 920px; margin: 0 auto; padding: 1.75rem 1.25rem 3.5rem; }
+    h1 {
+      font-size: 1.5rem; font-weight: 700; letter-spacing: -0.02em;
+      margin: 0 0 0.25rem; border: 2px dashed #111; display: inline-block;
+      padding: 0.35rem 0.6rem; background: #fff;
+    }
+    .agent-note {
+      margin: 0.75rem 0 1.5rem; font-size: 11px; color: #555;
+      border: 1px dashed #999; padding: 0.5rem 0.65rem; background: #fff;
+    }
+    h2 {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.06em;
+      text-transform: uppercase; margin: 1.75rem 0 0.65rem;
+      padding-bottom: 0.35rem; border-bottom: 2px solid #111;
+    }
+    h3 {
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 0.04em;
+      text-transform: uppercase; color: #555; margin: 1.35rem 0 0.4rem;
+    }
+    a { color: #111; }
+    code { font-family: ui-monospace, monospace; font-size: 0.85em; }
+
+    .details-wire { border: 2px solid #111; background: #fff; }
+    .details-wire .row {
+      display: grid; grid-template-columns: 9rem 1fr; border-bottom: 1px dashed #999;
+    }
+    .details-wire .row:last-child { border-bottom: none; }
+    .details-wire .k, .details-wire .v { padding: 0.55rem 0.7rem; font-size: 12px; }
+    .details-wire .k {
+      font-weight: 700; border-right: 1px dashed #999; background: #fafafa;
+    }
+    .details-wire .v ul { margin: 0.25rem 0 0; padding-left: 1.1rem; }
+    .details-wire .v li { margin: 0.15rem 0; }
+
+    .wf-sep {
+      margin: 2.25rem 0 1.25rem; border: 2px solid #111; background: #fff;
+      padding: 0.55rem 0.75rem; display: flex; align-items: baseline;
+      justify-content: space-between; gap: 0.75rem;
+    }
+    .wf-sep .wf-sep-label {
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+    }
+    .wf-sep .wf-sep-note { font-size: 10px; color: #666; text-align: right; }
+
+    .wire-block { margin-bottom: 1.75rem; }
+    .wire-block .desc { font-size: 11px; color: #555; margin: 0 0 0.45rem; }
+
+    /* Gallery chrome — header only (no navbar) */
+    .wire {
+      border: 2px solid #111; background: #fff;
+      display: flex; flex-direction: column; min-height: 300px;
+    }
+    .g-header {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 12px;
+      align-items: start;
+      padding: 12px 14px;
+      border-bottom: 2px solid #111;
+      background: #fafafa;
+    }
+    .g-title-block { min-width: 0; display: flex; flex-direction: column; gap: 4px; }
+    .g-title-block .name {
+      border: 1px dashed #999; padding: 4px 8px; font-weight: 700; font-size: 13px;
+      display: inline-block; width: fit-content;
+    }
+    .g-title-block .sub {
+      border: 1px dashed #bbb; padding: 2px 8px; font-size: 10px; color: #666;
+      display: inline-block; width: fit-content;
+    }
+    .theme {
+      width: 28px; height: 28px; border: 2px solid #111; border-radius: 999px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; background: #fff; flex-shrink: 0;
+    }
+    .g-body {
+      padding: 14px; display: flex; flex-direction: column; gap: 14px; min-width: 0;
+    }
+    .g-section { display: flex; flex-direction: column; gap: 7px; }
+    .g-section-head {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.06em;
+      text-transform: uppercase; color: #111;
+      padding-bottom: 4px; border-bottom: 1.5px solid #111;
+    }
+    .crumb {
+      font-size: 9px; color: #777; border: 1px dashed #ccc; padding: 3px 6px; width: fit-content;
+    }
+    .page-title {
+      border: 2px dashed #111; padding: 8px 10px; font-weight: 700; font-size: 14px; background: #fff;
+      width: fit-content;
+    }
+
+    .card-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;
+    }
+    .card-grid.two { grid-template-columns: repeat(2, 1fr); }
+    .card-grid.four { grid-template-columns: repeat(4, 1fr); }
+    .g-card {
+      border: 1.5px solid #111; background: #fff; display: flex; flex-direction: column;
+      min-height: 96px; text-decoration: none; color: #111;
+    }
+    .g-card.current { outline: 2px solid #111; outline-offset: -1px; background: #fafafa; }
+    .g-card .preview {
+      flex: 1; min-height: 56px; border-bottom: 1px dashed #999; background: #e8e8e8;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 9px; color: #777;
+    }
+    .g-card .preview .mini {
+      width: 48%; height: 68%; border: 1px solid #999; background: #fff;
+      display: flex; align-items: center; justify-content: center; font-size: 8px; color: #888;
+    }
+    .g-card .meta { padding: 6px 8px; }
+    .g-card .meta .ct { font-weight: 700; font-size: 11px; }
+    .g-card .meta .cm { font-size: 9px; color: #666; margin-top: 2px; }
+
+    .fs { display: flex; flex-direction: column; gap: 7px; font-size: 10px; color: #555; }
+    .fs-intro {
+      border: 1px dashed #999; padding: 6px 8px;
+      background: repeating-linear-gradient(0deg, transparent, transparent 6px, #eee 6px, #eee 7px);
+      color: #777; min-height: 36px;
+    }
+    .fs-block { border: 1.5px solid #111; background: #fff; }
+    .fs-block .bh {
+      font-size: 9px; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase;
+      padding: 3px 8px; border-bottom: 1px dashed #999; background: #fafafa; color: #111;
+    }
+    .fs-block .bb { padding: 6px 8px; }
+    .fs-split { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+    .fs-split-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; }
+    .fs-card {
+      border: 1px dashed #999; padding: 6px; background: #fafafa; min-height: 36px;
+    }
+    .fs-card strong { display: block; color: #111; font-size: 10px; margin-bottom: 2px; }
+    .brief-sheet { display: flex; flex-direction: column; gap: 8px; font-size: 10px; color: #444; }
+    .brief-meta {
+      border: 2px solid #111; background: #fff; padding: 8px 10px;
+      display: flex; flex-direction: column; gap: 4px;
+    }
+    .brief-meta-top { display: flex; justify-content: space-between; gap: 8px; }
+    .brief-product {
+      font-weight: 700; font-size: 13px; color: #111; border: 1px dashed #999;
+      padding: 2px 6px; display: inline-block;
+    }
+    .brief-platform {
+      border: 1.5px solid #111; padding: 2px 7px; font-size: 9px; font-weight: 700;
+      letter-spacing: 0.04em; text-transform: uppercase; background: #eee; white-space: nowrap;
+    }
+    .brief-purpose { border: 1px dashed #bbb; padding: 4px 6px; color: #666; font-size: 10px; }
+    .brief-block { border: 1.5px solid #111; background: #fff; }
+    .brief-block .bh {
+      font-size: 9px; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase;
+      padding: 4px 8px; border-bottom: 1px dashed #999; background: #fafafa; color: #111;
+    }
+    .brief-block .bb { padding: 6px 8px; min-height: 28px; }
+    .brief-block .bb.prose {
+      min-height: 44px;
+      background: repeating-linear-gradient(0deg, transparent, transparent 6px, #eee 6px, #eee 7px);
+      color: #777;
+    }
+    .brief-list { margin: 0; padding-left: 1.1rem; color: #666; }
+    .brief-table { width: 100%; border-collapse: collapse; font-size: 10px; }
+    .brief-table th, .brief-table td {
+      border-bottom: 1px dashed #999; padding: 4px 8px; text-align: left; color: #555;
+    }
+    .brief-table th {
+      font-weight: 700; background: #fafafa; color: #111; font-size: 9px;
+      letter-spacing: 0.04em; text-transform: uppercase;
+    }
+    .swatch-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; }
+    .swatch {
+      border: 1.5px solid #111; aspect-ratio: 1.2; display: flex; flex-direction: column;
+      justify-content: flex-end; padding: 3px; background: #ddd; font-size: 8px; color: #111;
+    }
+    .swatch .nm { font-weight: 700; background: #fff; padding: 1px 3px; }
+    .chip-row { display: flex; flex-wrap: wrap; gap: 4px; }
+    .chip {
+      border: 1.5px solid #111; padding: 3px 7px; font-size: 9px; background: #eee;
+      font-weight: 700; color: #111;
+    }
+    .frames { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+    .frames .slot {
+      border: 1px dashed #999; aspect-ratio: 4/3; display: flex; align-items: center;
+      justify-content: center; background: #f0f0f0; color: #777; font-size: 10px;
+    }
+    .tok { width: 100%; border-collapse: collapse; font-size: 9px; }
+    .tok th, .tok td { border-bottom: 1px dashed #999; padding: 3px 6px; text-align: left; color: #555; }
+    .tok th {
+      font-weight: 700; background: #fafafa; color: #111; font-size: 8px;
+      letter-spacing: 0.04em; text-transform: uppercase;
+    }
+    .do-dont { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+    .film-row { display: flex; align-items: flex-start; gap: 4px; }
+    .film-step { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px; }
+    .film-num {
+      font-size: 8px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #111;
+    }
+    .film-panel {
+      border: 2px solid #111; background: #e8e8e8; aspect-ratio: 16/9;
+      display: flex; align-items: center; justify-content: center; font-size: 8px; color: #666;
+    }
+    .film-panel .mini {
+      border: 1px solid #999; background: #fff; width: 42%; height: 72%;
+      display: flex; align-items: center; justify-content: center; font-size: 7px; color: #888;
+    }
+    .film-cap {
+      border: 1px dashed #999; padding: 3px 4px; font-size: 8px; color: #555; background: #fff; min-height: 32px;
+    }
+    .film-cap .sn { font-weight: 700; color: #111; display: block; }
+    .film-arrow { align-self: center; font-size: 14px; font-weight: 700; color: #111; margin-top: 18px; }
+    .state-tabs { display: flex; flex-wrap: wrap; gap: 3px; }
+    .state-tabs .tab {
+      border: 1.5px solid #111; padding: 2px 7px; font-size: 8px; background: #fff; color: #111;
+    }
+    .state-tabs .tab.on { background: #111; color: #fff; font-weight: 700; }
+    .state-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; }
+    .state-frame { border: 1.5px solid #111; background: #fff; }
+    .state-frame .sh {
+      font-size: 8px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase;
+      padding: 2px 6px; border-bottom: 1px dashed #999; background: #fafafa;
+    }
+    .state-frame .sv {
+      min-height: 52px; background: #eee; display: flex; align-items: center;
+      justify-content: center; font-size: 8px; color: #666;
+    }
+    .hi-fi {
+      border: 2px solid #111; background: #ddd; min-height: 110px;
+      display: flex; align-items: center; justify-content: center; font-size: 9px; color: #555;
+    }
+    .hi-fi .device {
+      border: 1.5px solid #111; background: #fff; width: 55%; max-width: 140px;
+      aspect-ratio: 9/16; display: flex; flex-direction: column; padding: 4px; gap: 3px; font-size: 7px; color: #888;
+    }
+    .hi-fi .device .bar { height: 8px; background: #eee; border: 1px dashed #bbb; }
+    .hi-fi .device .body {
+      flex: 1;
+      background: repeating-linear-gradient(0deg, transparent, transparent 4px, #f0f0f0 4px, #f0f0f0 5px);
+      border: 1px dashed #ccc;
+    }
+    .ba-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+    .ba { border: 1px dashed #999; padding: 6px; font-size: 9px; min-height: 40px; }
+    .ba.good { border-color: #111; background: #fafafa; }
+    .ba.bad { border-color: #c00; background: #fff5f5; color: #900; }
+    .term-table { width: 100%; border-collapse: collapse; font-size: 9px; }
+    .term-table th, .term-table td { border-bottom: 1px dashed #999; padding: 3px 6px; text-align: left; }
+    .term-table th {
+      background: #fafafa; font-weight: 700; font-size: 8px; letter-spacing: 0.04em;
+      text-transform: uppercase; color: #111;
+    }
+    .rule-block { border: 1.5px solid #111; background: #fff; }
+    .rule-block .rh {
+      font-size: 9px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+      padding: 3px 8px; border-bottom: 1px dashed #999; background: #fafafa;
+    }
+    .rule-block .rb { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0; }
+    .rule-block .rb > div {
+      padding: 5px 6px; font-size: 9px; border-right: 1px dashed #999; min-height: 36px;
+    }
+    .rule-block .rb > div:last-child { border-right: none; }
+    .rule-block .rb .lbl {
+      font-size: 7px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase;
+      color: #888; display: block; margin-bottom: 2px;
+    }
+
+    @media (max-width: 700px) {
+      .details-wire .row { grid-template-columns: 1fr; }
+      .details-wire .k { border-right: none; border-bottom: 1px dashed #999; }
+      .card-grid, .card-grid.two, .card-grid.four { grid-template-columns: 1fr 1fr; }
+      .fs-split, .do-dont, .ba-pair, .state-grid { grid-template-columns: 1fr; }
+      .film-row { flex-direction: column; }
+      .rule-block .rb { grid-template-columns: 1fr; }
+    }
+
+  </style>
+</head>
+<body>
+  <article class="page">
+    <h1>Gallery Layout</h1>
+    <p class="agent-note">
+      Agent guide for the Gallery docs chrome. Details are not copied into <code>design/</code> —
+      implement from the wireframes. Example:
+      <a href="https://ui.mantine.dev/" rel="noopener noreferrer">Mantine UI</a>
+      (card/tile gallery for subsections). <strong>No navbar</strong> — home uses three page sections
+      (Brief, Design system, Screens); cards open subsections.
+    </p>
+
+    <h2 id="details">1. Details</h2>
+    <div class="details-wire">
+      <div class="row">
+        <div class="k">Name</div>
+        <div class="v">Gallery Layout</div>
+      </div>
+      <div class="row">
+        <div class="k">Examples</div>
+        <div class="v">
+          <a href="https://ui.mantine.dev/" rel="noopener noreferrer">Mantine UI</a>
+          — card/tile gallery for subsections (not a docs navbar)
+        </div>
+      </div>
+      <div class="row">
+        <div class="k">Style</div>
+        <div class="v">
+          Docs chrome corners (<code>docs.json</code> <code>style</code>). Wireframes:
+          <a href="style.html">style.html</a> — <code>square</code> · <code>squircle</code> · <code>pill</code>.
+          Apply to cards and the theme control.
+        </div>
+      </div>
+      <div class="row">
+        <div class="k">Fonts</div>
+        <div class="v">
+          This agent-guide HTML uses <strong>Inter</strong>. Product docs:
+          <a href="../typography.html">typography.html</a> (pairings that list <code>gallery</code>).
+        </div>
+      </div>
+      <div class="row">
+        <div class="k">Icons</div>
+        <div class="v">Use Lucide Icons</div>
+      </div>
+      <div class="row">
+        <div class="k">Description</div>
+        <div class="v">
+          <strong>No navbar / main-nav strip.</strong> Header is one row, two columns:
+          long column = system title + “Design handbook” subtitle; small column = theme toggle.
+          Home (<code>index.html</code>) stacks three <strong>page sections</strong> —
+          Brief, Design system, Screens — each with a section heading and a <strong>card grid</strong>
+          for its subsections. Cards open nested pages (still no navbar; optional crumb + page title).
+          Design system cards → Foundations subcategory cards → section specimen.
+          Screens cards → feature → Storyboard / Designs cards → screen + states.
+        </div>
+      </div>
+      <div class="row">
+        <div class="k">Wireframes</div>
+        <div class="v">
+          <a href="#sep-home">Home</a> ·
+          <a href="#sep-brief">Brief</a> ·
+          <a href="#sep-foundations">Foundations</a> ·
+          <a href="#sep-components">Components</a> ·
+          <a href="#sep-patterns">Patterns</a> ·
+          <a href="#sep-content">Content</a> ·
+          <a href="#sep-accessibility">Accessibility</a> ·
+          <a href="#sep-screens">Screens</a>
+        </div>
+      </div>
+    </div>
+
+    <h2 id="wireframes">2. Wireframes</h2>
+
+    <div class="wf-sep" id="sep-home">
+      <span class="wf-sep-label">Home</span>
+      <span class="wf-sep-note">Three sections · cards for subsections · no navbar</span>
+    </div>
+
+    <div class="wire-block" id="wf-home">
+      <h3>Home · index</h3>
+      <p class="desc">Main page only: header (title ‖ theme) then Brief / Design system / Screens as sections. Cards = subsections.</p>
+      <div class="wire">
+        <header class="g-header">
+          <div class="g-title-block">
+            <div class="name">[ System name ]</div>
+            <div class="sub">Design handbook</div>
+          </div>
+          <div class="theme">◐</div>
+        </header>
+        <div class="g-body">
+          <div class="g-section">
+            <div class="g-section-head">Brief</div>
+            <div class="card-grid">
+              <a class="g-card current" href="#wf-brief">
+                  <div class="preview"><div class="mini">Brief</div></div>
+                  <div class="meta"><div class="ct">Overview</div><div class="cm">spec sheet</div></div>
+                </a>
+            </div>
+          </div>
+          <div class="g-section">
+            <div class="g-section-head">Design system</div>
+            <div class="card-grid">
+              <a class="g-card" href="#wf-f-category">
+                  <div class="preview"><div class="mini">tokens</div></div>
+                  <div class="meta"><div class="ct">Foundations</div><div class="cm">11 sections</div></div>
+                </a>
+              <a class="g-card" href="#wf-c-category">
+                  <div class="preview"><div class="mini">UI</div></div>
+                  <div class="meta"><div class="ct">Components</div><div class="cm">inventory</div></div>
+                </a>
+              <a class="g-card" href="#wf-p-category">
+                  <div class="preview"><div class="mini">→</div></div>
+                  <div class="meta"><div class="ct">Patterns</div><div class="cm">flows</div></div>
+                </a>
+              <a class="g-card" href="#wf-content">
+                  <div class="preview"><div class="mini">Aa</div></div>
+                  <div class="meta"><div class="ct">Content</div><div class="cm">voice · terms</div></div>
+                </a>
+              <a class="g-card" href="#wf-a11y">
+                  <div class="preview"><div class="mini">a11y</div></div>
+                  <div class="meta"><div class="ct">Accessibility</div><div class="cm">rules</div></div>
+                </a>
+            </div>
+          </div>
+          <div class="g-section">
+            <div class="g-section-head">Screens</div>
+            <div class="card-grid two">
+              <a class="g-card" href="#wf-feature">
+                  <div class="preview"><div class="mini">flow</div></div>
+                  <div class="meta"><div class="ct">Checkout</div><div class="cm">Storyboard · Designs</div></div>
+                </a>
+              <div class="g-card">
+                  <div class="preview"><div class="mini">flow</div></div>
+                  <div class="meta"><div class="ct">Settings</div><div class="cm">Storyboard · Designs</div></div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="wf-sep" id="sep-brief">
+      <span class="wf-sep-label">Brief</span>
+      <span class="wf-sep-note">Opened from Brief · Overview card</span>
+    </div>
+
+    <div class="wire-block" id="wf-brief">
+      <h3>Brief · Overview</h3>
+      <p class="desc">No navbar. Crumb + title optional. Spec sheet fills the body.</p>
+      <div class="wire">
+        <header class="g-header">
+          <div class="g-title-block">
+            <div class="name">[ System name ]</div>
+            <div class="sub">Design handbook</div>
+          </div>
+          <div class="theme">◐</div>
+        </header>
+        <div class="g-body">
+          <div class="crumb">Home → Brief → Overview</div>
+          <div class="page-title">Overview</div>
+          <div class="brief-sheet">
+            <div class="brief-meta">
+              <div class="brief-meta-top">
+                <span class="brief-product">[ Product name ]</span>
+                <span class="brief-platform">mobile · website · both</span>
+              </div>
+              <div class="brief-purpose">One-line purpose</div>
+            </div>
+            <div class="brief-block">
+              <div class="bh">Problem</div>
+              <div class="bb prose">2–3 sentences · not the UI solution</div>
+            </div>
+            <div class="fs-split">
+              <div class="brief-block"><div class="bh">Who</div><div class="bb"><ul class="brief-list"><li>Role(s)</li><li>Context</li></ul></div></div>
+              <div class="brief-block"><div class="bh">Goals</div><div class="bb"><ul class="brief-list"><li>User · product · success</li></ul></div></div>
+            </div>
+            <div class="fs-split">
+              <div class="brief-block"><div class="bh">Scope · In</div><div class="bb"><ul class="brief-list"><li>…</li></ul></div></div>
+              <div class="brief-block"><div class="bh">Scope · Out</div><div class="bb"><ul class="brief-list"><li>…</li></ul></div></div>
+            </div>
+            <div class="brief-block">
+              <div class="bh">Features → Screens</div>
+              <table class="brief-table">
+                <thead><tr><th>Feature</th><th>Screens</th></tr></thead>
+                <tbody><tr><td>Checkout</td><td>Cart · Payment · Confirm</td></tr></tbody>
+              </table>
+            </div>
+            <div class="brief-block"><div class="bh">Constraints</div><div class="bb">Brand · Tech · A11y · Terms</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="wf-sep" id="sep-foundations">
+      <span class="wf-sep-label">Design system · Foundations</span>
+      <span class="wf-sep-note">Category cards → section specimen</span>
+    </div>
+
+    <div class="wire-block" id="wf-f-category">
+      <h3>Foundations · Category</h3>
+      <p class="desc">Section heading + card grid of Foundations subsections (no navbar).</p>
+      <div class="wire">
+        <header class="g-header">
+          <div class="g-title-block">
+            <div class="name">[ System name ]</div>
+            <div class="sub">Design handbook</div>
+          </div>
+          <div class="theme">◐</div>
+        </header>
+        <div class="g-body">
+          <div class="crumb">Home → Design system → Foundations</div>
+          <div class="page-title">Foundations</div>
+          <div class="card-grid four">
+            <div class="g-card">
+                  <div class="preview"><div class="mini">P</div></div>
+                  <div class="meta"><div class="ct">Principles</div><div class="cm">north star</div></div>
+                </div>
+            <a class="g-card current" href="#wf-f-color">
+                  <div class="preview"><div class="mini">●</div></div>
+                  <div class="meta"><div class="ct">Color</div><div class="cm">semantic roles</div></div>
+                </a>
+            <div class="g-card">
+                  <div class="preview"><div class="mini">Aa</div></div>
+                  <div class="meta"><div class="ct">Typography</div><div class="cm">type roles</div></div>
+                </div>
+            <div class="g-card">
+                  <div class="preview"><div class="mini">▦</div></div>
+                  <div class="meta"><div class="ct">Spacing</div><div class="cm">scale</div></div>
+                </div>
+            <div class="g-card">
+                  <div class="preview"><div class="mini">▣</div></div>
+                  <div class="meta"><div class="ct">Layout</div><div class="cm">regions</div></div>
+                </div>
+            <div class="g-card">
+                  <div class="preview"><div class="mini">▢</div></div>
+                  <div class="meta"><div class="ct">Shape</div><div class="cm">radius</div></div>
+                </div>
+            <div class="g-card">
+                  <div class="preview"><div class="mini">▣</div></div>
+                  <div class="meta"><div class="ct">Elevation</div><div class="cm">depth</div></div>
+                </div>
+            <div class="g-card">
+                  <div class="preview"><div class="mini">◇</div></div>
+                  <div class="meta"><div class="ct">Icons</div><div class="cm">set</div></div>
+                </div>
+            <div class="g-card">
+                  <div class="preview"><div class="mini">→</div></div>
+                  <div class="meta"><div class="ct">Motion</div><div class="cm">timing</div></div>
+                </div>
+            <div class="g-card">
+                  <div class="preview"><div class="mini">◎</div></div>
+                  <div class="meta"><div class="ct">Logo</div><div class="cm">mark</div></div>
+                </div>
+            <div class="g-card">
+                  <div class="preview"><div class="mini">◐</div></div>
+                  <div class="meta"><div class="ct">Themes</div><div class="cm">light ‖ dark</div></div>
+                </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="wire-block" id="wf-f-color">
+      <h3>Foundations · Color</h3>
+      <p class="desc">Specimen page (exemplar for all Foundations sections).</p>
+      <div class="wire">
+        <header class="g-header">
+          <div class="g-title-block">
+            <div class="name">[ System name ]</div>
+            <div class="sub">Design handbook</div>
+          </div>
+          <div class="theme">◐</div>
+        </header>
+        <div class="g-body">
+          <div class="crumb">Foundations → Color</div>
+          <div class="page-title">Color</div>
+          <div class="fs">
+            <div class="fs-intro">What / Why / When — semantic roles</div>
+            <div class="fs-block">
+              <div class="bh">Semantic swatches</div>
+              <div class="bb">
+                <div class="swatch-grid">
+                  <div class="swatch" style="background:#e8e8e8"><span class="nm">bg-canvas</span></div>
+                  <div class="swatch" style="background:#ccc"><span class="nm">text-primary</span></div>
+                  <div class="swatch" style="background:#bbb"><span class="nm">border</span></div>
+                  <div class="swatch" style="background:#999"><span class="nm">action</span></div>
+                </div>
+              </div>
+            </div>
+            <div class="fs-block">
+              <div class="bh">Pairings · light ‖ dark</div>
+              <div class="bb"><div class="frames"><div class="slot">light</div><div class="slot">dark</div></div></div>
+            </div>
+            <div class="do-dont">
+              <div class="fs-block"><div class="bh">Do</div><div class="bb">semantic · both themes</div></div>
+              <div class="fs-block"><div class="bh">Don't</div><div class="bb">hue names</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="wf-sep" id="sep-components">
+      <span class="wf-sep-label">Design system · Components</span>
+      <span class="wf-sep-note">Inventory cards + specimen</span>
+    </div>
+
+    <div class="wire-block" id="wf-c-category">
+      <h3>Components · Category</h3>
+      <p class="desc">Cards for each component; open specimen.</p>
+      <div class="wire">
+        <header class="g-header">
+          <div class="g-title-block">
+            <div class="name">[ System name ]</div>
+            <div class="sub">Design handbook</div>
+          </div>
+          <div class="theme">◐</div>
+        </header>
+        <div class="g-body">
+          <div class="crumb">Home → Design system → Components</div>
+          <div class="page-title">Components</div>
+          <div class="card-grid">
+            <a class="g-card current" href="#wf-c-button">
+                  <div class="preview"><div class="mini">Btn</div></div>
+                  <div class="meta"><div class="ct">Button</div><div class="cm">variants · states</div></div>
+                </a>
+            <div class="g-card">
+                  <div class="preview"><div class="mini">___</div></div>
+                  <div class="meta"><div class="ct">Input</div><div class="cm">rest · error</div></div>
+                </div>
+            <div class="g-card">
+                  <div class="preview"><div class="mini">▢</div></div>
+                  <div class="meta"><div class="ct">Dialog</div><div class="cm">overlay</div></div>
+                </div>
+            <div class="g-card">
+                  <div class="preview"><div class="mini">!</div></div>
+                  <div class="meta"><div class="ct">Toast</div><div class="cm">feedback</div></div>
+                </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="wire-block" id="wf-c-button">
+      <h3>Components · Button</h3>
+      <p class="desc">Purpose → anatomy → variants → states.</p>
+      <div class="wire">
+        <header class="g-header">
+          <div class="g-title-block">
+            <div class="name">[ System name ]</div>
+            <div class="sub">Design handbook</div>
+          </div>
+          <div class="theme">◐</div>
+        </header>
+        <div class="g-body">
+          <div class="crumb">Components → Button</div>
+          <div class="page-title">Button</div>
+          <div class="fs">
+            <div class="fs-intro">Purpose — when / when not</div>
+            <div class="fs-block"><div class="bh">Anatomy</div><div class="bb">label · icon · container</div></div>
+            <div class="fs-split">
+              <div class="fs-block"><div class="bh">Variants</div><div class="bb"><div class="chip-row"><span class="chip">primary</span><span class="chip">secondary</span><span class="chip">ghost</span></div></div></div>
+              <div class="fs-block"><div class="bh">States</div><div class="bb">rest · hover · focus · disabled</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="wf-sep" id="sep-patterns">
+      <span class="wf-sep-label">Design system · Patterns</span>
+      <span class="wf-sep-note">Problem cards + specimen</span>
+    </div>
+
+    <div class="wire-block" id="wf-p-category">
+      <h3>Patterns · Category</h3>
+      <p class="desc">Cards named by user problem.</p>
+      <div class="wire">
+        <header class="g-header">
+          <div class="g-title-block">
+            <div class="name">[ System name ]</div>
+            <div class="sub">Design handbook</div>
+          </div>
+          <div class="theme">◐</div>
+        </header>
+        <div class="g-body">
+          <div class="crumb">Home → Design system → Patterns</div>
+          <div class="page-title">Patterns</div>
+          <div class="card-grid two">
+            <a class="g-card current" href="#wf-p-destructive">
+                  <div class="preview"><div class="mini">!</div></div>
+                  <div class="meta"><div class="ct">Confirm destructive</div><div class="cm">danger · confirm</div></div>
+                </a>
+            <div class="g-card">
+                  <div class="preview"><div class="mini">∅</div></div>
+                  <div class="meta"><div class="ct">Empty → first run</div><div class="cm">empty + CTA</div></div>
+                </div>
+            <div class="g-card">
+                  <div class="preview"><div class="mini">⚠</div></div>
+                  <div class="meta"><div class="ct">Form errors</div><div class="cm">inline · summary</div></div>
+                </div>
+            <div class="g-card">
+                  <div class="preview"><div class="mini">✎</div></div>
+                  <div class="meta"><div class="ct">Save / discard</div><div class="cm">dirty state</div></div>
+                </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="wire-block" id="wf-p-destructive">
+      <h3>Patterns · Confirm destructive</h3>
+      <p class="desc">When → structure → mini storyboard.</p>
+      <div class="wire">
+        <header class="g-header">
+          <div class="g-title-block">
+            <div class="name">[ System name ]</div>
+            <div class="sub">Design handbook</div>
+          </div>
+          <div class="theme">◐</div>
+        </header>
+        <div class="g-body">
+          <div class="crumb">Patterns → Confirm destructive</div>
+          <div class="page-title">Confirm destructive</div>
+          <div class="fs">
+            <div class="fs-intro">When — irreversible action</div>
+            <div class="fs-block"><div class="bh">Structure</div><div class="bb">overlay · danger CTA · cancel</div></div>
+            <div class="film-row">
+              <div class="film-step"><div class="film-num">1</div><div class="film-panel"><div class="mini">trigger</div></div></div>
+              <div class="film-arrow">→</div>
+              <div class="film-step"><div class="film-num">2</div><div class="film-panel"><div class="mini">confirm</div></div></div>
+              <div class="film-arrow">→</div>
+              <div class="film-step"><div class="film-num">3</div><div class="film-panel"><div class="mini">result</div></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="wf-sep" id="sep-content">
+      <span class="wf-sep-label">Design system · Content</span>
+      <span class="wf-sep-note">Single page</span>
+    </div>
+
+    <div class="wire-block" id="wf-content">
+      <h3>Content · Overview</h3>
+      <p class="desc">Terminology · labels · errors — no card index needed beyond home.</p>
+      <div class="wire">
+        <header class="g-header">
+          <div class="g-title-block">
+            <div class="name">[ System name ]</div>
+            <div class="sub">Design handbook</div>
+          </div>
+          <div class="theme">◐</div>
+        </header>
+        <div class="g-body">
+          <div class="crumb">Home → Design system → Content</div>
+          <div class="page-title">Content</div>
+          <div class="fs">
+            <div class="fs-block">
+              <div class="bh">Terminology</div>
+              <table class="term-table"><thead><tr><th>Preferred</th><th>Avoid</th></tr></thead>
+              <tbody><tr><td>Workspace</td><td>Project space</td></tr></tbody></table>
+            </div>
+            <div class="fs-block">
+              <div class="bh">Labels</div>
+              <div class="bb"><div class="ba-pair"><div class="ba good">✓ Save changes</div><div class="ba bad">✗ Click here</div></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="wf-sep" id="sep-accessibility">
+      <span class="wf-sep-label">Design system · Accessibility</span>
+      <span class="wf-sep-note">Rule · good · bad</span>
+    </div>
+
+    <div class="wire-block" id="wf-a11y">
+      <h3>Accessibility · Overview</h3>
+      <p class="desc">Shared rules page.</p>
+      <div class="wire">
+        <header class="g-header">
+          <div class="g-title-block">
+            <div class="name">[ System name ]</div>
+            <div class="sub">Design handbook</div>
+          </div>
+          <div class="theme">◐</div>
+        </header>
+        <div class="g-body">
+          <div class="crumb">Home → Design system → Accessibility</div>
+          <div class="page-title">Accessibility</div>
+          <div class="fs">
+            <div class="rule-block">
+              <div class="rh">Contrast</div>
+              <div class="rb">
+                <div><span class="lbl">Rule</span>Paired contrast</div>
+                <div><span class="lbl">Good</span>Primary on canvas</div>
+                <div><span class="lbl">Bad</span>Muted on muted</div>
+              </div>
+            </div>
+            <div class="rule-block">
+              <div class="rh">Keyboard &amp; focus</div>
+              <div class="rb">
+                <div><span class="lbl">Rule</span>Reachable · visible focus</div>
+                <div><span class="lbl">Good</span>Focus ring</div>
+                <div><span class="lbl">Bad</span>outline: none</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="wf-sep" id="sep-screens">
+      <span class="wf-sep-label">Screens</span>
+      <span class="wf-sep-note">Feature → Storyboard / Designs cards → screen + states</span>
+    </div>
+
+    <div class="wire-block" id="wf-feature">
+      <h3>Screens · Feature</h3>
+      <p class="desc">Feature page: section cards for Storyboard and Designs only.</p>
+      <div class="wire">
+        <header class="g-header">
+          <div class="g-title-block">
+            <div class="name">[ System name ]</div>
+            <div class="sub">Design handbook</div>
+          </div>
+          <div class="theme">◐</div>
+        </header>
+        <div class="g-body">
+          <div class="crumb">Home → Screens → Checkout</div>
+          <div class="page-title">Checkout</div>
+          <div class="card-grid two">
+            <a class="g-card current" href="#wf-storyboard">
+                  <div class="preview"><div class="mini">1→2→3</div></div>
+                  <div class="meta"><div class="ct">Storyboard</div><div class="cm">flow · steps</div></div>
+                </a>
+            <a class="g-card" href="#wf-designs">
+                  <div class="preview"><div class="mini">hi-fi</div></div>
+                  <div class="meta"><div class="ct">Designs</div><div class="cm">screens + states</div></div>
+                </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="wire-block" id="wf-storyboard">
+      <h3>Screens · Storyboard</h3>
+      <p class="desc">Film strip — 16:9 panels, captions.</p>
+      <div class="wire">
+        <header class="g-header">
+          <div class="g-title-block">
+            <div class="name">[ System name ]</div>
+            <div class="sub">Design handbook</div>
+          </div>
+          <div class="theme">◐</div>
+        </header>
+        <div class="g-body">
+          <div class="crumb">Checkout → Storyboard</div>
+          <div class="page-title">Storyboard</div>
+          <div class="fs">
+            <div class="fs-split-3">
+              <div class="fs-card"><strong>Feature</strong>Checkout</div>
+              <div class="fs-card"><strong>Who</strong>Shopper</div>
+              <div class="fs-card"><strong>Goal</strong>Pay</div>
+            </div>
+            <div class="film-row">
+              <div class="film-step">
+                <div class="film-num">1</div>
+                <div class="film-panel"><div class="mini">Cart</div></div>
+                <div class="film-cap"><span class="sn">Cart</span>Action · outcome</div>
+              </div>
+              <div class="film-arrow">→</div>
+              <div class="film-step">
+                <div class="film-num">2</div>
+                <div class="film-panel"><div class="mini">Payment</div></div>
+                <div class="film-cap"><span class="sn">Payment</span>Action · outcome</div>
+              </div>
+              <div class="film-arrow">→</div>
+              <div class="film-step">
+                <div class="film-num">3</div>
+                <div class="film-panel"><div class="mini">Confirm</div></div>
+                <div class="film-cap"><span class="sn">Confirm</span>Action · outcome</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="wire-block" id="wf-designs">
+      <h3>Screens · Designs</h3>
+      <p class="desc">Card grid of screens (subsections of Designs).</p>
+      <div class="wire">
+        <header class="g-header">
+          <div class="g-title-block">
+            <div class="name">[ System name ]</div>
+            <div class="sub">Design handbook</div>
+          </div>
+          <div class="theme">◐</div>
+        </header>
+        <div class="g-body">
+          <div class="crumb">Checkout → Designs</div>
+          <div class="page-title">Designs</div>
+          <div class="card-grid">
+            <div class="g-card">
+                  <div class="preview"><div class="mini">16:9</div></div>
+                  <div class="meta"><div class="ct">Cart</div><div class="cm">default · empty</div></div>
+                </div>
+            <a class="g-card current" href="#wf-design-screen">
+                  <div class="preview"><div class="mini">16:9</div></div>
+                  <div class="meta"><div class="ct">Payment</div><div class="cm">default · loading · error</div></div>
+                </a>
+            <div class="g-card">
+                  <div class="preview"><div class="mini">16:9</div></div>
+                  <div class="meta"><div class="ct">Confirm</div><div class="cm">default · success</div></div>
+                </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="wire-block" id="wf-design-screen">
+      <h3>Screens · Design (screen + states)</h3>
+      <p class="desc">Hi-fi + state strip.</p>
+      <div class="wire">
+        <header class="g-header">
+          <div class="g-title-block">
+            <div class="name">[ System name ]</div>
+            <div class="sub">Design handbook</div>
+          </div>
+          <div class="theme">◐</div>
+        </header>
+        <div class="g-body">
+          <div class="crumb">Designs → Payment</div>
+          <div class="page-title">Payment</div>
+          <div class="fs">
+            <div class="fs-block">
+              <div class="bh">States</div>
+              <div class="bb"><div class="state-tabs">
+                <span class="tab on">Default</span>
+                <span class="tab">Loading</span>
+                <span class="tab">Error</span>
+                <span class="tab">Success</span>
+              </div></div>
+            </div>
+            <div class="fs-block">
+              <div class="bh">Frame · default</div>
+              <div class="bb"><div class="hi-fi"><div class="device"><div class="bar">nav</div><div class="body">hi-fi</div><div class="bar">CTA</div></div></div></div>
+            </div>
+            <div class="fs-block">
+              <div class="bh">Other states</div>
+              <div class="bb"><div class="state-grid">
+                <div class="state-frame"><div class="sh">Loading</div><div class="sv">skeleton</div></div>
+                <div class="state-frame"><div class="sh">Error</div><div class="sv">retry</div></div>
+              </div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </article>
+</body>
+</html>

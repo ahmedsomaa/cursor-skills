@@ -23,7 +23,7 @@ Planned skills: [ROADMAP.md](../ux-new/ROADMAP.md).
 /ux-new Design the assignment flow from this app's requirements.
 ```
 
-**Audit** — name `ux-audit` for an existing app. Folder → **ask audit docs style** (same catalog templates as create + custom, then font pairing) → understand → walkthrough → evaluate → prioritize → redesign. All HTML under `design/audit/`.
+**Audit** — name `ux-audit` for an existing app. Folder → **ask audit docs style** (`ux-audit/layouts/` + typography + custom, then font pairing) → understand → walkthrough → evaluate → prioritize → redesign. All HTML under `design/audit/`.
 
 ```text
 /ux-audit Audit the checkout experience in this app.
@@ -86,7 +86,7 @@ The folder is always named `design`. Ask where it should live; do not assume the
 
 Create: `brief.html`, `design-system/`, feature storyboards and screens.  
 Audit: everything under `design/audit/` — `docs.json`, `docs.css`, `understand.html`, `walkthrough/`, `evaluate.html`, `prioritize.html`, `redesign/`.  
-Create chrome stays at `design/docs.json` when present. Docs template catalog lives in `ux-new/docs-templates/` (audit asks the same options + custom).
+Create chrome stays at `design/docs.json` when present. Create docs catalog: `ux-new/layouts/` + `ux-new/typography.html`. Audit docs catalog: `ux-audit/layouts/` + `ux-audit/typography.html`.
 
 ## Answer
 

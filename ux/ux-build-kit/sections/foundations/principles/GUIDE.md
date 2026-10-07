@@ -6,10 +6,10 @@ Every page answers What / Why / When / How / When not before specimens.
 
 Decide the visual principles that make this product recognizable and that later foundations must obey.
 
-- Derive from the brief and from the **atmosphere** chosen in Ask first (surface, density, ornament, depth).
+- Derive from the brief and from the **overall tone** chosen in Ask first (surface, density, ornament, depth).
 - Write 4–7 principles: what it looks like, and what it refuses.
 - Each principle must steer color, type, shape, or density later.
-- Put a short summary in `system.json` `principles`. Keep `atmosphere` named in `system.json`.
+- Put a short summary in `system.json` `principles`. Keep `tone` named in `system.json`.
 
 ## Represent
 

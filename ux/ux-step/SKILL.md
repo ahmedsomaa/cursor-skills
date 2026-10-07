@@ -32,7 +32,7 @@ Wait for their choice. Only then ask for path / feature / screen / other context
 1. Confirm where `design` lives (ask if unknown). Do not assume the repo root.
 2. Load the parent skill for the step: [ux-build-kit](../ux-build-kit/SKILL.md) or [ux-design-ui](../ux-design-ui/SKILL.md).
 3. Load the substep’s `guide`, `process`, or `rules` path from `menus.json`.
-4. Re-run any ask-gates that substep originally required (e.g. atmosphere only when the full kit ask applies; for logo follow PROCESS; for ui ask feature and/or screen).
+4. Re-run any ask-gates that substep originally required (e.g. overall tone only when the full kit ask applies; for logo follow PROCESS; for ui ask feature and/or screen).
 5. Write only the files for that substep. Update `system.json` when a kit section changes. Update the storyboard when a ui journey changes. Rebuild `docs.css` the way [ux-new](../ux-new/SKILL.md) builds it when docs chrome classes change. Keep index links current.
 
 ### Kit
