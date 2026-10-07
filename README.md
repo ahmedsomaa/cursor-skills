@@ -1,4 +1,4 @@
-# cursor-skills
+# Cursor skills
 
 Skills I use with Cursor agents.
 
