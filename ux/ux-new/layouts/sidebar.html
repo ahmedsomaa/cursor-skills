@@ -900,7 +900,7 @@
     .design-row .thumb {
       border: 1px solid #999;
       background: #eee;
-      aspect-ratio: 16 / 10;
+      aspect-ratio: 16 / 9;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -1023,6 +1023,32 @@
       .state-grid { grid-template-columns: 1fr; }
 
     }
+  
+    .viewport-toggle {
+      display: inline-flex; gap: 0; border: 1.5px solid #111; background: #fff; width: fit-content;
+    }
+    .viewport-toggle .vt {
+      padding: 3px 10px; font-size: 9px; font-weight: 700; letter-spacing: 0.04em;
+      text-transform: uppercase; border-right: 1px solid #111; color: #555; background: #fff;
+    }
+    .viewport-toggle .vt:last-child { border-right: none; }
+    .viewport-toggle .vt.on { background: #111; color: #fff; }
+    .viewport-row {
+      display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap;
+      margin-bottom: 6px;
+    }
+    .viewport-row .hint { font-size: 9px; color: #666; }
+    .hi-fi.web .device {
+      aspect-ratio: 16 / 9; width: 88%; max-width: 280px; min-height: 0;
+    }
+    .hi-fi.mobile .device {
+      aspect-ratio: 9 / 16; width: 42%; max-width: 140px;
+    }
+    .film-panel {
+      aspect-ratio: 16 / 9 !important;
+    }
+    .design-row .thumb { aspect-ratio: 16 / 9 !important; }
+
   </style>
 </head>
 <body>
@@ -1030,7 +1056,8 @@
     <h1>Sidebar Layout</h1>
     <p class="agent-note">
       Agent guide for the Sidebar docs chrome. The <strong>Details</strong> block is not copied into
-      <code>design/</code> — implement from the wireframes. Examples:
+      <code>design/</code>. Build from <a href="sidebar.jobs.md">sidebar.jobs.md</a> (staged reads);
+      open a single <code>#wf-*</code> here only if needed. Wireframes = IA/placement only — ship a <strong>finished unique</strong> handbook. Examples:
       <a href="https://mintlify.com/" rel="noopener noreferrer">Mintlify</a>,
       <a href="https://fumadocs.dev/" rel="noopener noreferrer">Fumadocs</a>.
     </p>
@@ -1061,7 +1088,9 @@
         <div class="k">Fonts</div>
         <div class="v">
           This agent-guide HTML uses <strong>Inter</strong> for wireframe readability.
-          Product docs pick from <a href="../typography.html">typography.html</a> (best three for Sidebar):
+          Product docs pick from <a href="../typography.html">typography.html</a> (best three for Sidebar).
+          Docs fonts = handbook default (incl. principles / patterns / icons / themes prose).
+          Design-system typography only inside UI samples, typography specimens, storyboards, and screens.
           <ul>
             <li><strong>Inter + JetBrains Mono</strong> — default, neutral docs</li>
             <li><strong>Source Sans 3 + Source Code Pro</strong> — long-form sidebar reading</li>
@@ -1071,7 +1100,7 @@
       </div>
       <div class="row">
         <div class="k">Icons</div>
-        <div class="v">Use Lucide Icons</div>
+        <div class="v">None in docs chrome — text labels only. Product Foundations / screens may use Lucide; never mix icon-nav with text-only nav.</div>
       </div>
       <div class="row">
         <div class="k">Description</div>
@@ -1486,7 +1515,7 @@
 
     <div class="wire-block" id="wf-f-typography">
       <h3>Foundations · Typography</h3>
-      <p class="desc">Families → weights → semantic style specimens (5 props each) → responsive / content / a11y → tokens.</p>
+      <p class="desc">Per family: name + role, weight variants with labels, then semantic roles with size · weight · lh · tracking each → responsive / content / a11y → tokens. Specimens use product type; page prose uses docs fonts.</p>
       <div class="wire">
         <aside class="side">
           <div class="side-header">
@@ -1525,9 +1554,11 @@
           <div class="title-slot">Typography</div>
           <div class="fs">
             <div class="fs-intro">What / Why / When — role scale, not a pixel ladder</div>
-            <div class="fs-split">
-              <div class="fs-block"><div class="bh">Families</div><div class="bb">UI sans · mono · (optional brand)</div></div>
-              <div class="fs-block"><div class="bh">Weights</div><div class="bb">400 · 500 · 600 · 700 only</div></div>
+            <div class="fs-block">
+              <div class="bh">Per family</div>
+              <div class="bb">
+                For each face (UI · mono · optional brand): name + role · weight specimens (e.g. Regular 400 · Medium 500 · Semibold 600 · Bold 700) with live lines · usage note
+              </div>
             </div>
             <div class="fs-block">
               <div class="bh">Semantic styles</div>
@@ -2052,7 +2083,7 @@
 
     <div class="wire-block" id="wf-f-logo">
       <h3>Foundations · Logo</h3>
-      <p class="desc">Idea → source → in action → variants on fixed L/D → clear space → min sizes → don'ts → colors → downloads.</p>
+      <p class="desc">Idea → source → in action → variants on fixed L/D → clear space → min sizes → don'ts → color swatches (fill = hex) → downloads.</p>
       <div class="wire">
         <aside class="side">
           <div class="side-header">
@@ -2123,8 +2154,18 @@
               </div>
             </div>
             <div class="fs-block">
-              <div class="bh">Colors · Downloads</div>
-              <div class="bb">role + hex · Theme / Variant / Size → Download (local assets only)</div>
+              <div class="bh">Colors</div>
+              <div class="bb">
+                <div class="swatch-grid">
+                  <div class="swatch" style="background:#111"><span class="nm">logo-ink · #111</span></div>
+                  <div class="swatch" style="background:#e8e8e8"><span class="nm">logo-accent · #…</span></div>
+                  <div class="swatch" style="background:#ccc"><span class="nm">logo-on-dark · #…</span></div>
+                </div>
+              </div>
+            </div>
+            <div class="fs-block">
+              <div class="bh">Downloads</div>
+              <div class="bb">Theme / Variant / Size → Download (local assets only)</div>
             </div>
           </div>
         </main>
@@ -2720,7 +2761,7 @@
 
     <div class="wf-sep" id="sep-screens">
       <span class="wf-sep-label">Screens</span>
-      <span class="wf-sep-note">Storyboard film strip · Designs index · screen + states</span>
+      <span class="wf-sep-note">Storyboard 16:9 · Designs lists hi-fi · Mobile|Web · screen + states</span>
     </div>
 
 
@@ -2728,8 +2769,9 @@
       <h3>Screens · Storyboard</h3>
       <p class="desc">
         Film strip of the experience — not a flowchart. Header (feature · who · goal).
-        Numbered <strong>16:9</strong> panels (≤3 per row), screen name + action + outcome under each.
-        → between steps; ↓ to next row. Notes for decisions / edge cases only.
+        Numbered panels are always <strong>aspect-ratio 16:9</strong> (≤3 per row), even when the product is mobile-first —
+        the miniature sits inside the 16:9 frame. <strong>Mobile | Web</strong> toggle previews how steps read for that viewport.
+        Screen name + action + outcome under each. → between steps; ↓ to next row. Notes for decisions / edge cases only.
       </p>
       <div class="wire">
         <aside class="side">
@@ -2778,6 +2820,14 @@
               <div><strong>Who</strong>Returning shopper</div>
               <div><strong>Goal</strong>Pay for cart items</div>
             </div>
+
+            <div class="viewport-row">
+              <span class="hint">Viewport</span>
+              <div class="viewport-toggle" aria-label="Mobile or Web">
+                <span class="vt">Mobile</span>
+                <span class="vt on">Web</span>
+              </div>
+            </div>
             <div class="film-row">
               <div class="film-step">
                 <div class="film-num">1</div>
@@ -2818,7 +2868,9 @@
     <div class="wire-block" id="wf-designs">
       <h3>Screens · Designs (index)</h3>
       <p class="desc">
-        Hub for the feature’s hi-fi screens. One row per screen → opens that screen’s design page.
+        Hub for the feature’s <strong>high-fidelity</strong> screens — every screen listed under Designs for this feature
+        (thumb · name · states). One row per screen → opens that screen’s design page.
+        <strong>Mobile | Web</strong> toggle sets the preview aspect for thumbs/frames.
         Not one sidebar button per screen — only <strong>Storyboard</strong> and <strong>Designs</strong> in nav.
       </p>
       <div class="wire">
@@ -2863,7 +2915,15 @@
           <div class="slot">SCREENS · Checkout</div>
           <div class="title-slot">Designs</div>
           <div class="fs">
-            <div class="fs-intro">Screens in this feature — each links to its hi-fi page (default + critical states)</div>
+            <div class="fs-intro">High-fidelity screens in this feature — each row opens its hi-fi page (default + critical states)</div>
+
+            <div class="viewport-row">
+              <span class="hint">Viewport</span>
+              <div class="viewport-toggle" aria-label="Mobile or Web">
+                <span class="vt">Mobile</span>
+                <span class="vt on">Web</span>
+              </div>
+            </div>
             <div class="design-list">
               <div class="design-row">
                 <div class="thumb">16:9</div>
@@ -2890,9 +2950,9 @@
     <div class="wire-block" id="wf-design-screen">
       <h3>Screens · Design (one screen + states)</h3>
       <p class="desc">
-        One page per screen. Default hi-fi frame (theme switch = light/dark).
-        <strong>State strip</strong> for critical states that are real here: default, loading, empty, error, success, disabled.
-        Extra frames only when the state differs. Purpose / layout notes stay short — system rules live in Design system.
+        One page per screen (listed under the feature’s Designs hub). Default hi-fi frame (theme switch = light/dark).
+        <strong>Mobile | Web</strong> toggle: Web = 16:9 frame · Mobile = 9:16 frame. Storyboard film stays 16:9 either way.
+        <strong>State strip</strong> for critical states that are real here. Extra frames only when the state differs.
       </p>
       <div class="wire">
         <aside class="side">
@@ -2938,7 +2998,15 @@
           <div class="fs">
             <div class="fs-split">
               <div class="fs-card"><strong>Purpose</strong>Enter payment · complete charge</div>
-              <div class="fs-card"><strong>Viewport</strong>from brief · phone / desktop</div>
+              <div class="fs-card"><strong>Listed under</strong>Checkout → Designs</div>
+            </div>
+
+            <div class="viewport-row">
+              <span class="hint">Viewport</span>
+              <div class="viewport-toggle" aria-label="Mobile or Web">
+                <span class="vt">Mobile</span>
+                <span class="vt on">Web</span>
+              </div>
             </div>
             <div class="fs-block">
               <div class="bh">States</div>
@@ -2955,7 +3023,7 @@
             <div class="fs-block">
               <div class="bh">Frame · default (theme → light ‖ dark)</div>
               <div class="bb">
-                <div class="hi-fi">
+                <div class="hi-fi web">
                   <div class="device">
                     <div class="bar">nav</div>
                     <div class="body">hi-fi UI</div>

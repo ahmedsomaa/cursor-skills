@@ -7,7 +7,7 @@
 **Audit:** `ux-audit` → `ux-understand` → `ux-walkthrough` → `ux-evaluate` → `ux-prioritize` → `ux-redesign` (artifacts under `design/audit/`)
 
 Assist: `ux-ask`, `ux-show-status`, `ux-resume`, `ux-critique`, `ux-handoff`  
-Singles (create): `ux-step`, `ux-repair`
+Singles (create): `ux-step` (menus: docs / kit / ui), `ux-repair` (generic — context from user, no menus)
 
 ## Planned (not built)
 

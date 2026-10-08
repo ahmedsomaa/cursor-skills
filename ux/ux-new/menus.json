@@ -1,6 +1,34 @@
 {
   "steps": [
     {
+      "id": "docs",
+      "label": "Documentation site",
+      "skill": "ux-new",
+      "substeps": [
+        {
+          "id": "template",
+          "label": "Docs template (layout, fonts, style)",
+          "rules": "docs-site.md"
+        },
+        {
+          "id": "brief",
+          "label": "Brief",
+          "rules": "docs-site.md",
+          "skill": "ux-discover"
+        },
+        {
+          "id": "index",
+          "label": "Index / home",
+          "rules": "docs-site.md"
+        },
+        {
+          "id": "chrome",
+          "label": "Site chrome (nav, type, themes shell)",
+          "rules": "chrome.md"
+        }
+      ]
+    },
+    {
       "id": "kit",
       "label": "Design system",
       "skill": "ux-build-kit",
@@ -95,11 +123,6 @@
           "label": "Accessibility",
           "file": "accessibility.html",
           "guide": "../ux-build-kit/sections/accessibility/GUIDE.md"
-        },
-        {
-          "id": "chrome",
-          "label": "Docs chrome (nav, type, themes shell)",
-          "rules": "chrome.md"
         }
       ]
     },
@@ -111,6 +134,11 @@
         {
           "id": "storyboard",
           "label": "Storyboard",
+          "ask": "feature"
+        },
+        {
+          "id": "designs",
+          "label": "Designs hub (hi-fi list)",
           "ask": "feature"
         },
         {

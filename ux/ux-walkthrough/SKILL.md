@@ -12,7 +12,7 @@ This is the Walkthrough state in [ux-audit](../ux-audit/SKILL.md). Say "Walkthro
 
 ## Designs directory
 
-The folder is always named `design`. Ask for the path if unknown. All outputs go under `<design>/audit/`. Read `<design>/audit/understand.html` first. If it is missing, follow [ux-understand](../ux-understand/SKILL.md). Use audit docs chrome from `audit/docs.json` / `audit/docs.css`; if missing, follow Docs template in [ux-audit](../ux-audit/SKILL.md).
+The folder is always named `design`. Ask for the path if unknown. All outputs go under `<design>/audit/`. Read `<design>/audit/understand.html` first. If it is missing, follow [ux-understand](../ux-understand/SKILL.md). Use audit docs chrome from `audit/docs.json` / `audit/docs.css`; if missing, follow Docs template in [ux-audit](../ux-audit/SKILL.md). Structure from the Walkthrough row in `layouts/<id>.jobs.md`; open `#wf-walkthrough` only if needed — **do not** read the full layout HTML.
 
 ## Walk
 

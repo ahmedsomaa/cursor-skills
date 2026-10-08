@@ -241,8 +241,9 @@
   <article class="page">
     <h1>Gallery Layout</h1>
     <p class="agent-note">
-      Agent guide for the Gallery audit docs chrome. Details are not copied into <code>design/audit/</code> —
-      implement from the wireframes. Example:
+      Agent guide for the Gallery audit docs chrome. Details are not copied into <code>design/audit/</code>.
+      Build from <a href="gallery.jobs.md">gallery.jobs.md</a> (staged reads); open a single <code>#wf-*</code> only if needed.
+      Wireframes = IA/placement only — ship a <strong>finished</strong> audit docs site. Example:
       <a href="https://ui.mantine.dev/" rel="noopener noreferrer">Mantine UI</a>
       (card/tile gallery). <strong>No navbar</strong> — home stacks Understand / Walkthrough / Evaluate /
       Prioritize / Redesign as sections with card grids.
@@ -265,7 +266,7 @@
         This agent-guide HTML uses <strong>Inter</strong>. Audit docs:
         <a href="../typography.html">typography.html</a> (pairings that list <code>gallery</code>).
       </div></div>
-      <div class="row"><div class="k">Icons</div><div class="v">Use Lucide Icons</div></div>
+      <div class="row"><div class="k">Icons</div><div class="v">None in docs chrome — text labels only. Product Foundations / screens may use Lucide; never mix icon-nav with text-only nav.</div></div>
       <div class="row"><div class="k">Description</div><div class="v">
         <strong>No navbar / main-nav strip.</strong> Header is one row: product title + “Audit handbook”;
         theme toggle. Home (<code>audit/index.html</code>) stacks five <strong>page sections</strong> —

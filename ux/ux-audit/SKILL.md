@@ -44,20 +44,21 @@ This is the Docs template state. Say "Docs template." before asking.
 
 **Always ask** which style they want for the **audit** documentation — even if create already has `<design>/docs.json`. Audit chrome is separate: write `<design>/audit/docs.json` and `<design>/audit/docs.css`. Every audit HTML page uses that chrome and links `docs.css` relative to `audit/` (or an equivalent path that resolves to `audit/docs.css`).
 
-Ask the same way [ux-new](../ux-new/SKILL.md) does, using this skill’s catalog:
+Ask using this skill’s catalog with **staged reads** (same idea as create):
 
-1. Open each layout under [layouts/](layouts/) (except `style.html`) and show name + fit from Details. Recommend gallery when the work is mostly walkthrough/redesign frames, and sidebar when it is mostly written reports. **Always offer custom.**
-2. Catalog layout: open that HTML and implement from its Details + Wireframes.
-   - Sidebar: [layouts/sidebar.html](layouts/sidebar.html) — left groups Understand / Walkthrough / Evaluate / Prioritize / Redesign; nest flows and redesign opportunities.
-   - Gallery: [layouts/gallery.html](layouts/gallery.html) — **no navbar**; home stacks the five steps as sections with card grids.
-   - Topbar: [layouts/topbar.html](layouts/topbar.html) — **navbar** for the five steps + **horizontal tabs** for flows / opportunity children + **vertical tabs** for redesign screens.
+1. For the pick, read only **Id / Fit** from each [layouts/*.jobs.md](layouts/) — **do not** open the full wireframe HTML. Show name + fit. Recommend gallery when the work is mostly walkthrough/redesign frames, and sidebar when it is mostly written reports. **Always offer custom.**
+2. Catalog layout: after they choose, read **once** `layouts/<id>.jobs.md` (chrome + page inventory). That file is the build bible. **Do not** read the full [sidebar.html](layouts/sidebar.html) / [gallery.html](layouts/gallery.html) / [topbar.html](layouts/topbar.html). Open a **single** `#wf-*` only when a jobs line is ambiguous. Build a **finished** audit docs site — real Tailwind chrome, fonts, and style — not dashed wireframe clones.
+   - Sidebar — left groups Understand / Walkthrough / Evaluate / Prioritize / Redesign; nest flows and redesign opportunities.
+   - Gallery — **no navbar**; home stacks the five steps as sections with card grids.
+   - Topbar — **navbar** for the five steps + **horizontal tabs** for flows / opportunity children + **vertical tabs** for redesign screens.
 3. Custom: ask whether they will describe the settings or the agent should cook them — same format as ux-new (color, typography, radius, monospace).
-4. After layout choice, ask which **font pairing** from [typography.html](typography.html) (recommend a pairing whose Best for includes the chosen layout id; custom last). Write families into `audit/docs.json` `fonts`. For `geist-geist-mono`, if Geist cannot load from Google Fonts, use Inter and JetBrains Mono per that pairing’s Adapt.
-5. Ask **Style** from [layouts/style.html](layouts/style.html); write `square` | `squircle` | `pill` into `audit/docs.json` `style`.
+4. After layout choice, ask **font pairing and Style in the same turn** from [typography.html](typography.html) and [layouts/style.html](layouts/style.html) (recommend a pairing whose Best for includes the chosen layout id; custom last for fonts). Write `fonts` and `style` (`square` | `squircle` | `pill`) into `audit/docs.json`.
 
 If `audit/docs.json` already exists, show the current choice and ask whether to **keep** it or **pick a new** style before continuing.
 
-Write `<design>/audit/docs.json`. Load fonts from Google Fonts with `display=swap`. Icons are Lucide at `https://unpkg.com/lucide@1.52.0/dist/umd/lucide.min.js`. Docs chrome is Tailwind utility classes.
+Write `<design>/audit/docs.json`. Load fonts from Google Fonts with `display=swap`.
+
+**Docs fonts** apply to audit chrome and written report pages (index, understand, evaluate, prioritize, walkthrough indexes). **Product-like frames** on walkthrough flow pages and redesign hi-fi use the product’s type when a create kit exists; otherwise keep readable docs type in chrome and frame labels — do not force a second random pairing on frames only. Docs chrome is **text labels only** — no Lucide (or other) icons in nav, tabs, or section heads. Docs chrome is Tailwind utility classes.
 
 Build `<design>/audit/docs.css` with the Tailwind CLI, minified, scanning the HTML under `audit`. From the `audit` folder: write a temporary `.tailwind-input.css` with `@import "tailwindcss" source(".");`, run `npx @tailwindcss/cli -i .tailwind-input.css -o docs.css --minify`, then delete the input file.
 

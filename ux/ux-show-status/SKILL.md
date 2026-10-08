@@ -21,6 +21,7 @@ Inspect markers for **Create** and **Audit**. If both are in progress, say so an
 | Marker | State |
 | --- | --- |
 | Path / `design/` exists | Folder |
+| `look.json` | Look |
 | `docs.json` + `docs.css` | Docs template |
 | `brief.html` with features/screens | Brief (`ux-discover`) |
 | `design-system/system.json` + section index | Design system (`ux-build-kit`) |

@@ -14,7 +14,7 @@ This is the Brief state. Say "Brief." before reading.
 
 The folder is always named `design`. If this session has not chosen where it lives, ask where in the current project to put it. Do not assume the repo root. If a `design` directory already exists, confirm that one instead of creating a second.
 
-Read `<design>/docs.json`. If it is missing, ask using [layouts/](../ux-new/layouts/), [typography.html](../ux-new/typography.html), and [layouts/style.html](../ux-new/layouts/style.html) the way [ux-new](../ux-new/SKILL.md) does — layout, then font pairing, then Style — including custom, and write `docs.json` (with `fonts` and `style`) before the page. Build `brief.html` and the index with that layout, typography, fonts, icons, and style, using Tailwind classes, and link `docs.css`. Load the families from Google Fonts. Code uses the monospace named in `fonts`. Icons are Lucide, the way [ux-new](../ux-new/SKILL.md) loads them. Apply `style` radii to docs chrome. Rebuild `docs.css` the way ux-new builds it. One theme control switches the docs chrome. Persist the choice in `localStorage` so later design pages open on the same theme.
+Read `<design>/look.json` and `<design>/docs.json`. If `look.json` is missing, follow Look in [ux-new](../ux-new/SKILL.md). If `docs.json` is missing, follow Docs template in [ux-new](../ux-new/SKILL.md) (layout, then fonts + style in one turn — including custom) and write `docs.json` before the page. Build `brief.html` and the index with that layout, typography, fonts, and style, using Tailwind classes, and link `docs.css`. Load the families from Google Fonts. Code uses the monospace named in `fonts`. Apply `style` radii to docs chrome. Selected docs fonts apply globally (including Brief and index). Rebuild `docs.css` the way ux-new builds it. One theme control switches the docs chrome. Persist the choice in `localStorage` so later design pages open on the same theme.
 
 ## Read
 
@@ -31,7 +31,7 @@ Leave unrelated parts of the repo alone. Use the product's words.
 
 ## Write
 
-Write `<design>/brief.html` as one scrollable **spec sheet**. Match the Brief · Overview structure in [sidebar.html](../ux-new/layouts/sidebar.html#wf-brief) (wireframe is the layout source of truth). Fill these blocks in order:
+Write `<design>/brief.html` as one scrollable **spec sheet**. Read the Brief row from `layouts/<id>.jobs.md` (layout id from `docs.json`) for structure and block order. Open that layout’s `#wf-brief` only if the jobs line is ambiguous — **do not** read the full layout HTML. Ship a finished docs page (real type and chrome from `docs.json`), not a dashed wireframe clone. Fill these blocks in order:
 
 1. **Meta** — product name, platform (mobile first / website first / both), one-line purpose
 2. **Problem** — 2–3 sentences on what’s broken or missing; state the problem, not the UI solution

@@ -18,7 +18,7 @@ Same markers as [ux-show-status](../ux-show-status/SKILL.md). If both create and
 
 ### Create
 
-1. Folder / docs → [ux-new](../ux-new/SKILL.md)  
+1. Folder / Look / docs → [ux-new](../ux-new/SKILL.md)  
 2. Brief → [ux-discover](../ux-discover/SKILL.md)  
 3. Kit → [ux-build-kit](../ux-build-kit/SKILL.md)  
 4. Screens → [ux-design-ui](../ux-design-ui/SKILL.md)  

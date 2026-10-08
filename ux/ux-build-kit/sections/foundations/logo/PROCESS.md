@@ -2,7 +2,7 @@
 
 Create the product mark. Draw an SVG, or pick one icon from Lucide, Hugeicons, Remix Icon, Font Awesome, or Devicon. Do not jump from the brief to a finished logo.
 
-Used when `ux-build-kit` writes the logo section, or when `ux-step` / `ux-repair` runs kit → logo.
+Used when `ux-build-kit` writes the logo section, when `ux-step` runs kit → logo, or when `ux-repair` is fixing the logo from user context.
 
 ## Designs directory
 
@@ -45,7 +45,7 @@ Use the docs chrome from `docs.json` when it exists. Follow [GUIDE.md](GUIDE.md)
 - Variants (primary / mono / reverse or duotone) on fixed light and dark surfaces; product colors, never default black
 - Clear space diagram and minimum sizes
 - Incorrect usage grid
-- Colors with role name and hex; fonts when the mark includes text
+- Colors as **swatches** (fill = actual hex), each labeled with role name + hex — same pattern as `color.html`, not a plain text list; fonts when the mark includes text
 - Downloads only when local assets exist: Theme (Light / Dark / Both), Variant, Size (16–512, SVG, All), live preview, **Download**
 
 The `logo` string in `system.json` names source, idea, colors (with names and hex), fonts when relevant, and the set link when from a library.

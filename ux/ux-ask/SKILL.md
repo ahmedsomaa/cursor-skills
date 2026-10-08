@@ -17,7 +17,7 @@ Planned skills: [ROADMAP.md](../ux-new/ROADMAP.md).
 
 ## Get started
 
-**Create** — name `ux-new` and say what to design. Folder → docs template → brief → kit → screens.
+**Create** — name `ux-new` and say what to design. Folder → Look (tone \| design system \| custom) → docs template → brief → kit → screens.
 
 ```text
 /ux-new Design the assignment flow from this app's requirements.
@@ -33,7 +33,7 @@ Planned skills: [ROADMAP.md](../ux-new/ROADMAP.md).
 
 ### Create pipeline
 
-`ux-new` runs the three create steps after Folder and Docs template.
+`ux-new` runs Look and Docs template, then the three create steps.
 
 | Need | Skill |
 | --- | --- |
@@ -62,17 +62,15 @@ Planned skills: [ROADMAP.md](../ux-new/ROADMAP.md).
 | Which skill / how this suite works | `ux-ask` |
 | Progress report, no writes | `ux-show-status` |
 | Continue from last unfinished state | `ux-resume` |
-| Critique a create kit/ui substep (no edits) | `ux-critique` |
+| Critique a create docs/kit/ui substep (no edits) | `ux-critique` |
 | Engineering handoff page | `ux-handoff` |
 
 ### Single commands (create only)
 
-Ask **step → substep** from [menus.json](../ux-new/menus.json) before any context.
-
 | Need | Skill |
 | --- | --- |
-| Run one kit or ui substep | `ux-step` |
-| Evaluate and auto-repair one substep | `ux-repair` |
+| Run one docs, kit, or ui substep (picks step → substep from [menus.json](../ux-new/menus.json)) | `ux-step` |
+| Fix whatever is wrong — describe the problem; no menus | `ux-repair` |
 
 ## Name clarity
 
@@ -84,7 +82,7 @@ Ask **step → substep** from [menus.json](../ux-new/menus.json) before any cont
 
 The folder is always named `design`. Ask where it should live; do not assume the repo root.
 
-Create: `brief.html`, `design-system/`, feature storyboards and screens.  
+Create: `look.json`, `docs.json`, `brief.html`, `design-system/`, feature storyboards and screens.  
 Audit: everything under `design/audit/` — `docs.json`, `docs.css`, `understand.html`, `walkthrough/`, `evaluate.html`, `prioritize.html`, `redesign/`.  
 Create chrome stays at `design/docs.json` when present. Create docs catalog: `ux-new/layouts/` + `ux-new/typography.html`. Audit docs catalog: `ux-audit/layouts/` + `ux-audit/typography.html`.
 

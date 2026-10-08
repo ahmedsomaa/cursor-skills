@@ -20,11 +20,11 @@ Brand-guideline page (`logo.html`):
 5. Clear space — diagram with exclusion zone
 6. Minimum sizes — digital floors; icon-only fallback when needed
 7. Incorrect usage — small don't grid (stretch, recolor, rotate, low contrast, busy bg)
-8. Colors — role name + hex
+8. Colors — same treatment as [color/GUIDE.md](../color/GUIDE.md): **semantic swatches** filled with the actual hex, labeled with role name + hex (logo ink roles from `system.json` `logo` colors). Not a text-only list.
 9. **Downloads** — only when local assets exist: Theme (Light / Dark / Both), Variant, Size (16–512, SVG, All), live preview, **Download**. Library-only: set link, no download row.
 
 ## Do / Don't
 
-**Do:** Plain-language idea; clear space; min sizes; fixed light/dark specimens; contrast-safe variants.
+**Do:** Plain-language idea; clear space; min sizes; fixed light/dark specimens; contrast-safe variants; logo colors as filled swatches (role + hex), like `color.html`.
 
-**Don't:** Download UI for pure library links; black marks on dark; skip incorrect-usage examples.
+**Don't:** Download UI for pure library links; black marks on dark; skip incorrect-usage examples; colors as a text-only hex list with no swatches.

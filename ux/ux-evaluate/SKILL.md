@@ -14,7 +14,7 @@ Not [ux-critique](../ux-critique/SKILL.md) (that gates create kit/ui substeps in
 
 ## Designs directory
 
-Ask for the `design` path if unknown. All outputs go under `<design>/audit/`. Read `audit/understand.html` and `audit/walkthrough/`. If either is missing, follow the earlier audit skills first. Use audit docs chrome from `audit/docs.json` / `audit/docs.css`; if missing, follow Docs template in [ux-audit](../ux-audit/SKILL.md).
+Ask for the `design` path if unknown. All outputs go under `<design>/audit/`. Read `audit/understand.html` and `audit/walkthrough/`. If either is missing, follow the earlier audit skills first. Use audit docs chrome from `audit/docs.json` / `audit/docs.css`; if missing, follow Docs template in [ux-audit](../ux-audit/SKILL.md). Structure from the Evaluate row in `layouts/<id>.jobs.md`; open `#wf-evaluate` only if needed — **do not** read the full layout HTML.
 
 ## Evaluate
 

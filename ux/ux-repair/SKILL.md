@@ -1,51 +1,36 @@
 ---
 name: ux-repair
-description: Evaluate a kit or UI substep against skill rules and auto-repair it.
+description: Get context from the user about what is wrong in the design folder, then auto-repair it against skill rules.
 disable-model-invocation: true
 ---
 
 # UX — Repair
 
-Evaluate the current state of a chosen surface against the skill rules, then fix it automatically. Absorbs former edit and polish work.
+Generic fix pass. No step/substep menus. Take what the user says is wrong (or what they want fixed), find the files, evaluate against the matching skill rules, and repair.
 
-## Gate (before any context)
+## Context (before writing)
 
-Do not evaluate, read the user’s freeform design dump as the task, or write until both selections exist. Read [menus.json](../ux-new/menus.json) and ask in this order:
+Do not edit until you know enough to act. From the first message and follow-ups, gather:
 
-```text
-Step:
-1. kit   (design system)
-2. ui    (screens)
-```
+1. **Where `design` lives** — ask if unknown. Do not assume the repo root.
+2. **What to fix** — their description, paths, screenshots, or “the whole site feels like wireframes.” Use what they already gave; only ask when something required is missing (path, which feature/screen if the request is ambiguous).
 
-Wait for their choice. Then list every substep for that step from `menus.json` (id + label):
+Do not present docs / kit / ui option lists. Infer the surface from context.
 
-```text
-Substep:
-1. …
-```
+## Repair
 
-Wait for their choice. Only then ask for path, feature, screen, or other context needed to locate the files. If they already pasted context in the first message, ignore it for work until the gate is complete, then use it.
+1. Map the request to the surfaces involved (docs site, design-system section, storyboard, Designs hub, screen, states, logo, chrome, etc.). A request may span more than one.
+2. Load the matching rules:
+   - Documentation site (index, brief, template, chrome): [docs-site.md](../ux-new/docs-site.md), [chrome.md](../ux-new/chrome.md), Docs template in [ux-new](../ux-new/SKILL.md); brief via [ux-discover](../ux-discover/SKILL.md).
+   - Design system sections: [ux-build-kit](../ux-build-kit/SKILL.md) and that section’s GUIDE (paths in [menus.json](../ux-new/menus.json) if needed). Logo: [PROCESS.md](../ux-build-kit/sections/foundations/logo/PROCESS.md).
+   - Screens (storyboard, Designs, screen, states): [ux-design-ui](../ux-design-ui/SKILL.md).
+3. Compare existing files to those rules. List gaps briefly, then apply repairs.
+4. Re-run any ask the original work would need only when a decision is missing (layout, fonts, style, Look, feature name, mobile vs web, etc.).
+5. Rebuild `docs.css` the way [ux-new](../ux-new/SKILL.md) builds it when docs chrome classes change.
+6. Keep scope to what they asked for, plus required shared fixes (broken index links, missing theme tokens used by that page).
 
-## After the gate
-
-1. Confirm where `design` lives (ask if unknown).
-2. Load the parent skill: [ux-build-kit](../ux-build-kit/SKILL.md) or [ux-design-ui](../ux-design-ui/SKILL.md).
-3. Load the substep’s `guide`, `process`, or `rules` from `menus.json`.
-4. Compare the existing files to those rules. List gaps briefly, then apply repairs.
-5. Re-run any ask-gates the original step would require when a decision is missing (overall tone, catalog pick, mobile vs website, feature name, etc.).
-6. Rebuild `docs.css` the way [ux-new](../ux-new/SKILL.md) builds it when docs chrome classes change.
-
-### Kit
-
-- Section pages: fix `system.json` and HTML to match the GUIDE.
-- **logo:** repair via [PROCESS.md](../ux-build-kit/sections/foundations/logo/PROCESS.md).
-- **chrome:** repair via [chrome.md](../ux-new/chrome.md) (nav, docs type, light/dark shell).
-
-### UI
-
-- **storyboard / screen / states:** repair to match [ux-design-ui](../ux-design-ui/SKILL.md) for that slice only.
+Use `layouts/<id>.jobs.md` plus targeted `#wf-*` anchors for structure — **do not** load a full layout HTML dump. Wireframes are **structure guides only** (IA and element placement). Repaired output is always a finished polished site — not dashed wireframe clones. When the handbook looks like wireframes, generic scaffolding, or clashes with Look, restyle chrome to match `docs.json.look` / `look.json` (ensure `look` is present; custom needs `description`), keep docs fonts as handbook default (product type only in UI samples / typography specimens / storyboards / screens), and pull one round of Look-aligned docs-site inspiration if needed.
 
 ## Done
 
-The named surface passes the rules. Other surfaces stay unchanged except required shared fixes (broken index links, missing theme tokens used by that page).
+The described problems are fixed and the touched surfaces pass their rules. Say briefly what changed.

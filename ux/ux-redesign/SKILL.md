@@ -14,7 +14,7 @@ Not [ux-design-ui](../ux-design-ui/SKILL.md) (that creates greenfield feature sc
 
 ## Designs directory
 
-Ask for the `design` path if unknown. All audit HTML lives under `<design>/audit/`. Read `audit/prioritize.html` and the related walkthrough/evaluate pages. If prioritize is missing, follow [ux-prioritize](../ux-prioritize/SKILL.md). Use audit docs chrome from `audit/docs.json` and link `audit/docs.css`. If those are missing, follow the Docs template step in [ux-audit](../ux-audit/SKILL.md). Rebuild `audit/docs.css` the way ux-audit builds it when chrome classes change.
+Ask for the `design` path if unknown. All audit HTML lives under `<design>/audit/`. Read `audit/prioritize.html` and the related walkthrough/evaluate pages. If prioritize is missing, follow [ux-prioritize](../ux-prioritize/SKILL.md). Use audit docs chrome from `audit/docs.json` and link `audit/docs.css`. If those are missing, follow the Docs template step in [ux-audit](../ux-audit/SKILL.md). Rebuild `audit/docs.css` the way ux-audit builds it when chrome classes change. Structure from the Redesign rows in `layouts/<id>.jobs.md`; open `#wf-redesign` / `#wf-redesign-screen` only if needed — **do not** read the full layout HTML.
 
 ## Redesign
 
