@@ -17,7 +17,12 @@ Planned skills: [ROADMAP.md](../ux-new/ROADMAP.md).
 
 ## Get started
 
-**Create** — name `ux-new` and say what to design. Folder → Look (tone \| design system \| custom) → docs template → brief → kit → screens.
+**Create** — three user waits: Round 1 (folder + visual + logo) → Round 2 (scope) → Kit Confirm; then pilot screens. Ship: Mintlify / Fumadocs-style Design Handbook. Chrome: [handbook.md](../ux-new/handbook.md).
+
+**When to grill first vs ux-new alone**
+
+- **Fuzzy product language** (terms unsettled, domain unclear) → run `/grill-with-docs` (or your main-flow grilling) first so `GLOSSARY.md` / ADRs exist, then `/ux-new`. Scope reads those terms and does not re-ask them.
+- **Clear solo build** (you know the product and features) → `/ux-new` alone is enough. Grilling rounds are already inside Round 1 / Round 2; grill-with-docs is not required.
 
 ```text
 /ux-new Design the assignment flow from this app's requirements.
@@ -33,14 +38,14 @@ Planned skills: [ROADMAP.md](../ux-new/ROADMAP.md).
 
 ### Create pipeline
 
-`ux-new` runs Look and Docs template, then the three create steps.
+`ux-new` runs Round 1 + Round 2, then pilot-first kit and screens. `look.json` tracks `status` and `pilotFeature`.
 
 | Need | Skill |
 | --- | --- |
 | Full create run with progress | `ux-new` |
-| Forward brief from requirements | `ux-discover` |
-| Invent design system (kit) | `ux-build-kit` |
-| Storyboards + high-fidelity screens | `ux-design-ui` |
+| Round 2 Scope + brief + handbook shell | `ux-discover` |
+| Write `system.html` (brand, foundations, pilot components, tokens) | `ux-build-kit` |
+| Write `screens.html` artboard (pilot first) | `ux-design-ui` |
 
 ### Audit pipeline
 
@@ -62,29 +67,29 @@ Planned skills: [ROADMAP.md](../ux-new/ROADMAP.md).
 | Which skill / how this suite works | `ux-ask` |
 | Progress report, no writes | `ux-show-status` |
 | Continue from last unfinished state | `ux-resume` |
-| Critique a create docs/kit/ui substep (no edits) | `ux-critique` |
+| Critique a create system or screens slice (no edits) | `ux-critique` |
 | Engineering handoff page | `ux-handoff` |
 
 ### Single commands (create only)
 
 | Need | Skill |
 | --- | --- |
-| Run one docs, kit, or ui substep (picks step → substep from [menus.json](../ux-new/menus.json)) | `ux-step` |
+| Run one system or screens substep | `ux-step` |
 | Fix whatever is wrong — describe the problem; no menus | `ux-repair` |
 
 ## Name clarity
 
-- `ux-understand` (audit as-is) ≠ `ux-discover` (create brief)
-- `ux-redesign` (audit improvements) ≠ `ux-design-ui` (create screens)
-- `ux-evaluate` (product UX audit) ≠ `ux-critique` (create design-folder substep)
+- `ux-understand` (audit as-is) ≠ `ux-discover` (create scope + brief + handbook)
+- `ux-redesign` (audit improvements) ≠ `ux-design-ui` (create `screens.html`)
+- `ux-evaluate` (product UX audit) ≠ `ux-critique` (create design-folder critique)
 
 ## Where the files go
 
 The folder is always named `design`. Ask where it should live; do not assume the repo root.
 
-Create: `look.json`, `docs.json`, `brief.html`, `design-system/`, feature storyboards and screens.  
-Audit: everything under `design/audit/` — `docs.json`, `docs.css`, `understand.html`, `walkthrough/`, `evaluate.html`, `prioritize.html`, `redesign/`.  
-Create chrome stays at `design/docs.json` when present. Create docs catalog: `ux-new/layouts/` + `ux-new/typography.html`. Audit docs catalog: `ux-audit/layouts/` + `ux-audit/typography.html`.
+Create: `look.json`, `handbook.css`, `handbook.js`, `favicon.svg`, `index.html`, `brief.html`, `system.html`, `screens.html` (plus `logo/` when the mark is custom).  
+Audit: everything under `design/audit/`. Audit docs catalog: `ux-audit/layouts/` + `ux-audit/typography.html`.  
+Create handbook chrome (fixed): [handbook.md](../ux-new/handbook.md) — General Sans / Geist Mono 12px; zinc-only (no accent); minified custom CSS/JS (no Tailwind); CSS-first; Lucide nav; ⌘K; **ON THIS PAGE** on every page; favicon + meta; home Overview/Start here/How to use/Status; compact titles; clickable site name; three links only (no DS subnav).
 
 ## Answer
 

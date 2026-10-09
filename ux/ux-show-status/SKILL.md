@@ -18,14 +18,15 @@ Inspect markers for **Create** and **Audit**. If both are in progress, say so an
 
 ### Create markers
 
+Prefer `look.json` `status` when present (`look` | `scope` | `kit` | `screens` | `done`). Also report `pilotFeature` when set. Cross-check file markers:
+
 | Marker | State |
 | --- | --- |
 | Path / `design/` exists | Folder |
-| `look.json` | Look |
-| `docs.json` + `docs.css` | Docs template |
-| `brief.html` with features/screens | Brief (`ux-discover`) |
-| `design-system/system.json` + section index | Design system (`ux-build-kit`) |
-| Feature storyboards + screens linked from index | Screens (`ux-design-ui`) |
+| `look.json` with `description` + `logo` (`status` ≥ `look`) | Round 1 / Look |
+| `look.json` with `name` + `platform` + `features` + `pilotFeature`, plus `brief.html` + `handbook.css` (`status` ≥ `scope`) | Round 2 / Scope (`ux-discover`) |
+| `system.html` (user confirmed in session, or file complete; `status` ≥ `kit`) | Design system (`ux-build-kit`) |
+| `screens.html` covering features from `look.json` (`status` `screens` or `done`) | Screens (`ux-design-ui`) |
 
 ### Audit markers
 
@@ -42,9 +43,10 @@ Inspect markers for **Create** and **Audit**. If both are in progress, say so an
 ## Report
 
 1. Pipeline(s) detected  
-2. Furthest completed state per pipeline  
-3. Next unfinished state  
-4. Missing files (paths)  
-5. Which skill to run next (`ux-resume`, `ux-new`, `ux-audit`, or a step skill)
+2. Furthest completed state per pipeline (`status` + markers)  
+3. `pilotFeature` when present  
+4. Next unfinished state  
+5. Missing files (paths)  
+6. Which skill to run next (`ux-resume`, `ux-new`, `ux-audit`, or a step skill)
 
-No writes. For create kit/ui substep critique use [ux-critique](../ux-critique/SKILL.md). To continue, name [ux-resume](../ux-resume/SKILL.md).
+No writes. For create system/screens critique use [ux-critique](../ux-critique/SKILL.md). To continue, name [ux-resume](../ux-resume/SKILL.md).

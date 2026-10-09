@@ -1,51 +1,117 @@
 ---
 name: ux-discover
-description: Discover project context and write design/brief.html.
+description: Discover project context, write look.json scope, brief.html, and the handbook shell.
 disable-model-invocation: true
 ---
 
 # UX — Discover
 
-Read the app. Write the brief the design system and the screens will follow. Do not style the product. The page uses the docs chrome.
+Confirm platform and the features → screens list (Round 2). Write the brief page and finish the Design Handbook shell. Do not style the product UI.
 
-This is the Brief state. Say "Brief." before reading.
+This is the Scope state. Say "Scope." / "Round 2." before asking.
 
 ## Designs directory
 
-The folder is always named `design`. If this session has not chosen where it lives, ask where in the current project to put it. Do not assume the repo root. If a `design` directory already exists, confirm that one instead of creating a second.
+The folder is always named `design`. Path should already be chosen in Round 1 ([ux-new](../ux-new/SKILL.md)). If unknown, ask once. Do not assume the repo root.
 
-Read `<design>/look.json` and `<design>/docs.json`. If `look.json` is missing, follow Look in [ux-new](../ux-new/SKILL.md). If `docs.json` is missing, follow Docs template in [ux-new](../ux-new/SKILL.md) (layout, then fonts + style in one turn — including custom) and write `docs.json` before the page. Build `brief.html` and the index with that layout, typography, fonts, and style, using Tailwind classes, and link `docs.css`. Load the families from Google Fonts. Code uses the monospace named in `fonts`. Apply `style` radii to docs chrome. Selected docs fonts apply globally (including Brief and index). Rebuild `docs.css` the way ux-new builds it. One theme control switches the docs chrome. Persist the choice in `localStorage` so later design pages open on the same theme.
+Read `<design>/look.json`. If it is missing `description` or `logo`, finish Round 1 in [ux-new](../ux-new/SKILL.md) first.
 
-## Read
+## Inventory (facts — do not ask)
 
-Prefer the repo over assumptions. Read the requirements and the existing product:
+Prefer the repo and existing domain docs over assumptions. Read:
 
-- What the product is, and the problem this work addresses
-- Who uses it, and the role this work is for
-- What they must accomplish, and what success looks like in plain language
-- Features and screens in scope — and what is out of scope
-- Existing pages, navigation, and terminology
-- Constraints the visual design has to respect (brand, tech, a11y)
+- Requirements and existing product (routes, roles, flows)
+- **`GLOSSARY.md`** and **`docs/adr/`** when present — use those terms; never re-ask settled vocabulary
+- Features and screens in scope; what is out of scope
+- Constraints (brand, tech, a11y)
 
-Leave unrelated parts of the repo alone. Use the product's words.
+Leave unrelated parts of the repo alone. If Round 1’s parallel inventory already ran, reuse it; refresh only if stale.
 
-## Write
+If the handbook shell is not yet scaffolded, create `handbook.css` / `handbook.js` / stub `index.html` per [handbook.md](../ux-new/handbook.md) before or right after Round 2 writes.
 
-Write `<design>/brief.html` as one scrollable **spec sheet**. Read the Brief row from `layouts/<id>.jobs.md` (layout id from `docs.json`) for structure and block order. Open that layout’s `#wf-brief` only if the jobs line is ambiguous — **do not** read the full layout HTML. Ship a finished docs page (real type and chrome from `docs.json`), not a dashed wireframe clone. Fill these blocks in order:
+## Round 2 — one grilling message
 
-1. **Meta** — product name, platform (mobile first / website first / both), one-line purpose
-2. **Problem** — 2–3 sentences on what’s broken or missing; state the problem, not the UI solution
-3. **Who** — primary role(s) and context of use
+Ask the **whole frontier in one message** ([grilling](../grilling/SKILL.md) format). Prefill recommendations from inventory + GLOSSARY. Wait once.
+
+```
+❓ **Q1** - **Name / product / who**: Confirm the short system name, one-line purpose, and primary role(s).
+
+➡️ <prefilled from repo + GLOSSARY>
+
+---
+
+❓ **Q2** - **Platform**: Mobile first, website first, or both?
+
+➡️ <recommend from the app>
+
+---
+
+❓ **Q3** - **Features → Screens**: Confirm or trim this table (and the pilot feature).
+
+➡️ <proposed table; pilot = first high-traffic feature id>
+
+---
+
+❓ **Q4** - **Out of scope**: What should this run not design?
+
+➡️ <proposed list>
+```
+
+## Write look.json
+
+After answers, merge into `<design>/look.json` (keep `source`, `description`, `logo`):
+
+```json
+{
+  "source": "custom",
+  "description": "…",
+  "logo": { "mode": "user | cook", "notes": "…" },
+  "name": "Short product name",
+  "platform": "mobile-first | website-first | both",
+  "product": "one-line purpose",
+  "who": "primary role(s)",
+  "features": [
+    {
+      "id": "kebab-id",
+      "name": "Feature name",
+      "screens": [
+        { "id": "kebab-id", "name": "Screen name" }
+      ]
+    }
+  ],
+  "pilotFeature": "kebab-id",
+  "outOfScope": ["…"],
+  "status": "scope"
+}
+```
+
+`pilotFeature` defaults to the first high-traffic feature in the confirmed table unless they overrode it in Q3. Do not write a handbook `accent` field.
+
+## Handbook shell
+
+Follow [handbook.md](../ux-new/handbook.md). Create or refresh:
+
+- `handbook.css` — **minified** custom CSS (no Tailwind); static zinc-only light/dark (no accent); **General Sans** / **Geist Mono**; φ radius; ⌘K command palette styles — never from Look or product
+- `handbook.js` — **minified** tiny kernel: theme persist + ⌘K command palette open/focus/filter only (CSS-first for nav, TOC, Preview/Code)
+- `favicon.svg` — handbook favicon per [handbook.md](../ux-new/handbook.md)
+- `index.html` — home with Overview / Start here / How to use / Status + **ON THIS PAGE**; document head meta; site name links home
+- Sidebar brand uses `look.json` `name` (clickable → `index.html`)
+
+Stub Design system / Screens until those pages exist. Every HTML page gets the document head + favicon from [handbook.md](../ux-new/handbook.md).
+
+## Brief page
+
+Write `<design>/brief.html` as a denser **spec sheet** in the handbook main column (handbook fonts). Include sticky **ON THIS PAGE** (all uppercase) with top-padded rail. Use `h2` ids. Use GLOSSARY terms when present. Blocks in order:
+
+1. **Meta** — key/value grid or definition list (Product / Platform / Purpose), not three equal-weight gray lines
+2. **Problem** — 2–3 sentences; problem, not UI solution
+3. **Who** — primary role(s) as a compact list (no tinted icon tiles)
 4. **Goals** — user goal, product goal, success in plain language
-5. **Scope** — **In** and **Out** side by side (both required)
-6. **Features → Screens** — table: each feature and the screens under it (source of truth for Screens nav)
-7. **Constraints** — key/value rows (brand, tech, a11y, terms to keep, plus platform if not already clear in Meta)
-8. **Open questions** — optional parking lot; omit the block when empty
+5. **Scope** — **In | Out** true two-column layout
+6. **Features → Screens** — table matching `look.json` `features` (mark the pilot)
+7. **Constraints** — short list (brand, tech, a11y, terms to keep)
+8. **Open questions** — omit when empty
 
-Before the brief is finished, ask whether the designs are mobile first, website first, or both. Record that in Meta (and Constraints if useful). If they already named it, use that answer.
+Breathing space between sections — avoid one undifferentiated text column. Keep the page short. No product mockups. No design-system specimens. No screen frames.
 
-Keep the page short. No product mockups, cards-as-dashboard, tabs, or accordions on the brief. No product styling. No design system. No screen pages. This step writes `brief.html` and the index, in the docs chrome.
-
-Add the brief to `<design>/index.html`. Create the index if it does not exist. Navigation: Brief → Overview; Design system; Screens → each feature from the table → Storyboard, Designs.
-
-This step is done when `brief.html` has Meta (with platform), Problem, Who, Goals, Scope in and out, a Features → Screens table the later steps can follow, and Constraints. Say "Brief finished. Next is the design system."
+This step is done when `look.json` has `name`, `platform`, `features`, `pilotFeature`, and `status`: `scope`; handbook assets and `brief.html` match [handbook.md](../ux-new/handbook.md). Say "Scope finished. Next is the design system."

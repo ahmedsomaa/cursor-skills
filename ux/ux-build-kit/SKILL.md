@@ -1,101 +1,157 @@
 ---
 name: ux-build-kit
-description: Write design/design-system HTML plus system.json from look.json (Tone, Design system, or Custom).
+description: Write design/system.html from look.json — brand, foundations, components, tokens.
 disable-model-invocation: true
 ---
 
 # UX — Build kit
 
-Design a visual system that fits this app and would look wrong on a different product. Deliver it as HTML the screens will use, and as the JSON those pages are built from. Make system-level decisions — do not only document tokens.
+Design a visual system that fits this app and would look wrong on a different product. Deliver it as one handbook page. Make system-level decisions — do not only document tokens.
 
-This is the Design system state. Say "Design system." before writing (or before Look if `look.json` is missing).
+Document the **product** system in a Lime-like way ([Lime](https://design.how/systems/lime)): purpose-named foundations, live specimens first, short Don’t/Do — not Lime’s warm chrome or multi-route sidebar.
+
+This is the Design system state. Say "Design system." before writing (or before Look if `look.json` is missing). Set `look.json` `status` to `kit` when you start writing.
 
 ## Designs directory
 
 The folder is always named `design`. If this session has not chosen where it lives, ask where in the current project to put it. Do not assume the repo root. If a `design` directory already exists, confirm that one instead of creating a second.
 
-Read `<design>/look.json`, `<design>/brief.html`, and `<design>/docs.json` first.
+Read `<design>/look.json` first.
 
-- If `look.json` is missing, run **Look** in [ux-new](../ux-new/SKILL.md) and write it before continuing.
-- If the brief is missing, follow [ux-discover](../ux-discover/SKILL.md) before designing.
-- If `docs.json` is missing, follow Docs template in [ux-new](../ux-new/SKILL.md) (after Look if needed), including custom, and write it before the pages.
-
-The HTML pages are the design-system pages. `system.json` lives in `design-system/`. `docs.json` and `look.json` live next to the index. The catalog format stays in this skill. Do not copy it into the project.
+- If `look.json` is missing `description` or `logo`, run Round 1 in [ux-new](../ux-new/SKILL.md) and finish those fields before continuing.
+- If `name`, `platform`, `features`, or `pilotFeature` is missing, or the handbook shell / `brief.html` is missing, follow [ux-discover](../ux-discover/SKILL.md) before designing.
 
 ## Look
 
-If `look.json` is valid (`source` is `tone`, `design-system`, or `custom`), **skip asking** — open the chosen guide (or custom notes) and go to Write.
+Visual system and logo intent were decided in Round 1. If `description` and `logo` are present, **skip re-asking** — use them and go to Write.
 
-If `look.json` is missing or they chose Remake, run the Look ask from [ux-new](../ux-new/SKILL.md) (Tone | Design system | Custom — one path only), rewrite `look.json`, then Write.
+If they chose Remake, re-run Round 1 in [ux-new](../ux-new/SKILL.md) (visual system + logo), then Write.
 
-Look pick lists live in [tones/catalog.md](tones/catalog.md) and [design-systems/catalog.md](design-systems/catalog.md) — use those for listing; open only the chosen `{id}.html` after pick (never dump `index.html` for the pick).
+Execute Brand / logo from `look.json` `logo` (`user` notes/assets vs `cook` concept). Search once for UI inspiration when cooking or remaking if `description` needs a fresh check.
 
-| `source` | How to write the kit |
-| --- | --- |
-| `tone` | Open [tones/](tones/) `{id}.html`. Carry philosophy → layout → type → components → color into Foundations. Invent roles and structure from the tone — **no** second catalog design-system pick. Put id + name into `system.json` `tone`. |
-| `design-system` | Open [design-systems/](design-systems/) `{id}.html`. Carry Suggested fonts, icon libraries, primary, and 6+1 fields into `system.json`. That system *is* the look; set `tone` from philosophy / closest-tone pills. Adapt so tokens belong to this product. |
-| `custom` | Invent both climate and machinery from `look.json` `description` (and brief). They describe or agent cooked — same outcome: a filled `system.json` unique to this app. |
-
-Tone guides and design-system guides use the **6+1 framework**. Specimen galleries are structure references — execute them as **finished UI specimens** with real type, color, shape, and density, not dashed wireframe clones.
-
-A copied screen, and a system that could ship on any other app, are both unfinished.
-
-## Hierarchy
-
-```text
-Foundations → Components → Patterns → Content → Accessibility
-```
-
-Never document something at a lower level when it belongs higher (spacing → Foundations; button → Components; destructive confirm → Patterns; preferred wording → Content; focus visible → Accessibility).
-
-Every design-system page answers **What / Why / When / How / When not**, then shows the representation its guide names. Before writing each HTML page, read that section’s `GUIDE.md` under `sections/` (Produce / Represent / Do / Don't).
-
-## Direction
-
-Take the final direction from `look.json`, the brief, and references that fit this product: who it is for, what they do, and any visual language already in the app. Someone who knows the product should recognize it from the type, color, and shape alone.
+**Do not invent** colors, typefaces, or shadows that Look’s `description` does not imply. Token roles are named by purpose. A copied screen, and a system that could ship on any other app, are both unfinished.
 
 ## Write
 
-Create `<design>/design-system/`.
+Create `<design>/system.html` as a **handbook page** using [handbook.md](../ux-new/handbook.md). Link minified `handbook.css` and `handbook.js`.
 
-Write `system.json` first. It is one filled record for this product (including `tone`, `motion`, `patterns`, `content`, `accessibility`, fonts, color roles, shape, elevation). Use the chosen tone or design-system HTML guide as the field source when `source` is catalog; fill Unconfirmed or missing values for this product. Open any `source` URL before relying on it. Custom Look fills every field from the decision notes.
+**No Design system sidebar subnav.** Sidebar **Design system** is a single link to this page. Foundations and components are reached via **ON THIS PAGE** + the ⌘K palette only — do not add Foundations/Components children under Design system.
 
-`system.json` is the source the HTML pages are built from.
+Major sections use `h2`; subsections use `h3` with ids so **ON THIS PAGE** and the command palette list them. Author static ON THIS PAGE links and palette heading entries for this page. TOC rail top padding matches main title padding. Include document head meta + `favicon.svg` per [handbook.md](../ux-new/handbook.md).
 
-Follow [sections/foundations/logo/PROCESS.md](sections/foundations/logo/PROCESS.md) for the mark (read [sections/foundations/logo/GUIDE.md](sections/foundations/logo/GUIDE.md) for display). Then write the other section pages as a **polished design-system site** — real UI, chosen Look applied. Docs chrome structure follows `docs.json` and `layouts/<id>.jobs.md` (layout id from `docs.json`) — read that jobs file once for chrome + page inventory; for each section use its GUIDE plus the matching jobs row. Open only that section’s `#wf-*` in the layout HTML if needed. **Never** load the full layout HTML at kit start. Visual finish is a unique finished Tailwind handbook + product tokens inside samples — not agent-guide wireframes.
+Do **not** recolor `handbook.css` from product primary — the shell stays the static zinc theme. No Tailwind. No multi-page foundations site. No `system.json`.
 
-Docs fonts (`docs.json`) are the **handbook default** for chrome and section prose — including `principles.html`, `patterns.html`, `icons.html`, `themes.html`, and any other mostly-written page. Design-system typography from `system.json` is used **only inside** UI samples / component and pattern examples / product frames, on `typography.html` specimens (the scale itself), and later on storyboards and screens. Do not wrap whole principles / patterns / icons / themes bodies in product type. Index and category hubs use docs fonts throughout. Group navigation by layer: Foundations, Components, Patterns, Content, Accessibility. Mark the current page.
+**Fonts:** Handbook General Sans / Geist Mono for page chrome and all explanatory copy (`h1`/`h2`/`h3`, prose, Usage Don’t/Do). **Product fonts** only inside Brand logo wordmarks (when type is part of the mark), Foundations Typography specimens, component Examples Preview, and Tokens Preview specimens — never restyle the whole `system.html` page in product type. Product color/space/radius/elevation tokens apply inside specimen frames only.
 
-| Layer         | File                 | Guide                                                                                  |
-| ------------- | -------------------- | -------------------------------------------------------------------------------------- |
-| Foundations   | `principles.html`    | [sections/foundations/principles/GUIDE.md](sections/foundations/principles/GUIDE.md)   |
-| Foundations   | `color.html`         | [sections/foundations/color/GUIDE.md](sections/foundations/color/GUIDE.md)             |
-| Foundations   | `typography.html`    | [sections/foundations/typography/GUIDE.md](sections/foundations/typography/GUIDE.md)   |
-| Foundations   | `spacing.html`       | [sections/foundations/spacing/GUIDE.md](sections/foundations/spacing/GUIDE.md)         |
-| Foundations   | `layout.html`        | [sections/foundations/layout/GUIDE.md](sections/foundations/layout/GUIDE.md)           |
-| Foundations   | `shape.html`         | [sections/foundations/shape/GUIDE.md](sections/foundations/shape/GUIDE.md)             |
-| Foundations   | `elevation.html`     | [sections/foundations/elevation/GUIDE.md](sections/foundations/elevation/GUIDE.md)     |
-| Foundations   | `icons.html`         | [sections/foundations/iconography/GUIDE.md](sections/foundations/iconography/GUIDE.md) |
-| Foundations   | `motion.html`        | [sections/foundations/motion/GUIDE.md](sections/foundations/motion/GUIDE.md)           |
-| Foundations   | `logo.html`          | [sections/foundations/logo/GUIDE.md](sections/foundations/logo/GUIDE.md)               |
-| Foundations   | `themes.html`        | [sections/foundations/themes/GUIDE.md](sections/foundations/themes/GUIDE.md)           |
-| Components    | `components.html`    | [sections/components/GUIDE.md](sections/components/GUIDE.md)                           |
-| Patterns      | `patterns.html`      | [sections/patterns/GUIDE.md](sections/patterns/GUIDE.md)                               |
-| Content       | `content.html`       | [sections/content/GUIDE.md](sections/content/GUIDE.md)                                 |
-| Accessibility | `accessibility.html` | [sections/accessibility/GUIDE.md](sections/accessibility/GUIDE.md)                     |
+**Separators:** Between major categories (**Brand / Foundations / Components / Tokens**), a **dashed or dotted** horizontal rule (handbook Border token). Prefer rules between `h2` categories — do not line every Foundations `h3`.
 
-Put the product tokens and the theme switch in a `<style>` block. Declare one CSS custom property per role named in `system.json` for color, spacing, type, elevation, and motion. Repeat that block on every design-system page. Both themes are this product, not a default inverted palette. The docs chrome is Tailwind classes from `docs.json`. Every page links `docs.css`. Rebuild `docs.css` the way [ux-new](../ux-new/SKILL.md) builds it. One theme control switches the docs chrome and the product frames together. Persist the choice in `localStorage` so every design page opens on the same theme.
+Write **Brand + Foundations + Tokens** in one pass — no mid-write asks. Do not block Confirm on polishing every foundation specimen twice.
 
-Link `<design>/design-system/index.html` from `<design>/index.html`.
+### Major sections (main column), in order
+
+#### 1. Brand (`h2`)
+
+- **Guidelines** — short brand rules: idea of the mark, where it appears, a few do / don’t lines.
+- **Logo** — variants **colored**, **monochrome**, and **duotone**, each on light and dark surfaces, plus once in nav or app-icon context.
+- **Downloads / source**
+  - **Custom mark:** write assets under `design/logo/` (SVG and PNG for each variant as needed) and expose download controls on the page.
+  - **Library mark:** adapt fills/strokes to product colors; link the public icon set / icon page — no fake local download set.
+
+#### 2. Foundations (`h2`)
+
+Each Foundations item is an `h3` with an id. Pattern: short purpose line, then **live specimens** (not a prose essay). Order:
+
+##### Color
+
+- Purpose-named roles (product tokens), e.g. `background`, `foreground`, `card`, `primary`, `secondary`, `muted`, `accent`, `destructive`, `border`, `ring` — same names in light and dark.
+- Each role: **large swatch**, role name, hex, CSS variable, **one-line job** (“where it goes”).
+- Show light‖dark pair (or theme-switch specimens). No flat hex dump. Contrast must hold for text-on-surface pairs the product uses.
+
+##### Typography
+
+- Section title is **Typography** (not Type). Roles: display/heading, body, caption, mono.
+- **Source:** fuse families from **[Google Fonts](https://fonts.google.com)** and/or **[Fontshare](https://www.fontshare.com)** only. Same source or mixed (e.g. Fontshare display + Google body). No Adobe Fonts, no system-only stack as the named product face, no random CDN orphans.
+- Per role: family name, weight (prefer `400` / `500` / `600` when the face supports it), size, line-height, live specimen string.
+- Load with `display=swap` via Fontshare CSS and/or Google Fonts `<link>` in `system.html` specimens.
+- Note tracking only when the Look needs it. No fake marketing headlines.
+
+##### Spacing
+
+- Compact or comfortable scale the screens actually use.
+- Show steps as a **visual ladder** (bars or inset blocks) with token names + px/rem — not a bullet list alone.
+
+##### Radius
+
+- One base `--radius`; smaller / larger steps. Prefer φ-related steps from the base when Look allows (`/ 1.618` and `* 1.618`).
+- Specimen: same box at each step.
+
+##### Elevation
+
+- `rest`, `raised`, `overlay` with distinct light and dark shadows (never naive invert).
+- Specimens on a card and an overlay surface. `sunken` only if the product uses it.
+
+##### Icons
+
+- Recommend **exactly one** library from [Icon libraries](https://design.how/directory/icon-libraries): Bootstrap Icons, Carbon, Fluent UI System Icons, Font Awesome Free, Heroicons, Hugeicons, Iconify, Iconoir, Ionicons, Lucide, Material Symbols, MingCute, Octicons, Phosphor, Radix Icons, Simple Icons, Tabler Icons.
+- **Default: Lucide** unless Look clearly implies another set on that list. One-line rationale + outbound link to the set.
+- Small specimen row in product colors — icons as UI, not tinted decorative tiles ([anti-slop](https://design.how/systems/lime/foundations/anti-slop)).
+
+##### Anti-slop
+
+- Short Don’t / Do table for **this product** (Look + [Lime anti-slop](https://design.how/systems/lime/foundations/anti-slop) habits): no nested cards, no emoji, sentence case, one primary action per view, believable copy/data, space over chrome.
+- Not a paste of Lime’s warm/glow rules into the product.
+
+#### 3. Components (`h2`) — pilot first
+
+Inventory only controls the **`pilotFeature`** needs (button, input, …). Keep the set small. Do **not** invent a full component catalog for every feature.
+
+At the top of Components, add a one-line **coverage gap**: which components are deferred until screens prove the need (e.g. “Later: date picker, data table”). Optional later pass: `ux-step` → components expands after screens.
+
+For **each** pilot component, **examples first** (Lime bias — show the real control before long prose):
+
+1. **Description** — one line: what it is for
+2. **Examples** — live specimen with handbook **Preview | Code** (CSS radios per [handbook.md](../ux-new/handbook.md)); Preview default; Code shows markup or token usage
+3. **Variants / States** — named variants and default/hover/focus/disabled (and real error/loading) shown in the example row when possible
+4. **Anatomy** — parts only if needed
+5. **Usage rules** — Don’t / Do pairs; mark gaps instead of inventing behavior Look does not imply
+
+#### 4. Tokens (`h2`)
+
+Use **Preview | Code** (CSS radios):
+
+- **Preview** — compact specimen of the token set (color chips, type, radius, shadows)
+- **Code** — copy-paste CSS variables block (light + dark) for engineering: color roles, type, radius, spacing steps used, elevation shadows, font families (real GF/Fontshare names) plus the `@import` / `<link>` sources used
+
+List one-off exceptions under Tokens when a value is not a shared role.
+
+Inline a product `<style>` (or scoped block) with CSS custom properties for light and dark used by specimens. The handbook theme toggle switches handbook chrome and product specimen themes together; chrome palette stays static.
+
+### Logo process
+
+Follow `look.json` `logo` — do not re-open the user-vs-cook ask unless Remake.
+
+- **`mode: user`:** Honor their notes, file paths, or library + icon. Adapt to product colors; if they pointed at a library icon, treat as library mark (link the set). If they provided or described a custom mark, produce variants and downloads.
+- **`mode: cook`:** Invent from `logo.notes` + product + visual system. Draw an SVG, or pick one icon from the [Icon libraries](https://design.how/directory/icon-libraries) list (prefer the Foundations Icons choice) and adapt fills/strokes — never default black or unset `currentColor`.
+
+Then:
+
+1. **Avoid the cliché.** One pass at competitor marks to refuse.
+2. **Design.** Colored, monochrome, and duotone treatments. If the mark includes text, name the font.
+3. **Validate.** Readable large and at ~24px; works on light and dark.
+4. **Deliver.**
+   - Custom: `design/logo/` assets + downloads on Brand; inline previews on the page.
+   - Library: inline preview + link to the set / icon; no pretend download zip.
 
 ## Confirm
 
-When the pages and logo exist, say "Design system ready." Point them at `<design>/design-system/index.html`. Ask one of:
+When `system.html` exists, say "Design system ready." Point them at `<design>/system.html`. Ask **once**:
 
 1. **Confirm.** Keep this system. Say "Design system finished. Next is the screens."
-2. **Remake.** Re-run Look (rewrite `look.json`), then Write again, then ask again.
-3. **Change parts.** Ask which parts (layer or section). For logo alone, follow [sections/foundations/logo/PROCESS.md](sections/foundations/logo/PROCESS.md). For other sections, update `system.json` and those HTML pages; re-read the section guide. Ask again after the change until they confirm.
+2. **Remake.** Re-run Round 1 (rewrite `look.json` `description` + `logo`), then Write again, then ask again.
+3. **Change parts.** Ask which: Brand, Foundations (which subsection), Components, or Tokens. Update only those parts. Ask again until they confirm.
+
+**Gates with defaults:** unanswered Change parts **defaults to keep** the current section — do not stall waiting on naming. Do not block Confirm on polishing every foundation specimen twice.
 
 Do not start [ux-design-ui](../ux-design-ui/SKILL.md) until they confirm.
 
-This step is done when they confirm, `system.json` is filled for this product, `logo.html` and the logo assets exist, the index links every section grouped by layer, both themes are recognizable as this product, specimens are finished UI (not wireframe clones), and the system would look wrong on a different app.
+This step is done when they confirm; `system.html` uses the handbook shell with Brand, Foundations (including Anti-slop), pilot Components (examples-first, plus coverage-gap line), and Tokens; dashed/dotted separators between `h2` categories; handbook fonts on chrome/copy and product fonts only in specimens; no DS sidebar subnav; color cards and Typography specimens are complete; Preview/Code uses CSS radios; logo has three variants with downloads or a library link; an icon library is named; both product themes feel like this product; and the system would look wrong on a different app.

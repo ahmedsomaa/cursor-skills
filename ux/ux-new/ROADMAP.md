@@ -2,12 +2,13 @@
 
 ## Shipped pipelines
 
-**Create:** `ux-new` → `ux-discover` → `ux-build-kit` → `ux-design-ui`
+**Create:** `ux-new` → `ux-discover` → `ux-build-kit` → `ux-design-ui`  
+Artifacts: Design Handbook (`index.html`, `brief.html`, `system.html`, `screens.html`, `handbook.css`, `handbook.js`) + `look.json`
 
 **Audit:** `ux-audit` → `ux-understand` → `ux-walkthrough` → `ux-evaluate` → `ux-prioritize` → `ux-redesign` (artifacts under `design/audit/`)
 
 Assist: `ux-ask`, `ux-show-status`, `ux-resume`, `ux-critique`, `ux-handoff`  
-Singles (create): `ux-step` (menus: docs / kit / ui), `ux-repair` (generic — context from user, no menus)
+Singles (create): `ux-step` (system / screens), `ux-repair` (generic — context from user, no menus)
 
 ## Planned (not built)
 
