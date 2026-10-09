@@ -141,7 +141,7 @@ No filler widgets, stats strips, or promo cards. Prefer spacing between sections
 - **Static** links to that page’s `main` `h2` / `h3` (ids required) — written into the HTML; not built by JS
 - Home TOC: Overview, Start here, How to use, Status
 - Optional CSS scroll-driven “in view” highlight; otherwise leave unhighlighted
-- **Top padding** on the rail (and its vertical separator) matches main title padding (`--handbook-pad`) — the rule must **not** start flush at the top of the content shell
+- **Left vertical separator is inset, not full-bleed:** unlike the sidebar’s full-height border, the TOC’s left rule must **not** run edge-to-edge. Pad it from the **top and bottom** by `--handbook-pad` (align with the page title block); do not draw a column border that starts at the top of the shell like the left sidebar.
 - Same presence and width rhythm on all four pages
 
 ### Main content layout
@@ -154,7 +154,7 @@ No filler widgets, stats strips, or promo cards. Prefer spacing between sections
   - Section `h2` ≈ **16–18px**
   - Subsection `h3` ≈ **14–15px**
   - Body ≈ **15–16px** / `400`
-- **Category separators** (Design system major `h2` blocks; Screens feature rows): dashed or dotted horizontal rule using Border token — see step skills
+- **Category separators** (Brief `h2` sections; Design system major `h2` blocks; Screens feature rows): dashed or dotted horizontal rule using Border token — see step skills
 
 ## Segmented control (Preview / Code)
 

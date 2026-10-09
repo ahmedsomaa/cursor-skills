@@ -112,6 +112,6 @@ Write `<design>/brief.html` as a denser **spec sheet** in the handbook main colu
 7. **Constraints** — short list (brand, tech, a11y, terms to keep)
 8. **Open questions** — omit when empty
 
-Breathing space between sections — avoid one undifferentiated text column. Keep the page short. No product mockups. No design-system specimens. No screen frames.
+Between Brief `h2` sections, use the same **dashed or dotted** horizontal rule (handbook Border token) as Design system / Screens. Keep the page short. No product mockups. No design-system specimens. No screen frames.
 
 This step is done when `look.json` has `name`, `platform`, `features`, `pilotFeature`, and `status`: `scope`; handbook assets and `brief.html` match [handbook.md](../ux-new/handbook.md). Say "Scope finished. Next is the design system."
